@@ -297,9 +297,9 @@ Internet Access (LLM API Calls)
 
 Future agents may include:
 
-- Regulatory Agent
-- Fraud Risk Agent
-- Market Intelligence Agent
-- Collections Agent
+- Regulatory Agent : Monitors and interprets regulatory guidelines to identify impacts on credit risk policies and decision-making.
+- Fraud Risk Agent : Detects suspicious customer behaviors and potential fraud indicators during credit assessment.
+- Market Intelligence Agent : Analyzes macroeconomic, industry, and market trends that may influence portfolio risk and lending strategies.
+- Collections Agent : Evaluates delinquent accounts and recommends collection, recovery, or customer engagement actions.
 
 The architecture is designed to support additional agents without significant redesign.
