@@ -1,12 +1,10 @@
 """
-pdf_ingestion.py
-
 Purpose:
 Load policy PDF documents and prepare them for
 downstream chunking and embedding generation.
 
 Author:
-Credit Risk Research Agent Project
+
 """
 
 from pathlib import Path
