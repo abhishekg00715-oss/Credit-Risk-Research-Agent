@@ -76,7 +76,7 @@ class PDFIngestion:
 if __name__ == "__main__":
 
     ingestor = PDFIngestion(
-        policy_path="data/policies"
+        policy_path="docs/policies"
     )
 
     docs = ingestor.load_documents()
