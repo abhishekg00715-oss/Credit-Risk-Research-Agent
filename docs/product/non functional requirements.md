@@ -93,7 +93,7 @@ Allow new agents and capabilities to be added easily.
 
 | ID | Requirement | Priority |
 |------|-------------|-----|
-| EXT-1 | New agents should be pluggable into the Coordinator Agent | Should have |
-| EXT-2 | New document sources should be supported without redesign | Could have |
-| EXT-3 | Additional datasets should be onboarded through configuration | Could have |
-| EXT-4 | LLM providers should be interchangeable through AISuite | Could have |
+| NFR-21 | New agents should be pluggable into the Coordinator Agent | Should have |
+| NFR-22 | New document sources should be supported without redesign | Could have |
+| NFR-23 | Additional datasets should be onboarded through configuration | Could have |
+| NFR-24 | LLM providers should be interchangeable through AISuite | Could have |
