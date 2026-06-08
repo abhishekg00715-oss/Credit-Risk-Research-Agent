@@ -143,7 +143,7 @@ class PDFIngestion:
 if __name__ == "__main__":
 
     ingestion = PDFIngestion(
-        policy_path="data/policies"
+        policy_path="docs/policies"
     )
 
     documents = ingestion.load_documents()
