@@ -1,0 +1,86 @@
+# Credit Card Underwriting Policy
+
+## 1. Purpose
+
+This policy defines eligibility and underwriting standards for issuing unsecured credit cards to retail customers.
+
+---
+
+## 2. Customer Eligibility
+
+Applicants must:
+
+* Be between 21 and 65 years of age.
+* Be a resident of the country.
+* Possess a valid government-issued identification document.
+* Provide proof of income.
+
+---
+
+## 3. Credit Score Requirements
+
+| Credit Score  | Decision               |
+| ------------- | ---------------------- |
+| 750 and above | Preferred Approval     |
+| 700 – 749     | Standard Approval      |
+| 650 – 699     | Manual Review Required |
+| Below 650     | Decline                |
+
+---
+
+## 4. Income Requirements
+
+| Customer Type | Minimum Annual Income |
+| ------------- | --------------------- |
+| Salaried      | ₹400,000              |
+| Self-Employed | ₹600,000              |
+
+Income must be supported by appropriate documentation.
+
+---
+
+## 5. Credit Utilization Guidelines
+
+| Utilization Ratio | Risk Assessment  |
+| ----------------- | ---------------- |
+| Below 30%         | Low Risk         |
+| 30% - 50%         | Moderate Risk    |
+| Above 50%         | Elevated Risk    |
+| Above 75%         | High Risk Review |
+
+---
+
+## 6. Debt-to-Income (DTI) Ratio
+
+Maximum acceptable DTI ratio:
+
+* Standard applicants: 40%
+* Premium applicants: 35%
+
+Applications exceeding these thresholds require manual review.
+
+---
+
+## 7. Automatic Decline Criteria
+
+Applications must be declined when:
+
+* Credit score is below 650.
+* Bankruptcy is reported within the last 5 years.
+* Fraud investigation is active.
+* Income verification cannot be completed.
+* DTI exceeds 60%.
+
+---
+
+## 8. Approval Decision Framework
+
+Approval decisions should consider:
+
+* Credit score
+* Income stability
+* Credit utilization
+* Existing obligations
+* Payment history
+
+No single factor should be used in isolation.
