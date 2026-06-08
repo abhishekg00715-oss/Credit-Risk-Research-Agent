@@ -1,1 +1,12 @@
-
+aisuite
+openai
+llama-index
+llama-index-vector-stores-chroma
+llama-index-embeddings-openai
+chromadb
+pypdf
+streamlit
+python-dotenv
+pandas
+numpy
+pytest
