@@ -1,5 +1,5 @@
 """
-pdf_ingestion.py
+md_ingestion.py
 
 Purpose:
 Load policy documents from Markdown files
