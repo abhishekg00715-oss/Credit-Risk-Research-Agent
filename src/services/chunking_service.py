@@ -53,8 +53,8 @@ class ChunkingService:
         print(
             f"Created {len(chunks)} chunk(s)"
     )
-
-
+        return chunks   
+        
     def preview_chunks(
         self,
         chunks: List[TextNode],
