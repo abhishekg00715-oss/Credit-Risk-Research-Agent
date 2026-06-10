@@ -11,3 +11,4 @@ pandas
 numpy
 pytest
 json
+typing
