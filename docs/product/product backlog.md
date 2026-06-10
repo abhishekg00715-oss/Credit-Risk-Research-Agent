@@ -88,10 +88,10 @@
 
 The following backlog items constitute the Minimum Viable Product:
 
-| ID | Feature |
-|----|---------|
-| CRA-1 | Upload and ingest policy PDFs |
-| CRA-2 | Extract text and chunk documents |
+| ID | Feature | status |
+|----|---------|--------|
+| CRA-1 | Upload and ingest policy PDFs | **Done** |
+| CRA-2 | Extract text and chunk documents |**Done**|
 | CRA-3 | Generate embeddings |
 | CRA-4 | Store embeddings |
 | CRA-5 | Semantic search |
