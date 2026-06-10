@@ -123,66 +123,74 @@ class ChunkingService:
     self,
     chunks: list,
     output_file: str
-):
-    """
-    Export chunks to JSON file.
+    ):
+    
+        """
+        Export chunks to JSON file.
 
-    Parameters:
-        chunks (list):
-            List of chunk dictionaries.
+        Parameters:
+            chunks (list):
+                List of chunk dictionaries.
 
-        output_file (str):
-            Destination JSON file path.
-    """
+            output_file (str):
+                Destination JSON file path.
+        """
 
-    try:
+        try:
 
-        output_path = Path(output_file)
+            output_path = Path(output_file)
 
-        # Create directory if it doesn't exist
-        output_path.parent.mkdir(
-            parents=True,
-            exist_ok=True
-        )
-
-        with open(
-            output_path,
-            "w",
-            encoding="utf-8"
-        ) as file:
-
-            json.dump(
-                chunks,
-                file,
-                indent=4,
-                ensure_ascii=False
+            # Create directory if it doesn't exist
+            output_path.parent.mkdir(
+                parents=True,
+                exist_ok=True
             )
 
-        print(
-            f"\n✓ Successfully exported "
-            f"{len(chunks)} chunks"
-        )
+            serializable_chunks = [
+                {
+                    "text": getattr(chunk, "text", str(chunk))
+                }
+                for chunk in chunks
+            ]
 
-        print(
-            f"✓ Output File: {output_file}"
-        )
+            with open(
+                output_path,
+                "w",
+                encoding="utf-8"
+            ) as file:
 
-    except Exception as e:
+                json.dump(
+                    serializable_chunks,
+                    file,
+                    indent=4,
+                    ensure_ascii=False
+                )
 
-        print(
-            f"\n❌ Failed to export chunks"
-        )
+            print(
+                f"\n✓ Successfully exported "
+                f"{len(chunks)} chunks"
+            )
 
-        print(
-            f"Reason: {str(e)}"
-        )
+            print(
+                f"✓ Output File: {output_file}"
+            )
+
+        except Exception as e:
+
+            print(
+                f"\n❌ Failed to export chunks"
+            )
+
+            print(
+                f"Reason: {str(e)}"
+            )
 
 if __name__ == "__main__":
 
-    from src.ingestion.pdf_ingestion import PDFIngestion
+    from src.ingestion.pdf_ingestion_new import PDFIngestion
 
     ingestion = PDFIngestion(
-        policy_path="data/policies"
+        policy_path="docs/policies"
     )
 
     documents = ingestion.load_documents()
@@ -204,7 +212,7 @@ if __name__ == "__main__":
         chunks
     )
 
-   chunking_service.export_chunks(
+    chunking_service.export_chunks(
         chunks,
         output_file="data/chunks/policy_chunks.json"
     )
