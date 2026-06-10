@@ -41,20 +41,38 @@ class ChunkingService:
     ) -> List[TextNode]:
         """
         Convert documents into chunks.
-    
+
         Returns:
             List[TextNode]
         """
-    
+
+        print("\nDocument Statistics")
+
+        for idx, doc in enumerate(documents):
+
+            try:
+
+                document_text = doc.text
+
+            except AttributeError:
+
+                document_text = doc.get_content()
+
+            print(
+                f"Document {idx + 1}: "
+                f"{len(document_text)} characters"
+            )
+
         chunks = self.splitter.get_nodes_from_documents(
             documents
         )
-    
+
         print(
-            f"Created {len(chunks)} chunk(s)"
-    )
+            f"\nCreated {len(chunks)} chunk(s)"
+        )
+
         return chunks   
-        
+
     def preview_chunks(
         self,
         chunks: List[TextNode],
@@ -63,36 +81,45 @@ class ChunkingService:
         """
         Display sample chunks.
         """
-    
+
+        if not chunks:
+
+            print(
+                "\nNo chunks available."
+            )
+
+            return
+
         print("\nChunk Preview")
-    
+
         for idx, chunk in enumerate(
             chunks[:num_chunks]
         ):
-    
+
             print("\n" + "=" * 80)
-    
+
             print(
                 f"Chunk {idx + 1}"
             )
-    
+
             print(
                 f"Node ID: {chunk.node_id}"
             )
-    
+
             print(
                 f"Source: "
                 f"{chunk.metadata.get('file_name', 'Unknown')}"
             )
-    
+
             print("=" * 80)
-    
+
             print(chunk.text)
-    
+
             print(
                 f"\nLength: "
                 f"{len(chunk.text)} chars"
-        )
+            )
+    
 
     def chunk_statistics(
         self,
@@ -171,10 +198,11 @@ class ChunkingService:
                                 "node_id",
                                 f"chunk_{idx}"
                             ),
-    
+                        "chunk_number": idx + 1,
+                        
                         "text":
                             chunk.text,
-    
+                        
                         "metadata":
                             getattr(
                                 chunk,
@@ -228,8 +256,8 @@ if __name__ == "__main__":
     documents = ingestion.load_documents()
 
     chunking_service = ChunkingService(
-        chunk_size=500,
-        chunk_overlap=50
+        chunk_size=150,
+        chunk_overlap=25
     )
 
     chunks = chunking_service.create_chunks(
