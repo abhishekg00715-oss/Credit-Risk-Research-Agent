@@ -8,9 +8,9 @@ for embedding generation and retrieval.
 Author:
 Credit Risk Research Agent
 """
-
+import json
 from typing import List
-
+from pathlib import Path
 from llama_index.core import Document
 from llama_index.core.node_parser import SentenceSplitter
 
@@ -118,7 +118,64 @@ class ChunkingService:
             f"Average Length: "
             f"{sum(lengths)/len(lengths):.2f}"
         )
+        
+    def export_chunks(
+    self,
+    chunks: list,
+    output_file: str
+):
+    """
+    Export chunks to JSON file.
 
+    Parameters:
+        chunks (list):
+            List of chunk dictionaries.
+
+        output_file (str):
+            Destination JSON file path.
+    """
+
+    try:
+
+        output_path = Path(output_file)
+
+        # Create directory if it doesn't exist
+        output_path.parent.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+        with open(
+            output_path,
+            "w",
+            encoding="utf-8"
+        ) as file:
+
+            json.dump(
+                chunks,
+                file,
+                indent=4,
+                ensure_ascii=False
+            )
+
+        print(
+            f"\n✓ Successfully exported "
+            f"{len(chunks)} chunks"
+        )
+
+        print(
+            f"✓ Output File: {output_file}"
+        )
+
+    except Exception as e:
+
+        print(
+            f"\n❌ Failed to export chunks"
+        )
+
+        print(
+            f"Reason: {str(e)}"
+        )
 
 if __name__ == "__main__":
 
@@ -145,4 +202,9 @@ if __name__ == "__main__":
 
     chunking_service.chunk_statistics(
         chunks
+    )
+
+   chunking_service.export_chunks(
+        chunks,
+        output_file="data/chunks/policy_chunks.json"
     )
