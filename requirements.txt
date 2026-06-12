@@ -13,3 +13,5 @@ pytest
 json
 typing
 pathlib 
+sentence-transformers
+torch
