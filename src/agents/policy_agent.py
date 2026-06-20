@@ -136,3 +136,26 @@ Instructions:
         )
 
         return answer
+
+if __name__ == "__main__":
+
+    agent = PolicyAgent()
+
+    query = (
+        "What card is suitable "
+        "for a customer with a "
+        "credit score of 720?"
+    )
+
+    response = (
+        agent.answer_question(
+            query
+        )
+    )
+
+    print("\n")
+    print("=" * 80)
+    print("POLICY AGENT RESPONSE")
+    print("=" * 80)
+
+    print(response)
