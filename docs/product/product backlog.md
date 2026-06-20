@@ -94,11 +94,11 @@ The following backlog items constitute the Minimum Viable Product:
 | CRA-2 | Extract text and chunk documents |**Done**|
 | CRA-3 | Generate embeddings |**Done**|
 | CRA-4 | Store embeddings |**Done**|
-| CRA-5 | Semantic search |
-| CRA-6 | RAG-based answers with citations |
-| CRA-20 | Source attribution |
+| CRA-5 | Semantic search |**Done**|
+| CRA-6 | RAG-based answers with citations |**Done**|
+| CRA-20 | Source attribution |**Done**|
 | CRA-24 | Coordinator Agent |
-| CRA-25 | Policy Agent |
+| CRA-25 | Policy Agent |**Done**|
 | CRA-31 | Streamlit UI |
 | CRA-34 | Sample queries and demo scenarios |
 
