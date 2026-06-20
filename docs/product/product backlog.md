@@ -99,7 +99,7 @@ The following backlog items constitute the Minimum Viable Product:
 | CRA-20 | Source attribution |**Done**|
 | CRA-24 | Coordinator Agent |**Done**|
 | CRA-25 | Policy Agent |**Done**|
-| CRA-31 | Streamlit UI |
+| CRA-31 | Build Streamlit UI for Policy Research |
 | CRA-34 | Sample queries and demo scenarios |
 
 ---
