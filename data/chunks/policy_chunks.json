@@ -1,6 +1,6 @@
 [
     {
-        "chunk_id": "1de9746d-1e20-4810-907a-7fc40193cdf4",
+        "chunk_id": "ffdb9c42-0182-4dbb-ac02-5b30db8ee2b3",
         "chunk_number": 1,
         "text": "Credit Card Underwriting Policy\n1. Purpose\nThis policy defines eligibility and underwriting standards for issuing unsecured \ncredit cards to retail customers.\n2. Customer Eligibility\nApplicants must:\nBe between 21 and 65 years of age.\nBe a resident of the country.\nPossess a valid government-issued identification document.\nProvide proof of income.\n3. Credit Score Requirements\n Credit Score Decision\n 750 and above Preferred Approval\n 700 – 749 Standard Approval\n 650 – 699 Manual Review Required\n Below 650 Decline\n4.",
         "metadata": {
@@ -9,7 +9,7 @@
         }
     },
     {
-        "chunk_id": "e293da4d-305b-4ac8-b05a-eb006cea1f10",
+        "chunk_id": "e0545728-7541-4a71-a2b8-f61b3facb9b2",
         "chunk_number": 2,
         "text": "Income Requirements\n Customer Type Minimum Annual Income\n Salaried ₹400,000\n Self-Employed ₹600,000\nIncome must be supported by appropriate documentation.\n5. Credit Utilization Guidelines\n Utilization Ratio Risk Assessment\n Below 30% Low Risk\n 30% - 50% Moderate Risk\n Above 50% Elevated Risk\n Above 75% High Risk Review\n6. Debt-to-Income (DTI) Ratio\nMaximum acceptable DTI ratio:\nStandard applicants: 40%\nPremium applicants: 35%\nApplications exceeding these thresholds require manual review.\n7.",
         "metadata": {
@@ -18,7 +18,7 @@
         }
     },
     {
-        "chunk_id": "e4706877-22d9-4a66-90af-b80b7bf50b17",
+        "chunk_id": "0a35665b-033c-4201-a0ab-b4877e546ede",
         "chunk_number": 3,
         "text": "7. Automatic Decline Criteria\nApplications must be declined when:\nCredit score is below 650.\nBankruptcy is reported within the last 5 years.\nFraud investigation is active.\nIncome verification cannot be completed.\nDTI exceeds 60%.\n8. Approval Decision Framework\nApproval decisions should consider:\nCredit score\nIncome stability\nCredit utilization\nExisting obligations\nPayment history\nNo single factor should be used in isolation.",
         "metadata": {
@@ -27,7 +27,7 @@
         }
     },
     {
-        "chunk_id": "d0f88032-a888-46c3-920a-dfcedee76907",
+        "chunk_id": "56a976f2-c5e6-4911-937b-684da610bbcc",
         "chunk_number": 4,
         "text": "Personal Loan Credit Policy\n## 1. Purpose\nThis policy governs underwriting decisions for unsecured personal loans.\n---\n## 2. Applicant Eligibility\nApplicants must:\n* Be at least 21 years old.\n* Have stable employment history of at least 12 months.\n* Maintain an active bank account.\n* Meet minimum income requirements.\n---\n## 3.",
         "metadata": {
@@ -36,7 +36,7 @@
         }
     },
     {
-        "chunk_id": "2d64affa-5d7f-4636-b87c-0c9b8bbad61f",
+        "chunk_id": "1d027156-26e0-4cdb-a3fd-da8d77fa3a16",
         "chunk_number": 5,
         "text": "* Maintain an active bank account.\n* Meet minimum income requirements.\n---\n## 3. Credit Score Evaluation\n| Credit Score | Lending Decision |\n| ------------ | ---------------- |\n| Above 760    | Excellent        |\n| 700 - 759    | Good             |\n| 650 - 699    | Acceptable       |\n| Below 650    | High Risk        |\nApplications below 650 generally require rejection.\n---\n## 4. Income Requirements\nMinimum annual income:\n* Salaried applicants: ₹500,000\n* Self-employed applicants: ₹750,000\n---\n## 5.",
         "metadata": {
@@ -45,7 +45,7 @@
         }
     },
     {
-        "chunk_id": "9a46e608-5ebc-48a3-ac97-3ef52dc2ba55",
+        "chunk_id": "b0d603bb-f73f-4d99-899e-f2bf1ab2bbd6",
         "chunk_number": 6,
         "text": "Employment Stability\nPreferred employment tenure:\n* Minimum 12 months with current employer.\n* Minimum 24 months business operation for self-employed applicants.\n---\n## 6. Loan-to-Income Assessment\nRecommended loan amount:\n* Not more than 10 times monthly income.\nApplications exceeding this threshold require enhanced review.\n---\n## 7. Risk Indicators\nThe following increase risk:\n* Multiple recent credit inquiries.\n* Significant recent increase in debt.\n* High revolving credit utilization.\n* Irregular repayment history.\n---\n## 8. Decline Conditions\nApplications should be declined when:\n* Income verification fails.\n* Fraud indicators are confirmed.",
         "metadata": {
@@ -54,7 +54,7 @@
         }
     },
     {
-        "chunk_id": "943246e4-bd10-46c1-b070-c147b3a4a49f",
+        "chunk_id": "3c6fe303-38e0-44ad-b0af-1194b3943460",
         "chunk_number": 7,
         "text": "Decline Conditions\nApplications should be declined when:\n* Income verification fails.\n* Fraud indicators are confirmed.\n* Active bankruptcy exists.\n* Credit score is below policy threshold.",
         "metadata": {
@@ -63,7 +63,7 @@
         }
     },
     {
-        "chunk_id": "c72c4781-c1b2-4d62-b2cb-3fdb4b925a1f",
+        "chunk_id": "4174a5d4-bf52-4506-b6fd-cc97aa7afb01",
         "chunk_number": 8,
         "text": "Premium Credit Card Eligibility Policy\n## 1. Purpose\nThis policy defines eligibility requirements for premium and rewards-based credit \ncard products.\n---\n## 2. Target Customer Segment\nPremium credit cards are intended for:\n* High-income professionals.\n* Business owners.\n* Affluent retail customers.\n* Existing customers with strong repayment history.\n---\n## 3. Minimum Eligibility Criteria\nApplicants must satisfy all of the following:\n* Age between 25 and 65 years.\n* Credit score of at least 750.\n* Annual income of at least ₹1,500,000.",
         "metadata": {
@@ -72,7 +72,7 @@
         }
     },
     {
-        "chunk_id": "27ce0c5f-4675-49dc-a9df-5460e7138cdc",
+        "chunk_id": "50988a5a-faa3-4354-9869-f828d6cd46f0",
         "chunk_number": 9,
         "text": "* Credit score of at least 750.\n* Annual income of at least ₹1,500,000.\n* No delinquency within the previous 24 months.\n---\n## 4. Preferred Customer Characteristics\nPreference may be given to customers who:\n* Maintain utilization below 30%.\n* Hold existing banking relationships.\n* Demonstrate stable employment.\n* Maintain low debt obligations.\n---\n## 5.",
         "metadata": {
@@ -81,7 +81,7 @@
         }
     },
     {
-        "chunk_id": "4293f7aa-f2de-4e2c-b340-7a85bce84e28",
+        "chunk_id": "06fd43a3-becd-4a3d-8009-c355d303ffcd",
         "chunk_number": 10,
         "text": "* Hold existing banking relationships.\n* Demonstrate stable employment.\n* Maintain low debt obligations.\n---\n## 5. Credit Limit Assignment\n| Credit Score | Indicative Credit Limit |\n| ------------ | ----------------------- |\n| 750 - 799    | ₹300,000 - ₹500,000     |\n| 800 - 849    | ₹500,000 - ₹1,000,000   |\n| 850+         | Above ₹1,000,000        |\nFinal limits remain subject to underwriting review.\n---\n## 6.",
         "metadata": {
@@ -90,7 +90,7 @@
         }
     },
     {
-        "chunk_id": "f7573f91-20e0-4d3c-8611-0eb986a99a50",
+        "chunk_id": "881c90ba-0ec7-469a-b5b3-6fbc7bed538e",
         "chunk_number": 11,
         "text": "---\n## 6. Review Triggers\nApplications require manual review when:\n* Utilization exceeds 50%.\n* Income documentation is incomplete.\n* DTI exceeds 40%.\n* Credit history is less than 24 months.\n---\n## 7. Automatic Rejection Criteria\nApplications must be rejected when:\n* Credit score is below 750.\n* Fraud alerts are present.\n* Bankruptcy is reported.\n* Material misrepresentation is identified.\n---\n## 8. Approval Principles\nPremium card approvals should prioritize:\n* Strong repayment history.\n* Sustainable income.\n* Low leverage.\n* Long-term customer value.",
         "metadata": {

@@ -24,8 +24,8 @@ class ChunkingService:
 
     def __init__(
         self,
-        chunk_size: int = 500,
-        chunk_overlap: int = 50
+        chunk_size: int = 250,
+        chunk_overlap: int = 30
     ):
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
