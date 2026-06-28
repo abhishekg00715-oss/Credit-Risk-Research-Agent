@@ -40,10 +40,10 @@ The solution aims to:
 |---------|-----------|
 | UI | Streamlit |
 | Agent Framework | AISuite |
-| LLM Access | OpenAI via AISuite |
+| LLM Access | OpenAI GPT |
 | Orchestration | Coordinator Agent |
 | RAG Framework | LlamaIndex |
-| Embeddings | OpenAI Embeddings |
+| Embeddings | Sentence Transformers (Local) |
 | Vector Store | ChromaDB |
 | Customer Data | SQLite |
 | Portfolio Data | CSV / SQLite |
