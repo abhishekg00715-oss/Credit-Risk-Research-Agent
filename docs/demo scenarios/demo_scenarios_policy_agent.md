@@ -11,3 +11,6 @@
 |Automatic rejection|What conditions trigger automatic rejection?|
 |Cross-policy comparison|Compare premium card eligibility with standard credit card approval.|
 
+
+***Check the 'screenshots' folder for the evidences*** 
+
