@@ -157,6 +157,12 @@ if st.button(
                     f"Response generated in {end-start:.2f} seconds"
                 )
 
+                st.session_state.history.append(
+                {
+                    "query": query,
+                    "response": response
+                }
+                )
                 
             except Exception as e:
 
@@ -165,17 +171,6 @@ if st.button(
                 )
 
 
-st.session_state.history.append(
-
-    {
-
-        "query":query,
-
-        "response":response
-
-    }
-
-)
 
 if st.sidebar.button("Clear History"):
 
