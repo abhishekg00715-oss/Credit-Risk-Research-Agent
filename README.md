@@ -29,6 +29,12 @@ This project provides an AI-powered assistant capable of understanding policy do
  - Source Attribution
  - Explainable Responses
 
+# High Level Architecture 
+
+<img width="2048" height="1152" alt="Architecture_diagram" src="https://github.com/user-attachments/assets/0f58bdfe-4a68-4861-8d65-22650a2f6fb4" />
+
+***Note: Further agents will be added into the 'AI ORCHESTRATION LAYER'***
+
 # Technology Stack
 
 | Layer	| Technology |
