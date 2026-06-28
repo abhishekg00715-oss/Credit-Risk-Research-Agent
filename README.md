@@ -72,8 +72,8 @@ This project provides an AI-powered assistant capable of understanding policy do
 Policy agent and Co-ordinator agent are completed and in working state, as part of Phase 1 milestone and MVP.
 Future components to be integrated are as follows:
 
-- Customer Risk Agent
-- Transaction Intelligence Agent
+- Customer Agent
+- Portfolio Agent
 - Fraud Detection Agent
 - Recommendation Agent
 - Decision Agent
