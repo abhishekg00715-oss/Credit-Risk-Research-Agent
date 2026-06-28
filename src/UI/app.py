@@ -9,6 +9,7 @@ Author:
 Credit Risk Research Agent
 """
 import sys
+import time
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -29,8 +30,43 @@ from src.agents.coordinator_agent import (CoordinatorAgent)
 st.set_page_config(
     page_title="Credit Risk Research Agent",
     page_icon="📊",
+    initial_sidebar_state="expanded",
     layout="wide"
 )
+
+# --------------------------------------------------
+# Sidebar Configuration
+# --------------------------------------------------
+
+with st.sidebar:
+
+    st.title("Navigation")
+
+    st.markdown("---")
+
+    st.markdown("### Project")
+
+    st.write("Credit Risk Research Agent")
+
+    st.markdown("---")
+
+    st.markdown("### Status")
+
+    st.success("Policy Agent Ready")
+
+    st.success("Vector Database Connected")
+
+    st.success("LLM Connected")
+
+    st.markdown("---")
+
+    st.markdown("### Version")
+
+    st.write("MVP 1.0")
+
+if "history" not in st.session_state:
+
+    st.session_state.history = []
 
 
 # --------------------------------------------------
@@ -68,7 +104,7 @@ st.markdown(
 # --------------------------------------------------
 
 query = st.text_area(
-    "Enter your question:",
+    "Ask a Credit Policy Question",
     height=120,
     placeholder=(
         "Example:\n"
@@ -99,7 +135,7 @@ if st.button(
         ):
 
             try:
-
+                start = time.time()
                 response = (
                     coordinator.process_query(
                         query
@@ -109,7 +145,7 @@ if st.button(
                 st.success(
                     "Response Generated"
                 )
-
+                end = time.time()
                 st.markdown(
                     "### Answer"
                 )
@@ -117,13 +153,33 @@ if st.button(
                 st.write(
                     response
                 )
+                st.caption(
+                    f"Response generated in {end-start:.2f} seconds"
+                )
 
+                
             except Exception as e:
 
                 st.error(
                     f"Error: {str(e)}"
                 )
 
+
+st.session_state.history.append(
+
+    {
+
+        "query":query,
+
+        "response":response
+
+    }
+
+)
+
+if st.sidebar.button("Clear History"):
+
+    st.session_state.history=[]
 
 # --------------------------------------------------
 # Sample Questions
