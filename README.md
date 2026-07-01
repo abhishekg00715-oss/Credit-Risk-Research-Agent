@@ -88,9 +88,9 @@ Future components to be integrated are as follows:
 - Clone the repository.
 - Install dependencies.
 - Configure the .env file with your OpenAI API key.
-- Run the ingestion pipeline.
-- Generate chunks.
-- Generate embeddings.
-- Build the vector store.
+- Run the ingestion pipeline.(one time)
+- Generate chunks.(one time)
+- Generate embeddings.(one time)
+- Build the vector store.(one time)
 - Launch the Streamlit application.
 - streamlit run src/ui/app.py
