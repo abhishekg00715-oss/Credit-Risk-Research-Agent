@@ -16,7 +16,10 @@ Prone to interpretation errors
 
 This project provides an AI-powered assistant capable of understanding policy documents and answering underwriting questions using policy-grounded responses with source attribution.
 
-# Key Features
+# Key Features 
+
+Current MVP has following features implemented:
+
  - PDF Policy Ingestion
  - Intelligent Document Chunking
  - Local Embedding Generation
@@ -48,7 +51,9 @@ This project provides an AI-powered assistant capable of understanding policy do
 |Development |	GitHub Codespaces |
 
 
-# End-to-End Workflow (WIP)
+# End-to-End Workflow 
+
+Current MVP has the following workflow to be followed:
 
 - Upload policy PDF documents.
 - Extract document text.
@@ -83,6 +88,8 @@ Future components to be integrated are as follows:
 - Conversational memory
 - AWS deployment (Design and Roadmap)
 - CI/CD pipeline
+
+*More details can be referred in the Product Roadmap -docs/product/product roadmap.md*
 
 # How to Run
 - Clone the repository.
