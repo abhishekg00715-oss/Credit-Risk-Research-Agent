@@ -87,8 +87,8 @@ Portfolio
 **Storage Locations**
 
 ```text
-data/policies/
-data/vectordb/
+docs/policies/
+data/vector_store/chroma_db/
 ```
 
 ---
