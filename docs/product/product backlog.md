@@ -17,7 +17,7 @@
 
 | ID | Feature / User Story | Priority |
 |----|----------------------|----------|
-| CRA-7 | Create local customer database (SQLite) | Must |
+| CRA-7 | Customer Data Foundation (SQLite) | Must |
 | CRA-8 | Implement customer lookup by customer_id | Must |
 | CRA-9 | Calculate credit score assessment | Should |
 | CRA-10 | Analyze income and credit utilization | Should |
