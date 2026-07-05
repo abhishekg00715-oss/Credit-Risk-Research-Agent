@@ -61,7 +61,8 @@ class CustomerGenerator:
     # --------------------------------------------------
 
     def generate_customer_id(
-        self
+        self,
+        customer_number: int
     ) -> str:
 
         return (
@@ -113,7 +114,8 @@ class CustomerGenerator:
     # --------------------------------------------------
     
     def determine_customer_segment(
-    income: float
+        self,
+        income: float
     ):
 
         if income >= 2500000:
@@ -176,7 +178,7 @@ class CustomerGenerator:
             )
         )
 
-        customer_segment: (
+        customer_segment = (
             self.determine_customer_segment(
                 income
             )

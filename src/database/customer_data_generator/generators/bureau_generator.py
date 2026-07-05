@@ -22,6 +22,9 @@ from src.database.customer_data_generator.config import (
     FAIR_SCORE,
     POOR_SCORE
 )
+from src.database.customer_data_generator.generators.customer_generator import (
+    CustomerGenerator,
+)
 
 
 class BureauGenerator:

@@ -20,9 +20,17 @@ from datetime import (
 
 from src.database.customer_data_generator.config import (
     CARD_PRODUCTS,
-    MAX_CREDIT_CARDS
+    MAX_CREDIT_CARDS,
+    REWARD_PROGRAMS,
+    BILLING_CYCLE_DAYS,
 )
 
+from src.database.customer_data_generator.generators.customer_generator import (
+    CustomerGenerator,
+)
+from src.database.customer_data_generator.generators.bureau_generator import (
+    BureauGenerator,
+)
 
 class CardGenerator:
     """
@@ -680,7 +688,7 @@ class CardGenerator:
                             reward_points,
                         
                         "last_card_transaction_date":
-                        
+
                             datetime.today().date()
                             -
                             timedelta(
@@ -688,9 +696,8 @@ class CardGenerator:
                                     1,
                                     20
                                 )
-                        )
-                        
-                        
+                            ),
+
                         "card_status":
 
                             self.card_status()
@@ -707,6 +714,26 @@ class CardGenerator:
 
 if __name__ == "__main__":
 
-    print(
-        "Run through data_pipeline_execution.py"
+    customer_generator = CustomerGenerator(
+        number_of_customers=10
     )
+
+    customer_dataframe = (
+        customer_generator.generate_dataframe()
+    )
+
+    bureau_generator = BureauGenerator(
+        customer_dataframe=customer_dataframe
+    )
+
+    bureau_dataframe = bureau_generator.generate_dataframe()
+
+    generator = CardGenerator(
+        customer_dataframe=customer_dataframe,
+        bureau_dataframe=bureau_dataframe,
+    )
+
+    df = generator.generate_dataframe()
+
+    print(df.head())
+
