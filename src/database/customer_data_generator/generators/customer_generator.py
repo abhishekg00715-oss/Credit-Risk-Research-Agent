@@ -65,8 +65,7 @@ class CustomerGenerator:
     ) -> str:
 
         return (
-            f"CUST"
-            f"{random.randint(100000,999999)}"
+            f"CUST{customer_number:06d}"
         )
 
     # --------------------------------------------------
@@ -160,7 +159,7 @@ class CustomerGenerator:
     # --------------------------------------------------
 
     def generate_customer(
-        self
+        self,customer_number: int
     ):
 
         employment = (
@@ -185,7 +184,7 @@ class CustomerGenerator:
         return {
 
             "customer_id":
-                self.generate_customer_id(),
+                self.generate_customer_id(customer_number),
 
             "first_name":
                 self.fake.first_name(),
@@ -246,10 +245,11 @@ class CustomerGenerator:
 
         customers = [
 
-            self.generate_customer()
+            self.generate_customer(customer_number)
 
-            for _ in range(
-                self.number_of_customers
+            for customer_number in range(
+                1,
+                self.number_of_customers + 1
             )
 
         ]
