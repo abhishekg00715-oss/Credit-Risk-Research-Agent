@@ -132,6 +132,166 @@ class CardGenerator:
 
         )[0]
 
+# --------------------------------------------------
+# Payment Behaviour
+# --------------------------------------------------
+
+def determine_payment_behaviour(
+    self,
+    credit_score: int
+):
+
+    if credit_score >= 800:
+
+        return {
+
+            "payment_status": "On Time",
+
+            "days_past_due": 0,
+
+            "missed_payments": 0
+
+        }
+
+    elif credit_score >= 750:
+
+        return {
+
+            "payment_status": "On Time",
+
+            "days_past_due": random.randint(
+                0,
+                5
+            ),
+
+            "missed_payments": random.randint(
+                0,
+                1
+            )
+
+        }
+
+    elif credit_score >= 700:
+
+        return {
+
+            "payment_status": "Delayed",
+
+            "days_past_due": random.randint(
+                5,
+                30
+            ),
+
+            "missed_payments": random.randint(
+                1,
+                3
+            )
+
+        }
+
+    return {
+
+        "payment_status": "Missed",
+
+        "days_past_due": random.randint(
+            30,
+            90
+        ),
+
+        "missed_payments": random.randint(
+            3,
+            8
+        )
+
+    }
+
+    # --------------------------------------------------
+    # Statement Information
+    # --------------------------------------------------
+    
+    def calculate_statement_details(
+        self,
+        outstanding_balance: float
+    ):
+    
+        statement_balance = round(
+    
+            outstanding_balance *
+    
+            random.uniform(
+                0.95,
+                1.05
+            ),
+    
+            2
+    
+        )
+    
+        minimum_due = round(
+    
+            statement_balance * 0.05,
+    
+            2
+    
+        )
+    
+        payment_amount = round(
+    
+            statement_balance *
+    
+            random.uniform(
+                0.40,
+                1.00
+            ),
+    
+            2
+    
+        )
+    
+        return (
+    
+            statement_balance,
+    
+            minimum_due,
+    
+            payment_amount
+    
+        )
+    
+
+    # --------------------------------------------------
+    # Rewards
+    # --------------------------------------------------
+    
+    def calculate_rewards(
+        self,
+        card_type: str,
+        outstanding_balance: float
+    ):
+    
+        reward_program = REWARD_PROGRAMS[
+            card_type
+        ]
+    
+        reward_points = int(
+    
+            outstanding_balance /
+    
+            100
+    
+        )
+    
+        return (
+    
+            reward_program,
+    
+            reward_points
+    
+        )
+    
+    
+
+    
     # --------------------------------------------------
     # Generate DataFrame
     # --------------------------------------------------
@@ -235,7 +395,73 @@ class CardGenerator:
                     2
 
                 )
+                    
+                payment = (
 
+                    self.determine_payment_behaviour(
+                
+                        credit_score
+                
+                    )
+                
+                )
+                
+                statement_balance, minimum_due, last_payment = (
+                
+                    self.calculate_statement_details(
+                
+                        outstanding
+                
+                    )
+                
+                )
+                
+                reward_program, reward_points = (
+                
+                    self.calculate_rewards(
+                
+                        product,
+                
+                        outstanding
+                
+                    )
+                
+                )
+                
+                billing_day = random.choice(
+                
+                    BILLING_CYCLE_DAYS
+                
+                )
+                
+                payment_due = (
+                
+                    datetime.today()
+                
+                    +
+                
+                    timedelta(days=15)
+                
+                ).date()
+                
+                last_payment_date = (
+                
+                    datetime.today()
+                
+                    -
+                
+                    timedelta(
+                
+                        days=random.randint(
+                            1,
+                            30
+                        )
+                
+                    )
+                
+                ).date()
+  
+                
                 issue_date = (
 
                     datetime.today()
@@ -252,7 +478,7 @@ class CardGenerator:
                     )
 
                 )
-
+    
                 expiry = (
 
                     issue_date
@@ -310,10 +536,91 @@ class CardGenerator:
                             rules[
                                 "annual_fee"
                             ],
+                        
 
+                        "cash_limit":
+
+                            round(
+                                credit_limit * 0.30,
+                                2
+                            ),
+                        
+                        "statement_balance":
+                        
+                            statement_balance,
+                        
+                        "billing_cycle_day":
+                        
+                            billing_day,
+                        
+                        "minimum_due":
+                        
+                            minimum_due,
+                        
+                        "payment_due_date":
+                        
+                            payment_due,
+                        
+                        "last_payment_amount":
+                        
+                            last_payment,
+                        
+                        "last_payment_date":
+                        
+                            last_payment_date,
+                        
+                        "payment_status":
+                        
+                            payment[
+                                "payment_status"
+                            ],
+                        
+                        "days_past_due":
+                        
+                            payment[
+                                "days_past_due"
+                            ],
+                        
+                        "missed_payments_last_12m":
+                        
+                            payment[
+                                "missed_payments"
+                            ],
+                        
+                        "write_off_flag":
+                        
+                            "Yes"
+                        
+                            if payment[
+                                "days_past_due"
+                            ] > 90
+                        
+                            else "No",
+                        
+                        "reward_program":
+                        
+                            reward_program,
+                        
+                        "reward_points":
+                        
+                            reward_points,
+                        
+                        "last_card_transaction_date":
+                        
+                            datetime.today().date()
+                            -
+                            timedelta(
+                                days=random.randint(
+                                    1,
+                                    20
+                                )
+                        )
+                        
+                        
                         "card_status":
 
                             self.card_status()
+                    
 
                     }
 
