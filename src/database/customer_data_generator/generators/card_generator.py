@@ -136,74 +136,159 @@ class CardGenerator:
 # Payment Behaviour
 # --------------------------------------------------
 
-def determine_payment_behaviour(
-    self,
-    credit_score: int
-):
-
-    if credit_score >= 800:
-
-        return {
-
-            "payment_status": "On Time",
-
-            "days_past_due": 0,
-
-            "missed_payments": 0
-
-        }
-
-    elif credit_score >= 750:
-
-        return {
-
-            "payment_status": "On Time",
-
-            "days_past_due": random.randint(
+    
+    def determine_payment_behaviour(
+        self,
+        credit_score: int
+    ) -> dict:
+        """
+        Determine customer payment behaviour
+        based on credit score.
+    
+        Returns a dictionary containing
+        payment behaviour attributes used
+        throughout the Card Generator.
+        """
+    
+        # ------------------------------------------
+        # Excellent Customer
+        # ------------------------------------------
+    
+        if credit_score >= 800:
+    
+            return {
+    
+                "payment_status": "On Time",
+    
+                "days_past_due": 0,
+    
+                "missed_payments": 0,
+    
+                "write_off_flag": "No"
+    
+            }
+    
+        # ------------------------------------------
+        # Very Good Customer
+        # ------------------------------------------
+    
+        elif credit_score >= 750:
+    
+            dpd = random.randint(
                 0,
                 5
-            ),
-
-            "missed_payments": random.randint(
-                0,
-                1
             )
-
-        }
-
-    elif credit_score >= 700:
-
-        return {
-
-            "payment_status": "Delayed",
-
-            "days_past_due": random.randint(
+    
+            return {
+    
+                "payment_status":
+    
+                    "On Time"
+    
+                    if dpd == 0
+    
+                    else
+    
+                    "Grace Period",
+    
+                "days_past_due":
+    
+                    dpd,
+    
+                "missed_payments":
+    
+                    0,
+    
+                "write_off_flag":
+    
+                    "No"
+    
+            }
+    
+        # ------------------------------------------
+        # Average Customer
+        # ------------------------------------------
+    
+        elif credit_score >= 700:
+    
+            dpd = random.randint(
                 5,
                 30
-            ),
-
-            "missed_payments": random.randint(
+            )
+    
+            missed = random.randint(
                 1,
                 3
             )
-
-        }
-
-    return {
-
-        "payment_status": "Missed",
-
-        "days_past_due": random.randint(
-            30,
-            90
-        ),
-
-        "missed_payments": random.randint(
-            3,
-            8
-        )
-
-    }
+    
+            return {
+    
+                "payment_status": "Delayed",
+    
+                "days_past_due": dpd,
+    
+                "missed_payments": missed,
+    
+                "write_off_flag": "No"
+    
+            }
+    
+        # ------------------------------------------
+        # High Risk Customer
+        # ------------------------------------------
+    
+        elif credit_score >= 650:
+    
+            dpd = random.randint(
+                30,
+                90
+            )
+    
+            missed = random.randint(
+                3,
+                6
+            )
+    
+            return {
+    
+                "payment_status": "Missed",
+    
+                "days_past_due": dpd,
+    
+                "missed_payments": missed,
+    
+                "write_off_flag": "No"
+    
+            }
+    
+        # ------------------------------------------
+        # Default Risk Customer
+        # ------------------------------------------
+    
+        else:
+    
+            dpd = random.randint(
+                91,
+                180
+            )
+    
+            missed = random.randint(
+                6,
+                12
+            )
+    
+            return {
+    
+                "payment_status": "Default",
+    
+                "days_past_due": dpd,
+    
+                "missed_payments": missed,
+    
+                "write_off_flag": "Yes"
+    
+            }
+    
 
     # --------------------------------------------------
     # Statement Information
@@ -568,34 +653,23 @@ def determine_payment_behaviour(
                         "last_payment_date":
                         
                             last_payment_date,
-                        
+
                         "payment_status":
-                        
-                            payment[
-                                "payment_status"
-                            ],
+
+                            payment["payment_status"],
                         
                         "days_past_due":
                         
-                            payment[
-                                "days_past_due"
-                            ],
+                            payment["days_past_due"],
                         
                         "missed_payments_last_12m":
                         
-                            payment[
-                                "missed_payments"
-                            ],
+                            payment["missed_payments"],
                         
                         "write_off_flag":
                         
-                            "Yes"
+                            payment["write_off_flag"],
                         
-                            if payment[
-                                "days_past_due"
-                            ] > 90
-                        
-                            else "No",
                         
                         "reward_program":
                         
