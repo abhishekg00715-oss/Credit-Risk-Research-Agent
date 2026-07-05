@@ -206,17 +206,28 @@ EXCELLENT_SCORE = (
 # Banking Products
 # ==================================================
 
-CARD_TYPES = [
-
-    "Classic",
-
-    "Gold",
-
-    "Platinum",
-
-    "Premium"
-
-]
+CARD_PRODUCTS = {
+    "Classic": {
+        "min_score": 650,
+        "income_multiplier": 0.25,
+        "annual_fee": 500
+    },
+    "Gold": {
+        "min_score": 700,
+        "income_multiplier": 0.40,
+        "annual_fee": 1500
+    },
+    "Platinum": {
+        "min_score": 750,
+        "income_multiplier": 0.60,
+        "annual_fee": 5000
+    },
+    "Premium": {
+        "min_score": 800,
+        "income_multiplier": 0.80,
+        "annual_fee": 10000
+    }
+}
 
 LOAN_TYPES = [
 
