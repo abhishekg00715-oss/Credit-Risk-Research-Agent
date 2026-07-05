@@ -16,11 +16,13 @@ import pandas as pd
 
 from faker import Faker
 from datetime import datetime
-from config import EMPLOYMENT_TYPES
-from config import OCCUPATION_MAPPING
-from config import SALARIED_INCOME
-from config import SELF_EMPLOYED_INCOME
-from config import BUSINESS_OWNER_INCOME
+from src.database.customer_data_generator.config import (
+    EMPLOYMENT_TYPES,
+    OCCUPATION_MAPPING,
+    SALARIED_INCOME,
+    SELF_EMPLOYED_INCOME,
+    BUSINESS_OWNER_INCOME,
+)
 
 
 class CustomerGenerator:
