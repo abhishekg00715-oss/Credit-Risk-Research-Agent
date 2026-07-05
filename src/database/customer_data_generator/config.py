@@ -94,38 +94,38 @@ RESIDENTIAL_STATUS = [
 # ==================================================
 # Occupations
 # ==================================================
+OCCUPATION_MAPPING = {
 
-OCCUPATIONS = [
+    "Salaried": [
 
-    "Software Engineer",
+        "Software Engineer",
+        "Teacher",
+        "Doctor",
+        "Marketing Manager",
+        "Sales Executive",
+        "Government Employee",
+        "Data Scientist",
+        "Consultant"
+    ],
 
-    "Doctor",
+    "Self-Employed": [
 
-    "Teacher",
+        "Chartered Accountant",
+        "Lawyer",
+        "Architect",
+        "Freelancer",
+        "Consultant"
+    ],
 
-    "Chartered Accountant",
+    "Business Owner": [
 
-    "Marketing Manager",
-
-    "Sales Executive",
-
-    "Consultant",
-
-    "Government Employee",
-
-    "Business Owner",
-
-    "Lawyer",
-
-    "Architect",
-
-    "Data Scientist",
-
-    "Mechanical Engineer",
-
-    "Civil Engineer"
-
-]
+        "Retail Business Owner",
+        "Restaurant Owner",
+        "Manufacturing Owner",
+        "Startup Founder",
+        "Exporter"
+    ]
+}
 
 
 # ==================================================
