@@ -17,7 +17,7 @@ import pandas as pd
 from faker import Faker
 from datetime import datetime
 from config import EMPLOYMENT_TYPES
-from config import OCCUPATIONS
+from config import OCCUPATION_MAPPING
 from config import SALARIED_INCOME
 from config import SELF_EMPLOYED_INCOME
 from config import BUSINESS_OWNER_INCOME
@@ -106,7 +106,26 @@ class CustomerGenerator:
             SALARIED_INCOME[0],
             SALARIED_INCOME[1]
         )
+        
+    # --------------------------------------------------
+    # Customer Segment
+    # --------------------------------------------------
+    
+    def determine_customer_segment(
+    income: float
+    ):
 
+        if income >= 2500000:
+    
+            return "High Net Worth"
+    
+        elif income >= 1200000:
+    
+            return "Affluent"
+    
+        return "Mass"
+    
+    
     # --------------------------------------------------
     # Relationship Years
     # --------------------------------------------------
@@ -156,6 +175,11 @@ class CustomerGenerator:
             )
         )
 
+        customer_segment: (
+            self.determine_customer_segment(
+                income
+            )
+        )
         return {
 
             "customer_id":
@@ -186,12 +210,15 @@ class CustomerGenerator:
 
             "occupation":
                 random.choice(
-                    OCCUPATIONS
+                     OCCUPATION_MAPPING[
+                        employment
+                     ]
                 ),
 
             "annual_income":
                 income,
-
+            "customer_segment":
+                customer_segment,                
             "city":
                 self.fake.city(),
 
