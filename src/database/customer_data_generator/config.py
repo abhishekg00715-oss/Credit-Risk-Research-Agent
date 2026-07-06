@@ -420,6 +420,54 @@ PREMIUM_DTI_LIMIT = 35
 
 
 # ==================================================
+# Loan Products
+# ==================================================
+
+LOAN_PRODUCTS = {
+
+    "Personal Loan": {
+
+        "min_score": 650,
+
+        "interest_range": (11.5, 18.0),
+
+        "max_income_multiplier": 0.50,
+
+        "secured": False
+
+    },
+
+    "Auto Loan": {
+
+        "min_score": 700,
+
+        "interest_range": (8.5, 12.0),
+
+        "max_income_multiplier": 0.80,
+
+        "secured": True
+
+    },
+
+    "Home Loan": {
+
+        "min_score": 750,
+
+        "interest_range": (7.5, 10.0),
+
+        "max_income_multiplier": 5.00,
+
+        "secured": True
+
+    }
+
+}
+
+
+
+
+
+# ==================================================
 # Export Configuration
 # ==================================================
 
