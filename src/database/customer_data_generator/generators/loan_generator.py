@@ -25,6 +25,12 @@ from src.database.customer_data_generator.config import (
     LOAN_STATUS
 )
 
+from src.database.customer_data_generator.generators.customer_generator import (
+    CustomerGenerator,
+)
+from src.database.customer_data_generator.generators.bureau_generator import (
+    BureauGenerator,
+)
 
 class LoanGenerator:
     """
