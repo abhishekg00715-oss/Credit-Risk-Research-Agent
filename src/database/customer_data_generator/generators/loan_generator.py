@@ -84,11 +84,11 @@ class LoanGenerator:
 
         if credit_score >= 780:
 
-            probabilities = [
-                0,
-                1,
-                2
-            ]
+            probabilities = list(
+                range(
+                    MAX_LOANS + 1
+                )
+            )
 
             weights = [
                 20,
@@ -98,11 +98,11 @@ class LoanGenerator:
 
         elif credit_score >= 700:
 
-            probabilities = [
-                0,
-                1,
-                2
-            ]
+            probabilities = list(
+                range(
+                    MAX_LOANS + 1
+                )
+            )
 
             weights = [
                 35,
@@ -112,10 +112,11 @@ class LoanGenerator:
 
         else:
 
-            probabilities = [
-                0,
-                1
-            ]
+            probabilities = list(
+                range(
+                    MAX_LOANS + 1
+                )
+            )
 
             weights = [
                 60,
