@@ -235,7 +235,7 @@ LOAN_TYPES = [
 
     "Home Loan",
 
-    "Vehicle Loan",
+    "Auto Loan",
 
     "Education Loan"
 
@@ -429,40 +429,54 @@ LOAN_PRODUCTS = {
 
         "min_score": 650,
 
-        "interest_range": (11.5, 18.0),
+        "interest_range": (11.5,18.0),
 
-        "max_income_multiplier": 0.50,
+        "max_income_multiplier":0.50,
+
+        "tenure": (12,60),
 
         "secured": False
-
     },
 
     "Auto Loan": {
 
-        "min_score": 700,
+        "min_score":700,
 
-        "interest_range": (8.5, 12.0),
+        "interest_range":(8.5,12.0),
 
-        "max_income_multiplier": 0.80,
+        "max_income_multiplier":0.80,
 
-        "secured": True
+        "tenure":(36,84),
 
+        "secured":True
     },
 
     "Home Loan": {
 
-        "min_score": 750,
+        "min_score":750,
 
-        "interest_range": (7.5, 10.0),
+        "interest_range":(7.5,10.0),
 
-        "max_income_multiplier": 5.00,
+        "max_income_multiplier":5.00,
 
-        "secured": True
+        "tenure":(180,360),
 
+        "secured":True
+    },
+
+    "Education Loan": {
+
+        "min_score":680,
+
+        "interest_range":(9.5,13.5),
+
+        "max_income_multiplier":1.20,
+
+        "tenure":(60,180),
+
+        "secured":False
     }
-
 }
-
 
 
 
