@@ -556,3 +556,34 @@ class LoanGenerator:
         return pd.DataFrame(
             loan_records
         )
+
+# ----------------------------------------
+# Local Testing
+# ----------------------------------------
+
+if __name__ == "__main__":
+
+    customer_df = (
+        CustomerGenerator(
+            number_of_customers=10
+        ).generate_dataframe()
+    )
+
+    bureau_df = (
+        BureauGenerator(
+            customer_dataframe=customer_df
+        ).generate_dataframe()
+    )
+
+    loan_df = (
+        LoanGenerator(
+            customer_dataframe=customer_df,
+            bureau_dataframe=bureau_df
+        ).generate_dataframe()
+    )
+
+    print(loan_df.head())
+
+    print()
+
+    print(loan_df.info())
