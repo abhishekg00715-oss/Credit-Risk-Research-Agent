@@ -272,31 +272,45 @@ PAYMENT_STATUS = [
 # Transaction Categories
 # ==================================================
 
-MERCHANT_CATEGORIES = [
+DEBIT_TRANSACTION_CATEGORIES = {
 
-    "Groceries",
+    "Groceries": 22,
 
-    "Fuel",
+    "Fuel": 15,
 
-    "Restaurant",
+    "Shopping": 18,
 
-    "Shopping",
+    "Restaurant": 12,
 
-    "Travel",
+    "Utilities": 10,
 
-    "Healthcare",
+    "Healthcare": 6,
 
-    "Utilities",
+    "Travel": 5,
 
-    "Insurance",
+    "Insurance": 4,
 
-    "Education",
+    "Education": 3,
 
-    "Entertainment",
+    "Entertainment": 3,
 
-    "Investment"
+    "Investment": 2
+}
 
-]
+CREDIT_TRANSACTION_CATEGORIES = {
+
+    "Salary Credit": 55,
+
+    "Cash Deposit": 15,
+
+    "Interest Credit": 8,
+
+    "Refund": 10,
+
+    "Investment Redemption": 7,
+
+    "Loan Disbursement": 5
+}
 
 
 # ==================================================
