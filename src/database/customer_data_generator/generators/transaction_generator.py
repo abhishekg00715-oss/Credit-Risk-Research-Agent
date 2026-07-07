@@ -21,7 +21,8 @@ from datetime import (
 from src.database.customer_data_generator.config import (
     MIN_TRANSACTIONS,
     MAX_TRANSACTIONS,
-    MERCHANT_CATEGORIES,
+    DEBIT_TRANSACTION_CATEGORIES,
+    CREDIT_TRANSACTION_CATEGORIES,
     TRANSACTION_CHANNELS
 )
 
@@ -107,31 +108,48 @@ class TransactionGenerator:
     # ----------------------------------------
     # Merchant Category
     # ----------------------------------------
-
     @staticmethod
-    def transaction_category():
+    def transaction_category(
+        transaction_type: str,has_loan: bool = False
+    ) -> str:
+        """
+        Select merchant category based
+        on transaction type.
+        """
+    
+        if transaction_type == "Credit":
+    
+            categories = dict(
+                CREDIT_TRANSACTION_CATEGORIES
+            )
+            if not has_loan:
 
+                categories.pop(
+                    "Loan Disbursement",
+                    None
+                )
+            
+        else:
+    
+            categories = dict(
+                DEBIT_TRANSACTION_CATEGORIES
+            )
+            if has_loan:
+
+                categories["Loan EMI"] = 8
+        
         return random.choices(
-
-            MERCHANT_CATEGORIES,
-
-            weights=[
-                22,   # Groceries
-                15,   # Fuel
-                12,   # Restaurant
-                18,   # Shopping
-                5,    # Travel
-                6,    # Healthcare
-                10,   # Utilities
-                4,    # Insurance
-                3,    # Education
-                3,    # Entertainment
-                2     # Investment
-            ],
-
+    
+            list(categories.keys()),
+    
+            weights=list(
+                categories.values()
+            ),
+    
             k=1
-
+    
         )[0]
+        
 
     # ----------------------------------------
     # Transaction Channel
@@ -178,6 +196,7 @@ class TransactionGenerator:
             k=1
 
         )[0]
+
 
     # ----------------------------------------
     # Transaction Amount
@@ -393,7 +412,8 @@ class TransactionGenerator:
                 )
 
                 category = (
-                    self.transaction_category()
+                    self.transaction_category(transaction_type=txn_type,
+                        has_loan=has_loan)
                 )
 
                 amount = (
