@@ -9,10 +9,10 @@ Financial institutions maintain hundreds of underwriting and policy documents co
 
 Searching these documents manually is:
 
-Time consuming
-Inconsistent across analysts
-Difficult for new employees
-Prone to interpretation errors
+- Time consuming
+- Inconsistent across analysts
+- Difficult for new employees
+- Prone to interpretation errors
 
 This project provides an AI-powered assistant capable of understanding policy documents and answering underwriting questions using policy-grounded responses with source attribution.
 
