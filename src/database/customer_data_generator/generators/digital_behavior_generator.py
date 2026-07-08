@@ -202,48 +202,7 @@ class DigitalBehaviorGenerator:
 
         )[0]
 
-    # ----------------------------------------
-    # Transactions Per Session
-    # ----------------------------------------
-
-    @staticmethod
-    def transactions_per_session() -> int:
-        """
-        Most sessions are used
-        for enquiries rather than
-        financial transactions.
-        """
-
-        return random.choices(
-
-            [
-                0,
-
-                1,
-
-                2,
-
-                3,
-
-                4
-
-            ],
-
-            weights=[
-                40,
-
-                30,
-
-                15,
-
-                10,
-
-                5
-            ],
-
-            k=1
-
-        )[0]
+    
 
     # ----------------------------------------
     # Biometric Login
@@ -334,6 +293,69 @@ class DigitalBehaviorGenerator:
         )
 
     # ----------------------------------------
+    # Session type
+    # ----------------------------------------
+
+    @staticmethod
+    def activity_type():
+    
+        return random.choices(
+    
+            list(DIGITAL_SESSION_TYPES.keys()),
+    
+            weights=list(DIGITAL_SESSION_TYPES.values()),
+    
+            k=1
+    
+        )[0]
+
+    
+    # ----------------------------------------
+    # Maximum Transactions by Activity
+    # ----------------------------------------
+    
+    @staticmethod
+    def max_transactions_for_activity(
+        activity_type: str
+    ) -> int:
+        """
+        Maximum financial transactions
+        expected for the activity.
+        """
+    
+        mapping = {
+    
+            "Balance Enquiry": 0,
+    
+            "Statement Download": 0,
+    
+            "Offer Browsing": 0,
+    
+            "Profile Update": 0,
+    
+            "Loan Account View": 0,
+    
+            "Funds Transfer": 2,
+    
+            "Bill Payment": 1,
+    
+            "Credit Card Payment": 1,
+    
+            "Reward Redemption": 1,
+    
+            "Service Request": 0
+    
+        }
+    
+        return mapping.get(
+            activity_type,
+            0
+        )
+
+
+
+    
+    # ----------------------------------------
     # Generate DataFrame
     # ----------------------------------------
 
@@ -416,41 +438,57 @@ class DigitalBehaviorGenerator:
                     self.login_status()
                 )
 
+                
                 # ----------------------------
                 # Allocate Transactions
                 # ----------------------------
 
+
+                activity_type = (
+                    self.activity_type()
+                )
+                
+                max_transactions = (
+                
+                    self.max_transactions_for_activity(
+                        activity_type
+                    )
+                
+                )
+                
                 if remaining_transactions <= 0:
-
+                
                     session_transactions = 0
-
-                elif session == (
-                    total_sessions - 1
-                ):
-
-                    session_transactions = (
-                        remaining_transactions
+                
+                elif session == total_sessions - 1:
+                
+                    session_transactions = min(
+                
+                        remaining_transactions,
+                
+                        max_transactions
+                
                     )
-
+                
                 else:
-
-                    max_allowed = min(
-                        4,
-                        remaining_transactions
-                    )
-
-                    session_transactions = (
-
-                        random.randint(
-                            0,
-                            max_allowed
+                
+                    session_transactions = random.randint(
+                
+                        0,
+                
+                        min(
+                
+                            max_transactions,
+                
+                            remaining_transactions
+                
                         )
-
+                
                     )
-
-                    remaining_transactions -= (
-                        session_transactions
-                    )
+                
+                remaining_transactions -= session_transactions
+                
+                
 
                 digital_records.append(
 
@@ -479,6 +517,8 @@ class DigitalBehaviorGenerator:
                         "session_duration_minutes":
                             self.session_duration(),
 
+                        "activity_type": activity_type,
+                        
                         "transactions_in_session":
                             session_transactions,
 
