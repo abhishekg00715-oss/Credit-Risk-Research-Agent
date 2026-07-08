@@ -493,6 +493,35 @@ LOAN_PRODUCTS = {
 }
 
 
+# ==================================================
+# Digital Session Types
+# ==================================================
+
+DIGITAL_SESSION_TYPES = {
+
+    "Balance Enquiry": 25,
+
+    "Statement Download": 10,
+
+    "Funds Transfer": 18,
+
+    "Bill Payment": 15,
+
+    "Credit Card Payment": 8,
+
+    "Loan Account View": 8,
+
+    "Profile Update": 6,
+
+    "Offer Browsing": 5,
+
+    "Reward Redemption": 3,
+
+    "Service Request": 2
+
+}
+
+
 
 
 # ==================================================
