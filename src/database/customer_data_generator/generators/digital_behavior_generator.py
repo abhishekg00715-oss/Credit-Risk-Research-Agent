@@ -22,7 +22,8 @@ from src.database.customer_data_generator.config import (
     MIN_DIGITAL_SESSIONS,
     MAX_DIGITAL_SESSIONS,
     DEVICE_TYPES,
-    LOGIN_CHANNELS
+    LOGIN_CHANNELS,
+    DIGITAL_SESSION_TYPES
 )
 
 
