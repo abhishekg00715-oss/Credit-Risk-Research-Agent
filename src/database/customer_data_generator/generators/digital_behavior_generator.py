@@ -353,8 +353,6 @@ class DigitalBehaviorGenerator:
             0
         )
 
-
-
     
     # ----------------------------------------
     # Generate DataFrame
@@ -435,60 +433,62 @@ class DigitalBehaviorGenerator:
                     self.device_type()
                 )
 
-                login_status = (
-                    self.login_status()
-                )
+        # ------------------------------------
+        # Allocate Transactions
+        # ------------------------------------
 
                 
-                # ----------------------------
-                # Allocate Transactions
-                # ----------------------------
-
-
-                activity_type = (
-                    self.activity_type()
-                )
+                login_status = self.login_status()
                 
-                max_transactions = (
+                if login_status == "Failed":
                 
-                    self.max_transactions_for_activity(
-                        activity_type
-                    )
-                
-                )
-                
-                if remaining_transactions <= 0:
+                    activity_type = "Login Failed"
                 
                     session_transactions = 0
                 
-                elif session == total_sessions - 1:
-                
-                    session_transactions = min(
-                
-                        remaining_transactions,
-                
-                        max_transactions
-                
-                    )
-                
                 else:
                 
-                    session_transactions = random.randint(
+                    activity_type = self.activity_type()
                 
-                        0,
+                    max_transactions = (
+                        self.max_transactions_for_activity(
+                            activity_type
+                        )
+                    )
                 
-                        min(
+                    if remaining_transactions <= 0:
                 
-                            max_transactions,
+                        session_transactions = 0
                 
-                            remaining_transactions
+                    elif session == total_sessions - 1:
+                
+                        session_transactions = min(
+                
+                            remaining_transactions,
+                
+                            max_transactions
                 
                         )
                 
-                    )
+                    else:
                 
-                remaining_transactions -= session_transactions
+                        session_transactions = random.randint(
                 
+                            0,
+                
+                            min(
+                
+                                max_transactions,
+                
+                                remaining_transactions
+                
+                            )
+                
+                        )
+                
+                if session_transactions > 0:
+                
+                    remaining_transactions -= session_transactions
                 
 
                 digital_records.append(
