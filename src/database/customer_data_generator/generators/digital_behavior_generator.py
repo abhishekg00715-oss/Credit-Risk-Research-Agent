@@ -332,3 +332,181 @@ class DigitalBehaviorGenerator:
             )
 
         )
+
+    # ----------------------------------------
+    # Generate DataFrame
+    # ----------------------------------------
+
+    def generate_dataframe(
+        self
+    ) -> pd.DataFrame:
+
+        digital_records = []
+
+        session_number = 1
+
+        # ------------------------------------
+        # Transaction Count Lookup
+        # ------------------------------------
+
+        transaction_lookup = (
+
+            self.transaction_dataframe
+
+            .groupby("customer_id")
+
+            .size()
+
+            .to_dict()
+
+        )
+
+        # ------------------------------------
+        # Generate Sessions
+        # ------------------------------------
+
+        for _, customer in (
+
+            self.customer_dataframe.iterrows()
+
+        ):
+
+            customer_id = (
+                customer["customer_id"]
+            )
+
+            customer_segment = (
+                customer["customer_segment"]
+            )
+
+            customer_state = (
+                customer["state"]
+            )
+
+            total_sessions = (
+
+                self.number_of_sessions(
+                    customer_segment
+                )
+
+            )
+
+            total_transactions = (
+
+                transaction_lookup.get(
+                    customer_id,
+                    0
+                )
+
+            )
+
+            remaining_transactions = (
+                total_transactions
+            )
+
+            for session in range(
+                total_sessions
+            ):
+
+                device = (
+                    self.device_type()
+                )
+
+                login_status = (
+                    self.login_status()
+                )
+
+                # ----------------------------
+                # Allocate Transactions
+                # ----------------------------
+
+                if remaining_transactions <= 0:
+
+                    session_transactions = 0
+
+                elif session == (
+                    total_sessions - 1
+                ):
+
+                    session_transactions = (
+                        remaining_transactions
+                    )
+
+                else:
+
+                    max_allowed = min(
+                        4,
+                        remaining_transactions
+                    )
+
+                    session_transactions = (
+
+                        random.randint(
+                            0,
+                            max_allowed
+                        )
+
+                    )
+
+                    remaining_transactions -= (
+                        session_transactions
+                    )
+
+                digital_records.append(
+
+                    {
+
+                        "session_id":
+                            self.generate_session_id(
+                                session_number
+                            ),
+
+                        "customer_id":
+                            customer_id,
+
+                        "login_datetime":
+                            self.login_datetime(),
+
+                        "login_channel":
+                            self.login_channel(),
+
+                        "device_type":
+                            device,
+
+                        "login_status":
+                            login_status,
+
+                        "session_duration_minutes":
+                            self.session_duration(),
+
+                        "transactions_in_session":
+                            session_transactions,
+
+                        "biometric_login":
+                            self.biometric_login(
+                                device
+                            ),
+
+                        "state":
+                            customer_state
+
+                    }
+
+                )
+
+                session_number += 1
+
+        return pd.DataFrame(
+            digital_records
+        )
+
+
+# ----------------------------------------
+# Local Testing
+# ----------------------------------------
+
+if __name__ == "__main__":
+
+    print(
+        "Run through data_pipeline_execution.py"
+    )
