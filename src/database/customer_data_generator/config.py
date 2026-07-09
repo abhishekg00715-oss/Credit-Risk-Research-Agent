@@ -9,6 +9,8 @@ Author:
 Credit Risk Research Agent
 """
 
+
+
 # ==================================================
 # General Configuration
 # ==================================================
@@ -528,7 +530,15 @@ DIGITAL_SESSION_TYPES = {
 # Export Configuration
 # ==================================================
 
-OUTPUT_DIRECTORY = "output"
+from pathlib import Path
+
+OUTPUT_DIRECTORY = (
+
+    Path(__file__).parent
+
+    / "output"
+
+)
 
 CUSTOMER_MASTER_FILE = "customer_master.csv"
 
