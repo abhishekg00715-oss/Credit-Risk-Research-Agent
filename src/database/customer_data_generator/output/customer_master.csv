@@ -1,0 +1,101 @@
+customer_id,first_name,last_name,gender,date_of_birth,employment_type,occupation,annual_income,customer_segment,city,state,customer_since,relationship_years
+CUST000001,Danielle,Johnson,Female,1972-11-23,Business Owner,Restaurant Owner,1304902,Affluent,East Jill,Utah,2022-01-01,4
+CUST000002,Joy,Gardner,Male,1987-02-03,Salaried,Data Scientist,829895,Mass,North Claytonbury,North Carolina,2021-01-01,5
+CUST000003,Carolyn,Hoffman,Male,1992-09-27,Salaried,Marketing Manager,792986,Mass,Robinsonshire,Louisiana,2025-01-01,1
+CUST000004,Lisa,Smith,Male,1996-10-12,Business Owner,Exporter,1311299,Affluent,Petersonberg,Indiana,2006-01-01,20
+CUST000005,Susan,Rogers,Female,1964-09-10,Self-Employed,Chartered Accountant,2584119,High Net Worth,West Melanieview,Arizona,2018-01-01,8
+CUST000006,Jessica,Herrera,Female,2004-04-23,Salaried,Doctor,1827114,Affluent,Millerport,South Dakota,2012-01-01,14
+CUST000007,Christine,Hensley,Male,1986-07-02,Salaried,Data Scientist,828700,Mass,North Donnaport,Colorado,2015-01-01,11
+CUST000008,Melissa,Delacruz,Female,1977-08-16,Salaried,Software Engineer,1842654,Affluent,Reidstad,Hawaii,2014-01-01,12
+CUST000009,Mitchell,Clark,Male,1972-07-14,Business Owner,Startup Founder,3449103,High Net Worth,New Cynthiaside,Washington,2011-01-01,15
+CUST000010,John,Ford,Female,1972-08-31,Salaried,Marketing Manager,1629678,Affluent,Lake Mark,Wyoming,2008-01-01,18
+CUST000011,Kimberly,Perez,Male,1961-12-18,Business Owner,Manufacturing Owner,1392201,Affluent,Richardland,Indiana,2023-01-01,3
+CUST000012,Robin,Bradley,Female,1992-10-28,Salaried,Sales Executive,823630,Mass,Lake Victor,Tennessee,2018-01-01,8
+CUST000013,Stephen,Baker,Female,1971-08-14,Self-Employed,Architect,1382220,Affluent,Juliechester,Pennsylvania,2014-01-01,12
+CUST000014,Reginald,Robinson,Male,2005-05-29,Salaried,Marketing Manager,699483,Mass,Daviston,Delaware,2017-01-01,9
+CUST000015,Eric,Moore,Female,1991-02-21,Salaried,Marketing Manager,1991551,Affluent,South Patrickmouth,North Dakota,2011-01-01,15
+CUST000016,John,Tran,Male,2002-12-05,Business Owner,Restaurant Owner,4735177,High Net Worth,Lake Nicoleview,Wyoming,2015-01-01,11
+CUST000017,Danielle,Rodriguez,Female,1980-01-31,Salaried,Teacher,2082607,Affluent,Smithview,North Carolina,2015-01-01,11
+CUST000018,Kathleen,Romero,Male,1965-04-22,Salaried,Consultant,1719854,Affluent,Meaganhaven,Rhode Island,2007-01-01,19
+CUST000019,James,Brooks,Female,1967-10-16,Self-Employed,Lawyer,1299246,Affluent,New Mariotown,Delaware,2011-01-01,15
+CUST000020,Sarah,Koch,Female,1997-12-11,Salaried,Data Scientist,1502018,Affluent,Johnbury,Oregon,2008-01-01,18
+CUST000021,Stacey,Miller,Female,1982-05-22,Self-Employed,Chartered Accountant,1280205,Affluent,Port Amandaberg,Florida,2018-01-01,8
+CUST000022,Donna,Arroyo,Male,1967-12-14,Salaried,Data Scientist,1041062,Mass,Brandtside,Wisconsin,2022-01-01,4
+CUST000023,Jessica,Harris,Female,1974-07-19,Business Owner,Exporter,2813831,High Net Worth,Samuelhaven,New Hampshire,2023-01-01,3
+CUST000024,David,Walker,Male,1975-09-25,Self-Employed,Chartered Accountant,1754507,Affluent,New Jeffrey,California,2009-01-01,17
+CUST000025,Jean,Brown,Female,1963-07-21,Business Owner,Manufacturing Owner,4349409,High Net Worth,Port Markhaven,Kansas,2008-01-01,18
+CUST000026,Joshua,Washington,Male,1984-10-13,Salaried,Consultant,2223537,Affluent,Sanchezfort,Nebraska,2016-01-01,10
+CUST000027,James,Davis,Male,1979-12-01,Salaried,Teacher,2499610,Affluent,Jenkinston,Utah,2017-01-01,9
+CUST000028,Denise,Lucas,Male,1963-04-01,Business Owner,Restaurant Owner,4730217,High Net Worth,Laurenville,Kansas,2016-01-01,10
+CUST000029,James,Herrera,Male,1966-10-30,Self-Employed,Consultant,2962319,High Net Worth,West Steven,California,2020-01-01,6
+CUST000030,Scott,Callahan,Male,1985-04-14,Self-Employed,Architect,781691,Mass,Lake Yvettetown,Colorado,2010-01-01,16
+CUST000031,Sara,Allison,Male,1968-01-02,Self-Employed,Consultant,942955,Mass,Olsonfurt,Arkansas,2018-01-01,8
+CUST000032,Franklin,Smith,Male,1978-02-01,Salaried,Doctor,2438391,Affluent,Mitchellside,Texas,2023-01-01,3
+CUST000033,Jennifer,Moore,Female,1973-11-14,Salaried,Data Scientist,1092592,Mass,New Jillton,West Virginia,2010-01-01,16
+CUST000034,Lee,Williams,Female,1981-12-22,Salaried,Data Scientist,1243688,Affluent,North Susan,Colorado,2008-01-01,18
+CUST000035,Melissa,Jones,Female,1963-07-31,Business Owner,Retail Business Owner,3037524,High Net Worth,South David,Oregon,2014-01-01,12
+CUST000036,John,Wheeler,Female,1988-05-23,Salaried,Software Engineer,668544,Mass,Sandovalshire,North Dakota,2018-01-01,8
+CUST000037,Leslie,Green,Male,1990-08-28,Business Owner,Retail Business Owner,2165171,Affluent,Johnfurt,Florida,2008-01-01,18
+CUST000038,Emily,Evans,Male,1974-09-30,Salaried,Software Engineer,1360251,Affluent,North Stephenshire,Connecticut,2024-01-01,2
+CUST000039,Charles,Lewis,Male,1972-06-14,Self-Employed,Architect,2856527,High Net Worth,Nicolebury,Mississippi,2023-01-01,3
+CUST000040,Justin,Kim,Male,1984-12-18,Business Owner,Exporter,2098574,Affluent,Cherylhaven,Alabama,2010-01-01,16
+CUST000041,Elizabeth,Spencer,Female,2002-06-13,Business Owner,Startup Founder,2219204,Affluent,East Josephville,West Virginia,2010-01-01,16
+CUST000042,Angela,Nelson,Female,1987-09-26,Salaried,Government Employee,806557,Mass,Jamesview,North Carolina,2022-01-01,4
+CUST000043,Tracy,Whitehead,Male,1998-08-05,Self-Employed,Chartered Accountant,2658843,High Net Worth,Lake Rodneyview,Arizona,2012-01-01,14
+CUST000044,Adam,Wise,Male,1989-03-10,Salaried,Marketing Manager,1823138,Affluent,Evanmouth,Oklahoma,2013-01-01,13
+CUST000045,Janice,Hoffman,Male,1965-07-21,Salaried,Data Scientist,2281621,Affluent,New Barry,Mississippi,2019-01-01,7
+CUST000046,Brandi,Hernandez,Male,1966-04-03,Salaried,Teacher,2340402,Affluent,Michaelton,Minnesota,2017-01-01,9
+CUST000047,Jason,Wright,Male,1965-02-22,Self-Employed,Consultant,1110658,Mass,Dicksonberg,Kansas,2008-01-01,18
+CUST000048,Michelle,Cherry,Male,1997-01-01,Salaried,Data Scientist,1391447,Affluent,Johnsonmouth,Nebraska,2023-01-01,3
+CUST000049,Leah,Shields,Female,1997-01-01,Self-Employed,Chartered Accountant,1596521,Affluent,Erikville,Missouri,2010-01-01,16
+CUST000050,Monica,Garrison,Female,1970-07-12,Salaried,Sales Executive,409040,Mass,Baileybury,Iowa,2013-01-01,13
+CUST000051,Andrew,Lee,Female,1975-04-17,Self-Employed,Lawyer,2474221,Affluent,Port Joshuahaven,Montana,2016-01-01,10
+CUST000052,Erin,Anthony,Male,1975-06-03,Salaried,Software Engineer,1313103,Affluent,North Natalieview,Idaho,2016-01-01,10
+CUST000053,Beverly,Terrell,Male,1962-03-29,Business Owner,Exporter,1439768,Affluent,Reedmouth,Nevada,2015-01-01,11
+CUST000054,Catherine,Dixon,Male,1977-11-08,Self-Employed,Chartered Accountant,2927704,High Net Worth,West Bradley,Nevada,2009-01-01,17
+CUST000055,Aaron,Frost,Male,1984-09-30,Business Owner,Retail Business Owner,4770789,High Net Worth,West Ryan,Texas,2023-01-01,3
+CUST000056,Samantha,Hanson,Male,1990-05-16,Business Owner,Startup Founder,4032046,High Net Worth,Lake Rachelhaven,Maryland,2023-01-01,3
+CUST000057,Elizabeth,Nguyen,Male,1991-11-23,Salaried,Teacher,1432702,Affluent,East Robert,Missouri,2007-01-01,19
+CUST000058,Erica,Orr,Female,1988-03-20,Self-Employed,Architect,3070733,High Net Worth,Richardtown,Maryland,2007-01-01,19
+CUST000059,Justin,Jordan,Female,1986-08-14,Salaried,Data Scientist,1401121,Affluent,Stevenmouth,Utah,2015-01-01,11
+CUST000060,Jason,Kennedy,Female,2001-01-26,Salaried,Teacher,2317738,Affluent,Lake Christopher,North Carolina,2016-01-01,10
+CUST000061,Elizabeth,Harvey,Male,1964-09-20,Salaried,Marketing Manager,819351,Mass,Lake Lance,Illinois,2011-01-01,15
+CUST000062,Dylan,Williams,Female,2004-10-17,Business Owner,Retail Business Owner,1755563,Affluent,South Robertshire,Illinois,2017-01-01,9
+CUST000063,Jennifer,Cruz,Male,1978-07-03,Salaried,Consultant,1595323,Affluent,Lake Grace,Wisconsin,2014-01-01,12
+CUST000064,Michelle,Mcclure,Male,1995-07-20,Business Owner,Exporter,3765562,High Net Worth,East Linda,Vermont,2016-01-01,10
+CUST000065,April,Williams,Female,1971-09-25,Self-Employed,Chartered Accountant,1263257,Affluent,South Dennismouth,Texas,2022-01-01,4
+CUST000066,Amanda,Hansen,Female,1974-10-19,Salaried,Sales Executive,1051995,Mass,Salazarhaven,Nevada,2008-01-01,18
+CUST000067,Maria,Kelley,Female,2000-11-22,Business Owner,Restaurant Owner,4209883,High Net Worth,Colebury,South Dakota,2019-01-01,7
+CUST000068,Joshua,Strickland,Female,1982-04-29,Business Owner,Manufacturing Owner,3319839,High Net Worth,West Scott,Virginia,2017-01-01,9
+CUST000069,Justin,Nelson,Female,1974-11-27,Salaried,Software Engineer,2176605,Affluent,East Edwardfurt,Vermont,2023-01-01,3
+CUST000070,Eric,Lewis,Female,1979-03-10,Salaried,Doctor,948697,Mass,Amychester,Arkansas,2015-01-01,11
+CUST000071,Jamie,Fisher,Female,2001-03-27,Business Owner,Exporter,3513915,High Net Worth,Port Nicoleshire,Missouri,2011-01-01,15
+CUST000072,Thomas,Bender,Male,1973-12-15,Salaried,Software Engineer,715595,Mass,Castanedachester,Ohio,2022-01-01,4
+CUST000073,Julie,Payne,Male,1987-09-01,Self-Employed,Freelancer,3017458,High Net Worth,South Jeffrey,Nevada,2007-01-01,19
+CUST000074,Todd,Price,Female,1990-08-14,Salaried,Software Engineer,1692929,Affluent,Ramseymouth,Florida,2024-01-01,2
+CUST000075,Tina,Ferguson,Male,2001-05-01,Self-Employed,Architect,1746603,Affluent,North Dawnberg,New Jersey,2019-01-01,7
+CUST000076,Hunter,Green,Male,1975-04-02,Business Owner,Restaurant Owner,3803243,High Net Worth,Murphyfurt,Louisiana,2012-01-01,14
+CUST000077,Karen,Decker,Male,1971-11-15,Salaried,Doctor,2129288,Affluent,South Andrewside,Arkansas,2020-01-01,6
+CUST000078,Zoe,Bell,Female,1989-10-10,Business Owner,Restaurant Owner,4481566,High Net Worth,Port Anthonybury,Illinois,2015-01-01,11
+CUST000079,Mary,Howell,Female,1971-04-03,Self-Employed,Chartered Accountant,1153385,Mass,Caldwellshire,Indiana,2020-01-01,6
+CUST000080,Steven,Scott,Female,1977-02-13,Self-Employed,Architect,1537069,Affluent,Port Loriport,Connecticut,2018-01-01,8
+CUST000081,Beth,Hickman,Male,1986-06-06,Self-Employed,Lawyer,1635009,Affluent,Sandersborough,California,2018-01-01,8
+CUST000082,Brittany,Rivas,Male,1971-06-13,Self-Employed,Architect,1868545,Affluent,Melissaville,Oregon,2015-01-01,11
+CUST000083,Kimberly,Reed,Female,1979-10-18,Self-Employed,Chartered Accountant,2376372,Affluent,Caseymouth,Alabama,2009-01-01,17
+CUST000084,Melissa,Short,Female,1965-04-08,Salaried,Software Engineer,1148967,Mass,Cynthiamouth,Virginia,2017-01-01,9
+CUST000085,Eric,Thompson,Female,1983-12-31,Salaried,Government Employee,2222692,Affluent,Christinaside,Wyoming,2006-01-01,20
+CUST000086,Timothy,Graham,Male,1993-06-01,Self-Employed,Freelancer,2845063,High Net Worth,Marcusbury,Colorado,2006-01-01,20
+CUST000087,Joshua,Hayes,Male,1994-04-16,Business Owner,Startup Founder,2268383,Affluent,Rogersfort,Massachusetts,2019-01-01,7
+CUST000088,Hunter,Lewis,Female,1996-06-03,Salaried,Data Scientist,1226425,Affluent,Joshuaview,Oklahoma,2009-01-01,17
+CUST000089,Alejandro,Vaughan,Male,1964-05-16,Salaried,Sales Executive,1716657,Affluent,Freemanbury,Vermont,2015-01-01,11
+CUST000090,Thomas,Joseph,Female,1980-09-08,Business Owner,Manufacturing Owner,3997151,High Net Worth,North Kellyfurt,Vermont,2016-01-01,10
+CUST000091,John,Beck,Male,1977-02-15,Self-Employed,Lawyer,3025374,High Net Worth,Ronaldside,Michigan,2016-01-01,10
+CUST000092,Michael,Chavez,Female,1974-04-26,Self-Employed,Freelancer,1429923,Affluent,North Jennifer,Massachusetts,2013-01-01,13
+CUST000093,David,Herrera,Female,1994-10-26,Business Owner,Restaurant Owner,2474543,Affluent,East Javier,New Mexico,2025-01-01,1
+CUST000094,Joshua,Lawrence,Female,1994-09-23,Self-Employed,Freelancer,3244523,High Net Worth,Tinaborough,Maine,2007-01-01,19
+CUST000095,Jeremy,White,Female,1961-02-26,Self-Employed,Lawyer,1596328,Affluent,West Brandon,Arkansas,2011-01-01,15
+CUST000096,Angela,Terry,Female,1966-03-15,Business Owner,Retail Business Owner,2390286,Affluent,Garciatown,Oregon,2023-01-01,3
+CUST000097,Justin,Mendoza,Male,1975-11-07,Salaried,Doctor,1342211,Affluent,West Shelleyfort,Delaware,2016-01-01,10
+CUST000098,Lynn,Morales,Female,1963-11-08,Salaried,Teacher,1426944,Affluent,East Edwardshire,Maryland,2024-01-01,2
+CUST000099,Christopher,Wright,Male,1985-08-19,Self-Employed,Freelancer,3341427,High Net Worth,Obrienbury,Wyoming,2012-01-01,14
+CUST000100,Alexandra,Hayes,Male,1980-06-10,Self-Employed,Chartered Accountant,1723344,Affluent,Torreston,South Carolina,2013-01-01,13

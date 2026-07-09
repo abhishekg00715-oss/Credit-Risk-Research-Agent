@@ -120,7 +120,8 @@ class LoanGenerator:
 
             weights = [
                 60,
-                40
+                40,
+                0
             ]
 
         loans = random.choices(
@@ -503,7 +504,7 @@ class LoanGenerator:
 
                     {
 
-                        "loan_id":
+                        "loan_account_number":
                             self.generate_loan_id(
                                 loan_number
                             ),

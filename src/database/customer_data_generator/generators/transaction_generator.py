@@ -36,9 +36,9 @@ class TransactionGenerator:
     def __init__(
         self,
         customer_dataframe: pd.DataFrame,
-        bureau_dataframe: pd.DataFrame,
-        card_dataframe: pd.DataFrame,
-        loan_dataframe: pd.DataFrame,
+        bureau_dataframe: pd.DataFrame | None = None,
+        card_dataframe: pd.DataFrame | None = None,
+        loan_dataframe: pd.DataFrame | None = None,
         seed: int = 42
     ):
 

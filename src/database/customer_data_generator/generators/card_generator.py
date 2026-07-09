@@ -588,7 +588,7 @@ class CardGenerator:
 
                     {
 
-                        "card_id":
+                        "card_number":
 
                             self.generate_card_id(),
 

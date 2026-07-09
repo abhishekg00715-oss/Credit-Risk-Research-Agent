@@ -9,6 +9,14 @@ Author:
 Credit Risk Research Agent
 """
 
+from pathlib import Path
+import sys
+
+# Allow direct execution of this script from the repository root
+REPO_ROOT = str(Path(__file__).resolve().parents[3])
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+
 from src.database.customer_data_generator.config import (
 
     NUMBER_OF_CUSTOMERS,
@@ -171,6 +179,8 @@ class CustomerDataPipeline:
             TransactionGenerator(
 
                 customer_dataframe=customer_df,
+
+                bureau_dataframe=bureau_df,
 
                 card_dataframe=card_df,
 
