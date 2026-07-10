@@ -44,14 +44,15 @@ class DatabaseLoader:
 
     def __init__(
         self,
-        database_name: str = "customer_risk.db",
-        data_directory=OUTPUT_DIRECTORY
+        database_name: str = "customer_risk.db"
     ):
 
         self.database_name = database_name
 
         self.data_directory = Path(
-            data_directory
+            Path(__file__).parent
+
+            / database_name
         )
 
         self.database = DatabaseManager(
