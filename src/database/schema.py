@@ -2,110 +2,151 @@
 schema.py
 
 Purpose:
-Contains all database schema definitions
-for the Customer Risk Assessment module.
+SQLite database schema definitions
+for the Customer Risk Assessment
+module.
 
 Author:
 Credit Risk Research Agent
 """
 
-# --------------------------------------------------
-# Customer Master Table
-# --------------------------------------------------
+# ==================================================
+# Customer Master
+# ==================================================
 
-CREATE_CUSTOMER_MASTER_TABLE = """
+CUSTOMER_MASTER_SCHEMA = """
+
 CREATE TABLE IF NOT EXISTS customer_master (
 
     customer_id TEXT PRIMARY KEY,
 
-    first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
+    first_name TEXT,
+
+    last_name TEXT,
 
     gender TEXT,
-    date_of_birth TEXT,
+
+    date_of_birth DATE,
 
     employment_type TEXT,
+
     occupation TEXT,
 
     annual_income REAL,
 
+    customer_segment TEXT,
+
     city TEXT,
+
     state TEXT,
 
-    customer_since TEXT,
+    customer_since DATE,
 
     relationship_years INTEGER
+
 );
+
 """
 
 
-# --------------------------------------------------
-# Credit Bureau Table
-# --------------------------------------------------
+# ==================================================
+# Credit Bureau
+# ==================================================
 
-CREATE_CREDIT_BUREAU_TABLE = """
+CREDIT_BUREAU_SCHEMA = """
+
 CREATE TABLE IF NOT EXISTS credit_bureau (
 
-    bureau_id INTEGER PRIMARY KEY AUTOINCREMENT,
-
-    customer_id TEXT NOT NULL,
+    customer_id TEXT PRIMARY KEY,
 
     credit_score INTEGER,
-    credit_history_years INTEGER,
 
-    hard_inquiries INTEGER,
-    delinquencies INTEGER,
-    defaults_count INTEGER,
+    bureau_rating TEXT,
 
-    bankruptcy_flag INTEGER,
+    total_accounts INTEGER,
+
+    active_accounts INTEGER,
 
     credit_utilization REAL,
 
-    FOREIGN KEY (customer_id)
-        REFERENCES customer_master(customer_id)
-);
-"""
+    total_outstanding REAL,
 
+    dti_ratio REAL,
 
-# --------------------------------------------------
-# Credit Card Accounts Table
-# --------------------------------------------------
-
-CREATE_CREDIT_CARD_TABLE = """
-CREATE TABLE IF NOT EXISTS credit_card_accounts (
-
-    card_id TEXT PRIMARY KEY,
-
-    customer_id TEXT NOT NULL,
-
-    card_type TEXT,
-
-    credit_limit REAL,
-
-    outstanding_balance REAL,
-
-    utilization_ratio REAL,
-
-    payment_status TEXT,
+    hard_inquiries INTEGER,
 
     late_payments INTEGER,
 
-    FOREIGN KEY (customer_id)
+    defaults INTEGER,
+
+    bankruptcies INTEGER,
+
+    fraud_flag TEXT,
+
+    last_bureau_refresh DATE,
+
+    FOREIGN KEY(customer_id)
+
         REFERENCES customer_master(customer_id)
+
 );
+
 """
 
 
-# --------------------------------------------------
-# Loan Accounts Table
-# --------------------------------------------------
+# ==================================================
+# Credit Card Accounts
+# ==================================================
 
-CREATE_LOAN_TABLE = """
+CREDIT_CARD_SCHEMA = """
+
+CREATE TABLE IF NOT EXISTS credit_card_accounts (
+
+    card_number TEXT PRIMARY KEY,
+
+    customer_id TEXT,
+
+    card_type TEXT,
+
+    reward_program TEXT,
+
+    credit_limit REAL,
+
+    available_credit REAL,
+
+    outstanding_balance REAL,
+
+    utilization_percentage REAL,
+
+    annual_fee REAL,
+
+    billing_cycle_day INTEGER,
+
+    card_status TEXT,
+
+    issue_date DATE,
+
+    expiry_date DATE,
+
+    FOREIGN KEY(customer_id)
+
+        REFERENCES customer_master(customer_id)
+
+);
+
+"""
+
+# ==================================================
+# Loan Accounts
+# ==================================================
+
+LOAN_SCHEMA = """
+
 CREATE TABLE IF NOT EXISTS loan_accounts (
 
-    loan_id TEXT PRIMARY KEY,
+    loan_account_number TEXT PRIMARY KEY,
 
-    customer_id TEXT NOT NULL,
+    customer_id TEXT,
 
     loan_type TEXT,
 
@@ -113,193 +154,177 @@ CREATE TABLE IF NOT EXISTS loan_accounts (
 
     outstanding_balance REAL,
 
-    monthly_emi REAL,
-
     interest_rate REAL,
+
+    tenure_months INTEGER,
+
+    emi_amount REAL,
 
     loan_status TEXT,
 
-    FOREIGN KEY (customer_id)
+    secured_flag TEXT,
+
+    disbursement_date DATE,
+
+    maturity_date DATE,
+
+    FOREIGN KEY(customer_id)
+
         REFERENCES customer_master(customer_id)
+
 );
+
 """
 
 
-# --------------------------------------------------
-# Transactions Table
-# --------------------------------------------------
+# ==================================================
+# Transactions
+# ==================================================
 
-CREATE_TRANSACTIONS_TABLE = """
+TRANSACTION_SCHEMA = """
+
 CREATE TABLE IF NOT EXISTS transactions (
 
     transaction_id TEXT PRIMARY KEY,
 
-    customer_id TEXT NOT NULL,
+    customer_id TEXT,
 
-    transaction_date TEXT,
-
-    merchant_category TEXT,
-
-    amount REAL,
+    transaction_date DATE,
 
     transaction_type TEXT,
 
-    channel TEXT,
+    merchant_category TEXT,
 
-    FOREIGN KEY (customer_id)
+    transaction_channel TEXT,
+
+    transaction_amount REAL,
+
+    debit_credit_indicator TEXT,
+
+    account_type TEXT,
+
+    FOREIGN KEY(customer_id)
+
         REFERENCES customer_master(customer_id)
+
 );
+
 """
 
 
-# --------------------------------------------------
-# Digital Behavior Table
-# --------------------------------------------------
+# ==================================================
+# Digital Behaviour
+# ==================================================
 
-CREATE_DIGITAL_BEHAVIOR_TABLE = """
+DIGITAL_BEHAVIOR_SCHEMA = """
+
 CREATE TABLE IF NOT EXISTS digital_behavior (
 
     session_id TEXT PRIMARY KEY,
 
-    customer_id TEXT NOT NULL,
+    customer_id TEXT,
 
-    login_timestamp TEXT,
+    login_timestamp DATETIME,
+
+    login_channel TEXT,
 
     device_type TEXT,
 
-    channel TEXT,
+    login_status TEXT,
 
-    session_duration INTEGER,
+    activity_type TEXT,
 
-    failed_login INTEGER,
+    session_duration_minutes INTEGER,
 
-    FOREIGN KEY (customer_id)
+    transactions_in_session INTEGER,
+
+    biometric_login TEXT,
+
+    FOREIGN KEY(customer_id)
+
         REFERENCES customer_master(customer_id)
+
 );
+
 """
 
 
-# --------------------------------------------------
-# Risk Assessment History
-# --------------------------------------------------
-
-CREATE_RISK_ASSESSMENT_HISTORY_TABLE = """
-CREATE TABLE IF NOT EXISTS risk_assessment_history (
-
-    assessment_id INTEGER
-        PRIMARY KEY AUTOINCREMENT,
-
-    customer_id TEXT NOT NULL,
-
-    assessment_timestamp TEXT,
-
-    overall_risk TEXT,
-
-    recommended_product TEXT,
-
-    llm_summary TEXT,
-
-    confidence_score REAL,
-
-    FOREIGN KEY (customer_id)
-        REFERENCES customer_master(customer_id)
-);
-"""
+# ==================================================
+# Database Schema
+# ==================================================
 
 
-# --------------------------------------------------
-# Customer Features Table
-# --------------------------------------------------
+DATABASE_SCHEMA = [
 
-CREATE_CUSTOMER_FEATURES_TABLE = """
-CREATE TABLE IF NOT EXISTS customer_features (
+    CUSTOMER_MASTER_SCHEMA,
 
-    customer_id TEXT PRIMARY KEY,
+    CREDIT_BUREAU_SCHEMA,
 
-    debt_to_income_ratio REAL,
+    CREDIT_CARD_SCHEMA,
 
-    credit_utilization REAL,
+    LOAN_SCHEMA,
 
-    repayment_score REAL,
+    TRANSACTION_SCHEMA,
 
-    income_stability_score REAL,
+    DIGITAL_BEHAVIOR_SCHEMA
 
-    relationship_score REAL,
-
-    financial_stress_score REAL,
-
-    overall_risk_score REAL,
-
-    last_updated TEXT,
-
-    FOREIGN KEY (customer_id)
-        REFERENCES customer_master(customer_id)
-);
-"""
-
-
-# --------------------------------------------------
-# Indexes
-# --------------------------------------------------
-
-CREATE_INDEXES = [
-
-    """
-    CREATE INDEX IF NOT EXISTS idx_bureau_customer
-    ON credit_bureau(customer_id);
-    """,
-
-    """
-    CREATE INDEX IF NOT EXISTS idx_card_customer
-    ON credit_card_accounts(customer_id);
-    """,
-
-    """
-    CREATE INDEX IF NOT EXISTS idx_loan_customer
-    ON loan_accounts(customer_id);
-    """,
-
-    """
-    CREATE INDEX IF NOT EXISTS idx_transaction_customer
-    ON transactions(customer_id);
-    """,
-
-    """
-    CREATE INDEX IF NOT EXISTS idx_transaction_date
-    ON transactions(transaction_date);
-    """,
-
-    """
-    CREATE INDEX IF NOT EXISTS idx_behavior_customer
-    ON digital_behavior(customer_id);
-    """,
-
-    """
-    CREATE INDEX IF NOT EXISTS idx_risk_customer
-    ON risk_assessment_history(customer_id);
-    """
 ]
 
 
 # --------------------------------------------------
-# Master Schema Collection
+# Local Testing
 # --------------------------------------------------
 
-ALL_TABLES = [
+if __name__ == "__main__":
 
-    CREATE_CUSTOMER_MASTER_TABLE,
+    print()
 
-    CREATE_CREDIT_BUREAU_TABLE,
+    print("=" * 50)
 
-    CREATE_CREDIT_CARD_TABLE,
+    print("Customer Risk Database Schema")
 
-    CREATE_LOAN_TABLE,
+    print("=" * 50)
 
-    CREATE_TRANSACTIONS_TABLE,
+    print(
 
-    CREATE_DIGITAL_BEHAVIOR_TABLE,
+        f"Total Tables : {len(DATABASE_SCHEMA)}"
 
-    CREATE_CUSTOMER_FEATURES_TABLE,
+    )
 
-    CREATE_RISK_ASSESSMENT_HISTORY_TABLE
-]
+    print()
+
+    print(
+
+        "customer_master"
+
+    )
+
+    print(
+
+        "credit_bureau"
+
+    )
+
+    print(
+
+        "credit_card_accounts"
+
+    )
+
+    print(
+
+        "loan_accounts"
+
+    )
+
+    print(
+
+        "transactions"
+
+    )
+
+    print(
+
+        "digital_behavior"
+
+    )
