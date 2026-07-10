@@ -27,8 +27,12 @@ class DatabaseManager:
         database_name: str = "customer_risk.db"
     ):
 
-        self.database_path = Path(
-            database_name
+        self.database_path = (
+
+            Path(__file__).parent
+
+            / database_name
+
         )
 
         self.connection = None
@@ -119,21 +123,21 @@ class DatabaseManager:
 # Execute Query
 # ----------------------------------------
 
-def query(
-    self,
-    sql: str,
-    parameters: tuple = ()
-):
+    def query(
+        self,
+        sql: str,
+        parameters: tuple = ()
+    ):
 
-    self.execute(
+        self.execute(
 
-        sql,
+            sql,
 
-        parameters
+            parameters
 
-    )
+        )
 
-    return self.fetchall()
+        return self.fetchall()
 
     # ----------------------------------------
     # Execute Many

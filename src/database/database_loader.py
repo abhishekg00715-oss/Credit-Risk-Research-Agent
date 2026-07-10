@@ -44,15 +44,14 @@ class DatabaseLoader:
 
     def __init__(
         self,
-        database_name: str = "customer_risk.db"
+        database_name: str = "customer_risk.db",
+        directory: str = OUTPUT_DIRECTORY
     ):
 
         self.database_name = database_name
 
         self.data_directory = Path(
-            Path(__file__).parent
-
-            / database_name
+            directory
         )
 
         self.database = DatabaseManager(
@@ -83,15 +82,20 @@ class DatabaseLoader:
             file_path
         )
 
-      # ----------------------------------------
+    # ----------------------------------------
     # Load DataFrame
     # ----------------------------------------
-
+  
     def load_dataframe(
         self,
         dataframe: pd.DataFrame,
         table_name: str
     ):
+        print(table_name)
+
+        print(dataframe.columns.tolist())
+
+        print(dataframe.head(1))
 
         dataframe.to_sql(
 
@@ -168,17 +172,17 @@ class DatabaseLoader:
         
         ]
 
-        for table in tables_to_clear:
-
-            self.database.execute(
-        
-                f"DELETE FROM {table};"
-        
-            )
-
         with self.database:
             
             self.database.create_schema()
+
+            for table in tables_to_clear:
+
+                self.database.execute(
+            
+                    f"DELETE FROM {table};"
+            
+                )
 
             for file_name, table_name in dataset_mapping:
                 print(
@@ -278,7 +282,3 @@ if __name__ == "__main__":
     loader = DatabaseLoader()
 
     loader.run()
-
-        )
-
-  
