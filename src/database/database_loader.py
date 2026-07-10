@@ -167,14 +167,16 @@ class DatabaseLoader:
         
         ]
 
-       for table in tables_to_clear:
+        for table in tables_to_clear:
 
-        self.database.execute(
-    
-            f"DELETE FROM {table};"
-    
-        )
+            self.database.execute(
+        
+                f"DELETE FROM {table};"
+        
+            )
 
+        with self.database:
+            
             self.database.create_schema()
 
             for file_name, table_name in dataset_mapping:
