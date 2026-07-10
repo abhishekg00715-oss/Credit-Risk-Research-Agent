@@ -2,9 +2,9 @@
 database_utils.py
 
 Purpose:
-Provides reusable SQLite database utilities
-for creating tables, inserting records,
-executing queries, and managing connections.
+Provides SQLite database utilities
+for the Customer Risk Assessment
+module.
 
 Author:
 Credit Risk Research Agent
@@ -13,263 +13,210 @@ Credit Risk Research Agent
 import sqlite3
 
 from pathlib import Path
-from typing import List
-from typing import Tuple
-from typing import Optional
+
+from src.database.schema import DATABASE_SCHEMA
 
 
 class DatabaseManager:
     """
     Generic SQLite database manager.
-
-    This class provides reusable helper methods
-    for creating tables, inserting records,
-    querying data, and committing transactions.
     """
 
     def __init__(
         self,
-        database_path: str
+        database_name: str = "customer_risk.db"
     ):
-        """
-        Initialize database connection.
-
-        Parameters
-        ----------
-        database_path : str
-            Path to SQLite database.
-        """
 
         self.database_path = Path(
-            database_path
+            database_name
         )
 
-        self.database_path.parent.mkdir(
-            parents=True,
-            exist_ok=True
-        )
+        self.connection = None
+
+        self.cursor = None
+
+    # ----------------------------------------
+    # Connect Database
+    # ----------------------------------------
+
+    def connect(
+        self
+    ):
 
         self.connection = sqlite3.connect(
+
             self.database_path
+
         )
 
-        self.connection.row_factory = (
-            sqlite3.Row
+        self.connection.execute(
+
+            "PRAGMA foreign_keys = ON;"
+
         )
 
-        self.cursor = (
-            self.connection.cursor()
-        )
+        self.cursor = self.connection.cursor()
 
-        print(
-            f"Connected to database:\n"
-            f"{self.database_path}"
-        )
+        return self.connection
 
-    # --------------------------------------------------
-    # Table Creation
-    # --------------------------------------------------
+    # ----------------------------------------
+    # Close Database
+    # ----------------------------------------
 
-    def create_tables(
-        self,
-        table_queries: List[str]
+    def close(
+        self
     ):
-        """
-        Execute CREATE TABLE statements.
-        """
 
-        for query in table_queries:
+        if self.connection:
 
-            self.cursor.execute(
-                query
-            )
+            self.connection.close()
 
-        self.connection.commit()
+    # ----------------------------------------
+    # Commit Changes
+    # ----------------------------------------
 
-        print(
-            f"Created {len(table_queries)} table(s)"
-        )
-
-    # --------------------------------------------------
-    # Index Creation
-    # --------------------------------------------------
-
-    def create_indexes(
-        self,
-        index_queries: List[str]
+    def commit(
+        self
     ):
-        """
-        Execute CREATE INDEX statements.
-        """
 
-        for query in index_queries:
+        if self.connection:
 
-            self.cursor.execute(
-                query
-            )
+            self.connection.commit()
 
-        self.connection.commit()
+    # ----------------------------------------
+    # Rollback
+    # ----------------------------------------
 
-        print(
-            f"Created {len(index_queries)} index(es)"
-        )
+    def rollback(
+        self
+    ):
 
-    # --------------------------------------------------
-    # Execute Single Query
-    # --------------------------------------------------
+        if self.connection:
+
+            self.connection.rollback()
+
+    # ----------------------------------------
+    # Execute SQL
+    # ----------------------------------------
 
     def execute(
         self,
-        query: str,
+        sql: str,
         parameters: tuple = ()
     ):
-        """
-        Execute a single SQL statement.
-        """
 
         self.cursor.execute(
-            query,
+
+            sql,
+
             parameters
+
         )
 
-        self.connection.commit()
+        return self.cursor
 
-    # --------------------------------------------------
-    # Bulk Insert
-    # --------------------------------------------------
+# ----------------------------------------
+# Execute Query
+# ----------------------------------------
+
+def query(
+    self,
+    sql: str,
+    parameters: tuple = ()
+):
+
+    self.execute(
+
+        sql,
+
+        parameters
+
+    )
+
+    return self.fetchall()
+
+    # ----------------------------------------
+    # Execute Many
+    # ----------------------------------------
 
     def executemany(
         self,
-        query: str,
-        records: List[Tuple]
+        sql: str,
+        parameters: list
     ):
-        """
-        Execute bulk insert operations.
-        """
 
         self.cursor.executemany(
-            query,
-            records
-        )
 
-        self.connection.commit()
+            sql,
 
-    # --------------------------------------------------
-    # Fetch All
-    # --------------------------------------------------
-
-    def fetch_all(
-        self,
-        query: str,
-        parameters: tuple = ()
-    ):
-        """
-        Execute query and
-        return all rows.
-        """
-
-        self.cursor.execute(
-            query,
             parameters
+
         )
 
-        return self.cursor.fetchall()
-
-    # --------------------------------------------------
+    # ----------------------------------------
     # Fetch One
-    # --------------------------------------------------
+    # ----------------------------------------
 
-    def fetch_one(
-        self,
-        query: str,
-        parameters: tuple = ()
+    def fetchone(
+        self
     ):
-        """
-        Execute query and
-        return one row.
-        """
-
-        self.cursor.execute(
-            query,
-            parameters
-        )
 
         return self.cursor.fetchone()
 
-    # --------------------------------------------------
-    # Count Records
-    # --------------------------------------------------
+    # ----------------------------------------
+    # Fetch All
+    # ----------------------------------------
 
-    def get_row_count(
+    def fetchall(
+        self
+    ):
+
+        return self.cursor.fetchall()
+
+    # ----------------------------------------
+    # Create Database Schema
+    # ----------------------------------------
+
+    def create_schema(
+        self
+    ):
+
+        for table_schema in DATABASE_SCHEMA:
+
+            self.execute(
+                table_schema
+            )
+
+        self.commit()
+
+    # ----------------------------------------
+    # Context Manager
+    # ----------------------------------------
+
+    def __enter__(
+        self
+    ):
+
+        self.connect()
+
+        return self
+
+    def __exit__(
         self,
-        table_name: str
-    ) -> int:
-        """
-        Return number of rows
-        in a table.
-        """
+        exc_type,
+        exc_value,
+        traceback
+    ):
 
-        self.cursor.execute(
-            f"""
-            SELECT COUNT(*)
-            FROM {table_name}
-            """
-        )
+        if exc_type:
 
-        return self.cursor.fetchone()[0]
+            self.rollback()
 
-    # --------------------------------------------------
-    # Table Exists
-    # --------------------------------------------------
+        else:
 
-    def table_exists(
-        self,
-        table_name: str
-    ) -> bool:
-        """
-        Check whether a table exists.
-        """
+            self.commit()
 
-        self.cursor.execute(
-            """
-            SELECT name
-            FROM sqlite_master
-            WHERE type='table'
-            AND name=?
-            """,
-            (table_name,)
-        )
-
-        return (
-            self.cursor.fetchone()
-            is not None
-        )
-
-    # --------------------------------------------------
-    # Commit
-    # --------------------------------------------------
-
-    def commit(self):
-        """
-        Commit transaction.
-        """
-
-        self.connection.commit()
-
-    # --------------------------------------------------
-    # Close Connection
-    # --------------------------------------------------
-
-    def close(self):
-        """
-        Close database connection.
-        """
-
-        self.connection.close()
-
-        print(
-            "Database connection closed."
-        )
+        self.close()
 
 
 # --------------------------------------------------
@@ -278,14 +225,26 @@ class DatabaseManager:
 
 if __name__ == "__main__":
 
-    db = DatabaseManager(
-        database_path=(
-            "data/customers/customer.db"
+    with DatabaseManager() as database:
+
+        database.create_schema()
+
+        print()
+
+        print("=" * 50)
+
+        print("SQLite Database Created Successfully")
+
+        print("=" * 50)
+
+        print(
+
+            f"Database : {database.database_path}"
+
         )
-    )
 
-    print(
-        "\nDatabase Connected Successfully"
-    )
+        print(
 
-    db.close()
+            f"Tables Created : {len(DATABASE_SCHEMA)}"
+
+        )
