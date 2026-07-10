@@ -107,7 +107,7 @@ class DatabaseLoader:
         self.loaded_records[table_name] = (
 
             len(dataframe)
-
+        )
 
     # ----------------------------------------
     # Load All Datasets
@@ -151,7 +151,29 @@ class DatabaseLoader:
 
         ]
 
-        with self.database:
+        tables_to_clear = [
+
+            "digital_behavior",
+        
+            "transactions",
+        
+            "loan_accounts",
+        
+            "credit_card_accounts",
+        
+            "credit_bureau",
+        
+            "customer_master"
+        
+        ]
+
+       for table in tables_to_clear:
+
+        self.database.execute(
+    
+            f"DELETE FROM {table};"
+    
+        )
 
             self.database.create_schema()
 
@@ -160,7 +182,7 @@ class DatabaseLoader:
                 dataframe = self.read_csv(
                     file_name
                 )
-
+                
                 self.load_dataframe(
 
                     dataframe,
