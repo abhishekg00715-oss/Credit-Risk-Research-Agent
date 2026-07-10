@@ -180,7 +180,12 @@ class DatabaseLoader:
             self.database.create_schema()
 
             for file_name, table_name in dataset_mapping:
+                print(
 
+                    f"Loading {table_name}..."
+                
+                )
+                
                 dataframe = self.read_csv(
                     file_name
                 )
@@ -192,6 +197,7 @@ class DatabaseLoader:
                     table_name
 
                 )
+            self.database.commit()
 
     # ----------------------------------------
     # Loading Summary
