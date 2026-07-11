@@ -110,7 +110,7 @@ The following backlog items constitute the Minimum Viable Product:
 
 | ID | Feature | status |
 |----|---------|--------|
-| CRA-7 | Customer Data Foundation (SQLite) | **In Progress** |
+| CRA-7 | Customer Data Foundation (SQLite) | **Done** |
 | CRA-8 | Implement customer lookup by customer_id | **To Do** |
 | CRA-9 | Calculate credit score assessment | **To Do** |
 | CRA-10 | Analyze income and credit utilization | **To Do** |
