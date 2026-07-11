@@ -31,8 +31,11 @@ Credit Risk Research Agent
 
 from pathlib import Path
 import sqlite3
+import logging
+
 from typing import Any, Dict, List, Optional
 
+logger = logging.getLogger(__name__)
  # Default database location
     DEFAULT_DATABASE_PATH = (
         Path(__file__).resolve().parent.parent
@@ -50,7 +53,7 @@ class CustomerRepository:
     details from consuming components.
     """
 
-    def __init__(self, database_path: str) -> None:
+    def __init__(self, database_path: Optional[str] = None) -> None:
         """
         Initialize the repository.
 
