@@ -93,14 +93,16 @@ data/vector_store/chroma_db/
 
 ---
 
-### Customer Repository
+### Customer  Data Repository
 
-| Component     | Technology |
+| Repository Artifact     | Implementation |
 | ------------- | ---------- |
-| Customer Data Repository | SQLite     |
+| Database Technology | SQLite     |
 | Database File | src/database/customer_risk.db     |
-| Access Layer | DatabaseManager (database_utils.py)     |
-| Data Loading | database_loader.py     |
+| Database Schema | shema.py |
+| Database Utility | database_utils.py    |
+| Data Loader | database_loader.py     |
+| Data Generator Pipeline | customer_data_generator/ |
 
 **Database Tables**
 
