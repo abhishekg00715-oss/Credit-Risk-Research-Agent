@@ -108,11 +108,15 @@ CREATE TABLE IF NOT EXISTS credit_card_accounts (
 
     card_type TEXT,
 
-    reward_program TEXT,
+    issue_date DATE,
+
+    expiry_date DATE,
 
     credit_limit REAL,
 
     available_credit REAL,
+
+    available_limit REAL,
 
     outstanding_balance REAL,
 
@@ -120,13 +124,35 @@ CREATE TABLE IF NOT EXISTS credit_card_accounts (
 
     annual_fee REAL,
 
+    cash_limit REAL,
+
+    statement_balance REAL,
+
     billing_cycle_day INTEGER,
 
+    minimum_due REAL,
+
+    payment_due_date DATE,
+
+    last_payment_amount REAL,
+
+    last_payment_date DATE,
+
+    payment_status TEXT,
+
+    days_past_due INTEGER,
+
+    missed_payments_last_12m INTEGER,
+
+    write_off_flag TEXT,
+
+    reward_program TEXT,
+
+    reward_points INTEGER,
+
+    last_card_transaction_date DATE,
+
     card_status TEXT,
-
-    issue_date DATE,
-
-    expiry_date DATE,
 
     FOREIGN KEY(customer_id)
 
@@ -150,7 +176,15 @@ CREATE TABLE IF NOT EXISTS loan_accounts (
 
     loan_type TEXT,
 
+    loan_status TEXT,
+
+    secured_flag TEXT,
+
+    secured TEXT,
+
     loan_amount REAL,
+
+    sanctioned_amount REAL,
 
     outstanding_balance REAL,
 
@@ -158,11 +192,15 @@ CREATE TABLE IF NOT EXISTS loan_accounts (
 
     tenure_months INTEGER,
 
+    remaining_tenure INTEGER,
+
     emi_amount REAL,
 
-    loan_status TEXT,
+    monthly_emi REAL,
 
-    secured_flag TEXT,
+    repayment_status TEXT,
+
+    days_past_due INTEGER,
 
     disbursement_date DATE,
 

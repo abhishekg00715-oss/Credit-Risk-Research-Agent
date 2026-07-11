@@ -83,6 +83,135 @@ class DatabaseLoader:
         )
 
     # ----------------------------------------
+    # Normalize DataFrame for Table
+    # ----------------------------------------
+
+    @staticmethod
+    def normalize_dataframe_for_table(
+        dataframe: pd.DataFrame,
+        table_name: str
+    ) -> pd.DataFrame:
+
+        normalized_dataframe = dataframe.copy()
+
+        if table_name == "credit_card_accounts":
+
+            if (
+                "available_limit" in normalized_dataframe.columns
+                and "available_credit" not in normalized_dataframe.columns
+            ):
+
+                normalized_dataframe["available_credit"] = (
+                    normalized_dataframe["available_limit"]
+                )
+
+            elif (
+                "available_credit" in normalized_dataframe.columns
+                and "available_limit" not in normalized_dataframe.columns
+            ):
+
+                normalized_dataframe["available_limit"] = (
+                    normalized_dataframe["available_credit"]
+                )
+
+        if table_name == "loan_accounts":
+
+            if (
+                "sanctioned_amount" in normalized_dataframe.columns
+                and "loan_amount" not in normalized_dataframe.columns
+            ):
+
+                normalized_dataframe["loan_amount"] = (
+                    normalized_dataframe["sanctioned_amount"]
+                )
+
+            if (
+                "monthly_emi" in normalized_dataframe.columns
+                and "emi_amount" not in normalized_dataframe.columns
+            ):
+
+                normalized_dataframe["emi_amount"] = (
+                    normalized_dataframe["monthly_emi"]
+                )
+
+            if (
+                "secured" in normalized_dataframe.columns
+                and "secured_flag" not in normalized_dataframe.columns
+            ):
+
+                normalized_dataframe["secured_flag"] = (
+                    normalized_dataframe["secured"]
+                )
+
+        return normalized_dataframe
+
+    # ----------------------------------------
+    # Ensure Table Compatibility
+    # ----------------------------------------
+
+    def ensure_table_columns(
+        self,
+        table_name: str,
+        dataframe: pd.DataFrame
+    ):
+
+        table_info = self.database.connection.execute(
+            f"PRAGMA table_info({table_name})"
+        ).fetchall()
+
+        existing_columns = {
+            column[1] for column in table_info
+        }
+
+        for column_name in dataframe.columns:
+
+            if column_name in existing_columns:
+
+                continue
+
+            inferred_type = self.infer_sql_column_type(
+                dataframe[column_name]
+            )
+
+            self.database.execute(
+                f"ALTER TABLE {table_name} ADD COLUMN {column_name} {inferred_type};"
+            )
+
+        if table_name == "credit_card_accounts":
+
+            if "available_credit" in dataframe.columns and "available_limit" in dataframe.columns:
+
+                dataframe.loc[:, "available_credit"] = dataframe["available_credit"].fillna(dataframe["available_limit"])
+                dataframe.loc[:, "available_limit"] = dataframe["available_limit"].fillna(dataframe["available_credit"])
+
+    @staticmethod
+    def infer_sql_column_type(series: pd.Series) -> str:
+
+        if pd.api.types.is_bool_dtype(series):
+
+            return "BOOLEAN"
+
+        if pd.api.types.is_integer_dtype(series):
+
+            return "INTEGER"
+
+        if pd.api.types.is_float_dtype(series):
+
+            return "REAL"
+
+        numeric_series = pd.to_numeric(series.dropna(), errors="coerce")
+
+        if numeric_series.notna().all():
+
+            if (numeric_series % 1 == 0).all():
+
+                return "INTEGER"
+
+            return "REAL"
+
+        return "TEXT"
+
+    # ----------------------------------------
     # Load DataFrame
     # ----------------------------------------
   
@@ -97,7 +226,17 @@ class DatabaseLoader:
 
         print(dataframe.head(1))
 
-        dataframe.to_sql(
+        normalized_dataframe = self.normalize_dataframe_for_table(
+            dataframe,
+            table_name
+        )
+
+        self.ensure_table_columns(
+            table_name,
+            normalized_dataframe
+        )
+
+        normalized_dataframe.to_sql(
 
             table_name,
 
@@ -111,7 +250,7 @@ class DatabaseLoader:
 
         self.loaded_records[table_name] = (
 
-            len(dataframe)
+            len(normalized_dataframe)
         )
 
     # ----------------------------------------
