@@ -97,21 +97,22 @@ data/vector_store/chroma_db/
 
 | Component     | Technology |
 | ------------- | ---------- |
-| Customer Data | SQLite     |
+| Customer Data Repository | SQLite     |
+| Database File | src/database/customer_risk.db     |
+| Access Layer | DatabaseManager (database_utils.py)     |
+| Data Loading | database_loader.py     |
 
-**Database**
+**Database Tables**
 
-```text
-data/customers/customer.db
-```
 
-**Example Tables**
-
-```text
-customers
-credit_profiles
-assessments
-```
+|Table	|Purpose |
+|-------|--------|
+|customer_master|	Customer demographic and relationship information|
+|credit_bureau|	Credit bureau profile, score, utilization, DTI and repayment history|
+|credit_card_accounts|	Customer credit card portfolio and utilization details|
+|loan_accounts|	Loan portfolio including EMI, outstanding balance and tenure|
+|transactions|	Customer banking transaction history|
+|digital_behavior|	Digital banking login and behavioural activity|
 
 ---
 
