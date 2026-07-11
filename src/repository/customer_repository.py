@@ -33,6 +33,12 @@ from pathlib import Path
 import sqlite3
 from typing import Any, Dict, List, Optional
 
+ # Default database location
+    DEFAULT_DATABASE_PATH = (
+        Path(__file__).resolve().parent.parent
+        / "database"
+        / "customer_risk.db"
+    )
 
 class CustomerRepository:
     """
@@ -50,11 +56,16 @@ class CustomerRepository:
 
         Parameters
         ----------
-        database_path : str
-            Path to the SQLite database file.
+        database_path : str, optional
+            Custom path to the SQLite database.
+            If not provided, the default project database is used.
         """
 
-        self.database_path = Path(database_path)
+        self.database_path = (
+            Path(database_path)
+            if database_path
+            else self.DEFAULT_DATABASE_PATH
+        )
 
     # ------------------------------------------------------------------
     # Database Helper Methods
