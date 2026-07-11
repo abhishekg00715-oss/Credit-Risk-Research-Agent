@@ -312,3 +312,55 @@ class CustomerRepository:
 
             "digital_behavior": self.get_digital_behavior(customer_id)
         }
+
+# ------------------------------------------------------------------
+# Repository Test Harness
+# ------------------------------------------------------------------
+
+if __name__ == "__main__":
+
+    print("=" * 80)
+    print("Customer Repository Test")
+    print("=" * 80)
+
+    # --------------------------------------------------------------
+    # Initialize Repository
+    # --------------------------------------------------------------
+
+    repository = CustomerRepository()
+
+    # --------------------------------------------------------------
+    # Test Customer ID
+    # --------------------------------------------------------------
+
+    customer_id = "CUST000001"      # Replace with a valid customer_id
+
+    print(f"\nRetrieving profile for Customer ID: {customer_id}")
+
+    profile = repository.get_customer_profile(customer_id)
+
+    print("\nCustomer Master")
+    print("-" * 40)
+    print(profile["customer"])
+
+    print("\nCredit Bureau")
+    print("-" * 40)
+    print(profile["credit_bureau"])
+
+    print("\nCredit Cards")
+    print("-" * 40)
+    print(f"Records : {len(profile['credit_cards'])}")
+
+    print("\nLoan Accounts")
+    print("-" * 40)
+    print(f"Records : {len(profile['loans'])}")
+
+    print("\nTransactions")
+    print("-" * 40)
+    print(f"Records : {len(profile['transactions'])}")
+
+    print("\nDigital Behaviour")
+    print("-" * 40)
+    print(f"Records : {len(profile['digital_behavior'])}")
+
+    print("\nRepository retrieval completed successfully.")
