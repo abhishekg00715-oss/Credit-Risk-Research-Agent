@@ -102,6 +102,21 @@ The following backlog items constitute the Minimum Viable Product:
 | CRA-31 | Build Streamlit UI for Policy Research |**Done**|
 | CRA-34 | Sample queries and demo scenarios |**Done**|
 
+| ID | NFR | status |
+|----|---------|--------|
+| NFR-5 | Responses must be generated using retrieved context whenever available |**Done**|
+| NFR-6 | Policy-related responses should reference source documents|**Done**|
+| NFR-7 | Hallucinated policy rules should be minimized through retrieval-augmented generation (RAG)|**Done**|
+| NFR-9 | All policy answers must include source citations | **Done** |
+| NFR-17 | Agents must follow single-responsibility principles | **Done** |
+| NFR-18 | Business logic should be separated from UI logic | **Done** |
+| NFR-19 | Shared services should be reusable across agents |**Done** |
+| NFR-21 | New agents should be pluggable into the Coordinator Agent | **Done** |
+
+
+
+
+
 ---
 
 
