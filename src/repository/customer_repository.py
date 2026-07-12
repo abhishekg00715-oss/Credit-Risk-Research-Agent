@@ -36,12 +36,13 @@ import logging
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
- # Default database location
-    DEFAULT_DATABASE_PATH = (
-        Path(__file__).resolve().parent.parent
-        / "database"
-        / "customer_risk.db"
-    )
+
+# Default database location
+DEFAULT_DATABASE_PATH = (
+    Path(__file__).resolve().parent.parent
+    / "database"
+    / "customer_risk.db"
+)
 
 class CustomerRepository:
     """
@@ -67,7 +68,7 @@ class CustomerRepository:
         self.database_path = (
             Path(database_path)
             if database_path
-            else self.DEFAULT_DATABASE_PATH
+            else DEFAULT_DATABASE_PATH
         )
 
     # ------------------------------------------------------------------
@@ -213,7 +214,7 @@ class CustomerRepository:
             SELECT *
             FROM credit_card_accounts
             WHERE customer_id = ?
-            ORDER BY card_id
+            ORDER BY card_number
         """
 
         return self._fetch_all(query, (customer_id,))
@@ -234,7 +235,7 @@ class CustomerRepository:
             SELECT *
             FROM loan_accounts
             WHERE customer_id = ?
-            ORDER BY loan_id
+            ORDER BY loan_account_number
         """
 
         return self._fetch_all(query, (customer_id,))
@@ -350,17 +351,22 @@ if __name__ == "__main__":
     print("\nCredit Cards")
     print("-" * 40)
     print(f"Records : {len(profile['credit_cards'])}")
+    print(profile["credit_cards"])
 
     print("\nLoan Accounts")
     print("-" * 40)
     print(f"Records : {len(profile['loans'])}")
+    print(profile["loans"])
 
     print("\nTransactions")
     print("-" * 40)
     print(f"Records : {len(profile['transactions'])}")
+    #print(profile["transactions"])
 
     print("\nDigital Behaviour")
     print("-" * 40)
     print(f"Records : {len(profile['digital_behavior'])}")
+    #print(profile["digital_behavior"])
 
     print("\nRepository retrieval completed successfully.")
+
