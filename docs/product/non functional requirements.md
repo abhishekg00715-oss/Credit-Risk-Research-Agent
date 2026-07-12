@@ -97,3 +97,27 @@ Allow new agents and capabilities to be added easily.
 | NFR-22 | New document sources should be supported without redesign | Could have |
 | NFR-23 | Additional datasets should be onboarded through configuration | Could have |
 | NFR-24 | LLM providers should be interchangeable through AISuite | Could have |
+
+
+# Portability
+
+## Objective
+
+Allow agents and its services to be able to run locally with no cloud dependency.
+
+| NFR-22 | The application shall execute completely on a local workstation without requiring cloud-hosted AI services or managed infrastructure. | Must have |
+|NFR-23| The application shall use lightweight local storage technologies that can be installed without enterprise infrastructure.| Must have|
+| NFR-24| The application shall support local execution using standard Python runtime and open-source libraries.| Must have|
+| NFR-25| The application shall be deployable on Windows without additional enterprise middleware.| Should have |
+
+# Data Integrity
+
+## Objective
+
+
+
+| NFR-26 | The application shall validate input documents before ingestion and prevent invalid or unreadable files from entering downstream processing. | Must have |
+
+
+
+
