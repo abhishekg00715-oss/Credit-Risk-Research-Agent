@@ -83,13 +83,7 @@
 | CRA-35 | Capture screenshots and walkthroughs for README | Should |
 
 ---
-| ID | Enahancement | Category | Business Value |Complexity | Related Capability| Status|
-|------|---------------|---------|----------|---------|-----------------|-----|
-|FE-01| Agent Memory | Candidate | | | | Deferred |
-|FE-02| LangGraph/CrewAI Integration | Exploratory | | | | Deferred |
-|FE-03| Multi-session Conversation Context | Candidate | | | | Future Release |
-|FE-04|Human-in-the-loop Review| Candidate | | | | Future Release |
-|FE-05|Decision Trace Visualization|Candidate | | | | Future Release |
+
 
 
 
