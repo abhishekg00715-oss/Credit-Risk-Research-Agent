@@ -5,8 +5,8 @@ explored,analyzed for feasibility and added into the future phases. A set of suc
 
 | ID | Enahancement | Category | Business Value |Complexity | Related Capability| Status|
 |------|---------------|---------|----------|---------|-----------------|-----|
-|FE-01| Agent Memory | Candidate | High | | | Deferred |
-|FE-02| LangGraph/CrewAI Integration | Exploratory |Medium| | | Deferred |
-|FE-03| Multi-session Conversation Context | Candidate | Medium | | | Future Release |
-|FE-04|Human-in-the-loop Review| Candidate | High | | | Future Release |
-|FE-05|Decision Trace Visualization|Candidate | Medium | | | Future Release |
+|FE-01| Agent Memory | Candidate |  | | | Deferred |
+|FE-02| LangGraph/CrewAI Integration | Exploratory || | | Deferred |
+|FE-03| Multi-session Conversation Context |  | Medium | | | Future Release |
+|FE-04|Human-in-the-loop Review| Candidate |  | | | Future Release |
+|FE-05|Decision Trace Visualization|Candidate |  | | | Future Release |
