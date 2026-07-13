@@ -1,132 +1,63 @@
-# Product Backlog
+## Performance
 
-## Epic: Policy Research Assistant
+| ID | Requirement | Target | Priority | Phase | Status |
+|---|---|---|---|---|---|
+| NFR-1 | Policy document query response time | < 10 seconds | Should Have | Phase 1 |  Not Measured |
+| NFR-2 | Customer profile retrieval time | < 3 seconds | Should Have | Phase 2 |  To be validated in CRA-09 |
+| NFR-3 | Portfolio analytics response time | < 15 seconds | Should Have | Phase 3 |  Planned |
+| NFR-4 | End-to-end credit assessment workflow | < 20 seconds | Should Have | Phase 5 |  Planned |
 
-| ID | Feature / User Story | Priority |
-|----|----------------------|----------|
-| CRA-1 | Upload and ingest policy PDFs | Must |
-| CRA-2 | Extract text and chunk documents | Must |
-| CRA-3 | Generate embeddings for document chunks | Must |
-| CRA-4 | Store embeddings in ChromaDB / FAISS | Must |
-| CRA-5 | Implement semantic search over policies | Must |
-| CRA-6 | Generate RAG-based answers with citations | Must |
+## Accuracy & Relevance
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-5 | Responses shall be generated using retrieved context whenever available. | Must Have | Phase 1 |  Implemented |
+| NFR-6 | Policy-related responses shall reference source documents. | Must Have | Phase 1 |  Implemented |
+| NFR-7 | Hallucinated policy rules shall be minimized through RAG. | Must Have | Phase 1 |  Implemented |
+| NFR-8 | Customer recommendations shall be derived from retrieved evidence. | Should Have | Phase 2 |  Planned |
 
----
+## Explainability
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-9 | All policy answers shall include source citations. | Must Have | Phase 1 |  Implemented |
+| NFR-10 | Customer assessments shall include supporting rationale. | Must Have | Phase 2 |  Planned |
+| NFR-11 | Evidence used to generate customer assessments shall be visible to users. | Must Have | Phase 2 |  Planned |
+| NFR-12 | Confidence scores should be provided where feasible. | Should Have | Future |  Deferred |
 
-## Epic: Customer Risk Assessment
+## Auditability
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-13 | User questions should be logged. | Should Have | Phase 2 |  Planned |
+| NFR-14 | Agent responses should be logged. | Should Have | Phase 2 |  Planned |
+| NFR-15 | Retrieved source references should be captured for audit purposes. | Should Have | Phase 2 |  Partially Implemented |
+| NFR-16 | Multi-agent workflow execution history should be traceable. | Should Have | Phase 5 |  Planned |
 
-| ID | Feature / User Story | Priority |
-|----|----------------------|----------|
-| CRA-7 | Customer Data Foundation (SQLite) | Must |
-| CRA-8 | Implement customer lookup by customer_id | Must |
-| CRA-9 | Calculate credit score assessment | Should |
-| CRA-10 | Analyze income and credit utilization | Should |
-| CRA-11 | Generate customer risk summary | Should |
+## Maintainability
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-17 | Components shall follow SRP. | Must Have | Phase 1 | Implemented |
+| NFR-18 | Business logic shall be separated from presentation logic. | Must Have | Phase 1 |  Implemented |
+| NFR-19 | Shared services shall be reusable across agents. | Must Have | Phase 1 |  Implemented |
+| NFR-20 | Configuration shall be externalized from application logic. | Must Have | Phase 1 | Partially Implemented |
 
----
+## Extensibility
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-21 | New agents shall be pluggable into the Coordinator Agent. | Should Have | Phase 1 | Implemented |
+| NFR-22 | New document sources shall be supported with minimal changes. | Could Have | Future |  Planned |
+| NFR-23 | Additional datasets shall be onboarded through configuration. | Could Have | Future |  Planned |
+| NFR-24 | LLM providers shall be interchangeable through AISuite. | Could Have | Future |  Planned |
 
-## Epic: Portfolio Intelligence
+## Portability
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-25 | Execute locally without cloud-hosted AI services. | Must Have | Phase 1 | Implemented |
+| NFR-26 | Use lightweight local storage technologies. | Must Have | Phase 1 | Implemented |
+| NFR-27 | Support standard Python runtime and open-source libraries. | Must Have | Phase 1 | Implemented |
+| NFR-28 | Deploy on Windows without enterprise middleware. | Should Have | Phase 1 |  Implemented |
 
-| ID | Feature / User Story | Priority |
-|----|----------------------|----------|
-| CRA-12 | Load portfolio dataset (CSV / SQLite) | Must |
-| CRA-13 | Compute default rates by customer segment | Should |
-| CRA-14 | Perform trend analysis over time | Should |
-| CRA-15 | Identify high-risk segments and risk hotspots | Could |
-
----
-
-## Epic: Recommendation Engine
-
-| ID | Feature / User Story | Priority |
-|----|----------------------|----------|
-| CRA-16 | Implement rule evaluation engine | Should |
-| CRA-17 | Calculate risk score | Should |
-| CRA-18 | Generate recommendation (Approve / Decline / Review) | Should |
-| CRA-19 | Generate recommendation rationale | Should |
-
----
-
-## Epic: Explainability & Governance
-
-| ID | Feature / User Story | Priority |
-|----|----------------------|----------|
-| CRA-20 | Attach policy citations to responses | Must |
-| CRA-21 | Collect supporting evidence from all agents | Should |
-| CRA-22 | Generate confidence score | Could |
-| CRA-23 | Persist decision trace / audit trail | Could |
-
----
-
-## Epic: Multi-Agent Orchestration
-
-| ID | Feature / User Story | Priority |
-|----|----------------------|----------|
-| CRA-24 | Implement Coordinator Agent | Must |
-| CRA-25 | Implement Policy Agent | Must |
-| CRA-26 | Implement Customer Agent | Must |
-| CRA-27 | Implement Portfolio Agent | Must |
-| CRA-28 | Implement Recommendation Agent | Must |
-| CRA-29 | Implement Explainability Agent | Should |
-| CRA-30 | Create end-to-end credit assessment workflow | Should |
-
----
-
-## Epic: User Experience & Demo
-
-| ID | Feature / User Story | Priority |
-|----|----------------------|----------|
-| CRA-31 | Build Streamlit UI for Policy Research | Must |
-| CRA-32 | Build Streamlit UI for Customer Assessment | Should |
-| CRA-33 | Build Streamlit UI for Portfolio Analysis | Should |
-| CRA-34 | Add sample queries and demo scenarios | Must |
-| CRA-35 | Capture screenshots and walkthroughs for README | Should |
-
----
-
-# MVP Scope (Release 1.0)
-
-The following backlog items constitute the Minimum Viable Product:
-
-| ID | Feature | status |
-|----|---------|--------|
-| CRA-1 | Upload and ingest policy PDFs | **Done** |
-| CRA-2 | Extract text and chunk documents |**Done**|
-| CRA-3 | Generate embeddings |**Done**|
-| CRA-4 | Store embeddings |**Done**|
-| CRA-5 | Semantic search |**Done**|
-| CRA-6 | RAG-based answers with citations |**Done**|
-| CRA-20 | Source attribution |**Done**|
-| CRA-24 | Coordinator Agent |**Done**|
-| CRA-25 | Policy Agent |**Done**|
-| CRA-31 | Build Streamlit UI for Policy Research |**Done**|
-| CRA-34 | Sample queries and demo scenarios |**Done**|
-
-| ID | NFR | status |
-|----|---------|--------|
-| NFR-5 | Responses must be generated using retrieved context whenever available |**Done**|
-| NFR-6 | Policy-related responses should reference source documents|**Done**|
-| NFR-7 | Hallucinated policy rules should be minimized through retrieval-augmented generation (RAG)|**Done**|
-| NFR-9 | All policy answers must include source citations | **Done** |
-| NFR-17 | Agents must follow single-responsibility principles | **Done** |
-| NFR-18 | Business logic should be separated from UI logic | **Done** |
-| NFR-19 | Shared services should be reusable across agents |**Done** |
-| NFR-21 | New agents should be pluggable into the Coordinator Agent | **Done** |
-
-
-
-
-
----
-
-
----
-# Phase 2 Backlog 
-
-| ID | Feature | status |
-|----|---------|--------|
-| CRA-7 | Customer Data Foundation (SQLite) | **Done** |
-| CRA-8 | Implement customer lookup by customer_id | **Done** |
-| CRA-9 | Calculate credit score assessment | **To Do** |
-| CRA-10 | Analyze income and credit utilization | **To Do** |
-| CRA-11 | Generate customer risk summary | **To Do** |
+## Data Integrity
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-29 | Validate input documents before ingestion. | Must Have | Phase 1 | Partially Implemented |
+| NFR-30 | Validate synthetic customer data before loading. | Must Have | Phase 2 |  Implemented |
+| NFR-31 | Maintain referential integrity across customer datasets. | Must Have | Phase 2 |  Implemented |
