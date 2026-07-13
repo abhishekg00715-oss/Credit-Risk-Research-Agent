@@ -4,122 +4,70 @@ This document defines the quality attributes and operational expectations for th
 
 Following Non-Functional requirements to be covered by the solution :
 
-# Performance
+## Performance
 
-## Objective
-Provide timely responses to user queries without excessive delays.
+| ID | Requirement | Target | Priority | Phase | Status |
+|---|---|---|---|---|---|
+| NFR-1 | Policy document query response time | < 10 seconds | Should Have | Phase 1 | 🟡 Not Measured |
+| NFR-2 | Customer profile retrieval time | < 3 seconds | Should Have | Phase 2 | 🟡 To be validated in CRA-09 |
+| NFR-3 | Portfolio analytics response time | < 15 seconds | Should Have | Phase 3 | ⚪ Planned |
+| NFR-4 | End-to-end credit assessment workflow | < 20 seconds | Should Have | Phase 5 | ⚪ Planned |
 
-| ID | Requirement | Target | Priority |
-|------|-------------|---------|-------|
-| NFR-1 | Policy document query response time | < 10 seconds | should have |
-| NFR-2 | Customer profile retrieval time | < 3 seconds | should have |
-| NFR-3 | Portfolio analytics response time | < 15 seconds | should have |
-| NFR-4 | End-to-end credit assessment workflow | < 20 seconds | should have |
+## Accuracy & Relevance
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-5 | Responses shall be generated using retrieved context whenever available. | Must Have | Phase 1 | ✅ Implemented |
+| NFR-6 | Policy-related responses shall reference source documents. | Must Have | Phase 1 | ✅ Implemented |
+| NFR-7 | Hallucinated policy rules shall be minimized through RAG. | Must Have | Phase 1 | ✅ Implemented |
+| NFR-8 | Customer recommendations shall be derived from retrieved evidence. | Should Have | Phase 2 | ⚪ Planned |
 
+## Explainability
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-9 | All policy answers shall include source citations. | Must Have | Phase 1 | ✅ Implemented |
+| NFR-10 | Customer assessments shall include supporting rationale. | Must Have | Phase 2 | ⚪ Planned |
+| NFR-11 | Evidence used to generate customer assessments shall be visible to users. | Must Have | Phase 2 | ⚪ Planned |
+| NFR-12 | Confidence scores should be provided where feasible. | Should Have | Future | ⚪ Deferred |
 
+## Auditability
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-13 | User questions should be logged. | Should Have | Phase 2 | ⚪ Planned |
+| NFR-14 | Agent responses should be logged. | Should Have | Phase 2 | ⚪ Planned |
+| NFR-15 | Retrieved source references should be captured for audit purposes. | Should Have | Phase 2 | 🟡 Partially Implemented |
+| NFR-16 | Multi-agent workflow execution history should be traceable. | Should Have | Phase 5 | ⚪ Planned |
 
-# Accuracy & Relevance
+## Maintainability
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-17 | Components shall follow SRP. | Must Have | Phase 1 | ✅ Implemented |
+| NFR-18 | Business logic shall be separated from presentation logic. | Must Have | Phase 1 | ✅ Implemented |
+| NFR-19 | Shared services shall be reusable across agents. | Must Have | Phase 1 | ✅ Implemented |
+| NFR-20 | Configuration shall be externalized from application logic. | Must Have | Phase 1 | 🟡 Partially Implemented |
 
-## Objective
+## Extensibility
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-21 | New agents shall be pluggable into the Coordinator Agent. | Should Have | Phase 1 | ✅ Implemented |
+| NFR-22 | New document sources shall be supported with minimal changes. | Could Have | Future | ⚪ Planned |
+| NFR-23 | Additional datasets shall be onboarded through configuration. | Could Have | Future | ⚪ Planned |
+| NFR-24 | LLM providers shall be interchangeable through AISuite. | Could Have | Future | ⚪ Planned |
 
-Provide contextually relevant and factually grounded responses.
+## Portability
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-25 | Execute locally without cloud-hosted AI services. | Must Have | Phase 1 | ✅ Implemented |
+| NFR-26 | Use lightweight local storage technologies. | Must Have | Phase 1 | ✅ Implemented |
+| NFR-27 | Support standard Python runtime and open-source libraries. | Must Have | Phase 1 | ✅ Implemented |
+| NFR-28 | Deploy on Windows without enterprise middleware. | Should Have | Phase 1 | ✅ Implemented |
 
+## Data Integrity
+| ID | Requirement | Priority | Phase | Status |
+|---|---|---|---|---|
+| NFR-29 | Validate input documents before ingestion. | Must Have | Phase 1 | 🟡 Partially Implemented |
+| NFR-30 | Validate synthetic customer data before loading. | Must Have | Phase 2 | ✅ Implemented |
+| NFR-31 | Maintain referential integrity across customer datasets. | Must Have | Phase 2 | ✅ Implemented |
 
-| ID | Requirement | Priority |
-|--------|---------------|------|
-| NFR-5 | Responses must be generated using retrieved context whenever available | Must have |
-| NFR-6 | Policy-related responses should reference source documents | Must have |
-| NFR-7 | Hallucinated policy rules should be minimized through retrieval-augmented generation (RAG) | Must have |
-| NFR-8 | Recommendations should be derived from available evidence rather than unsupported assumptions | Should have |
-
-
-
-# Explainability
-
-## Objective
-
-Ensure that every recommendation can be understood and justified.
-
-
-| ID | Requirement | Priority |
-|------|-------------|-------|
-| NFR-9 | All policy answers must include source citations | Must Have |
-| NFR-10 | Recommendations must include supporting rationale | Must Have |
-| NFR-11 | Evidence used in decision generation must be visible to users | Must Have |
-| NFR-12 | Confidence scores should be provided where feasible | Should Have |
-
-
-
-# Auditability
-
-## Objective
-
-Enable users to trace how conclusions were generated.
-
-
-
-| ID | Requirement | Priority |
-|------|-------------|------|
-| NFR-13 | User questions should be logged | Should have |
-| NFR-14 | Agent responses should be logged | Should have |
-| NFR-15 | Retrieved source references should be captured | Should have |
-| NFR-16 | Workflow execution history should be traceable | Should have |
-
-
-
-# Maintainability
-
-## Objective
-
-Enable future enhancements with minimal redesign.
-
-
-| ID | Requirement | Priority |
-|------|-------------|-------|
-| NFR-17 | Agents must follow single-responsibility principles | Must have |
-| NFR-18 | Business logic should be separated from UI logic | Should have |
-| NFR-19 | Shared services should be reusable across agents | Must have |
-| NFR-20 | Configuration should be externalized | Must have |
-
-
-
-# Extensibility
-
-## Objective
-
-Allow new agents and capabilities to be added easily.
-
-### Requirements
-
-| ID | Requirement | Priority |
-|------|-------------|-----|
-| NFR-21 | New agents should be pluggable into the Coordinator Agent | Should have |
-| NFR-22 | New document sources should be supported without redesign | Could have |
-| NFR-23 | Additional datasets should be onboarded through configuration | Could have |
-| NFR-24 | LLM providers should be interchangeable through AISuite | Could have |
-
-
-# Portability
-
-## Objective
-
-Allow agents and its services to be able to run locally with no cloud dependency.
-
-| ID | Requirement | Priority |
-|------|-------------|-----|
-| NFR-22 | The application shall execute completely on a local workstation without requiring cloud-hosted AI services or managed infrastructure. | Must have |
-|NFR-23| The application shall use lightweight local storage technologies that can be installed without enterprise infrastructure.| Must have|
-| NFR-24| The application shall support local execution using standard Python runtime and open-source libraries.| Must have|
-| NFR-25| The application shall be deployable on Windows without additional enterprise middleware.| Should have |
-
-# Data Integrity
-
-## Objective
-
-
-| ID | Requirement | Priority |
-|------|-------------|-----|
-| NFR-26 | The application shall validate input documents before ingestion and prevent invalid or unreadable files from entering downstream processing. | Must have |
 
 
 
