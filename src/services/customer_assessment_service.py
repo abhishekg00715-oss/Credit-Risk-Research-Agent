@@ -618,3 +618,30 @@ class CustomerAssessmentService:
 
             "reason": reason
         }
+
+# ------------------------------------------------------------------
+# Test Harness
+# ------------------------------------------------------------------
+
+if __name__ == "__main__":
+
+    from repository.customer_repository import CustomerRepository
+
+    repository = CustomerRepository()
+
+    customer_profile = repository.get_customer_profile(
+        "CUST000001"
+    )
+
+    service = CustomerAssessmentService()
+
+    assessment = service.assess_customer(customer_profile)
+
+    print("\nCustomer Assessment")
+    print("-" * 60)
+
+    for key, value in assessment.items():
+
+        print(f"\n{key}")
+
+        print(value)
