@@ -488,21 +488,90 @@ class CustomerAssessmentService:
         assessment: Dict[str, Any]
     ) -> Dict[str, Any]:
         """
-        Generate an overall customer assessment summary.
-
-        Parameters
-        ----------
-        assessment : dict
-            Individual assessment results.
-
+        Generate an overall customer risk summary.
+    
+        Business Rule
+        -------------
+        BR-006
+    
         Returns
         -------
         dict
         """
-
-        raise NotImplementedError(
-            "Overall summary generation not yet implemented."
-        )
+    
+        ratings = [
+    
+            assessment["credit_score"]["rating"],
+    
+            assessment["credit_utilization"]["rating"],
+    
+            assessment["dti_ratio"]["rating"],
+    
+            assessment["payment_history"]["rating"],
+    
+            assessment["fraud_indicator"]["rating"]
+        ]
+    
+        reasons = []
+    
+        high_risk_count = 0
+        moderate_count = 0
+    
+        for item in assessment.values():
+    
+            if not isinstance(item, dict):
+                continue
+    
+            reasons.append(item.get("reason"))
+    
+            rating = item.get("rating")
+    
+            if rating in ("Poor", "High", "High Risk"):
+    
+                high_risk_count += 1
+    
+            elif rating == "Moderate":
+    
+                moderate_count += 1
+    
+        # --------------------------------------------------
+        # Overall Assessment
+        # --------------------------------------------------
+    
+        if assessment["fraud_indicator"]["rating"] == "High Risk":
+    
+            overall_rating = "High Risk"
+    
+        elif assessment["credit_score"]["rating"] == "Poor":
+    
+            overall_rating = "High Risk"
+    
+        elif high_risk_count >= 2:
+    
+            overall_rating = "High Risk"
+    
+        elif high_risk_count == 1:
+    
+            overall_rating = "Moderate Risk"
+    
+        elif moderate_count >= 2:
+    
+            overall_rating = "Moderate Risk"
+    
+        else:
+    
+            overall_rating = "Low Risk"
+    
+        return {
+    
+            "metric": "Overall Customer Assessment",
+    
+            "rating": overall_rating,
+    
+            "rule_id": "BR-006",
+    
+            "reason": reasons
+        }
 
     def _build_assessment(
         self,
