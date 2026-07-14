@@ -61,6 +61,78 @@ class CustomerAgent:
             else CustomerRepository()
         )
 
+
+# ------------------------------------------------------------------
+# Validation Helpers
+# ------------------------------------------------------------------
+
+    def _validate_customer_id(
+        self,
+        customer_id: str
+    ) -> bool:
+        """
+        Validate the supplied customer identifier.
+    
+        Parameters
+        ----------
+        customer_id : str
+    
+        Returns
+        -------
+        bool
+            True if the customer identifier is valid.
+        """
+    
+        return (
+            isinstance(customer_id, str)
+            and bool(customer_id.strip())
+        )
+
+# ------------------------------------------------------------------
+# Response Helpers
+# ------------------------------------------------------------------
+
+    def _build_success_response(
+        self,
+        customer_profile: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """
+        Build a standardized success response.
+        """
+    
+        return {
+    
+            "success": True,
+    
+            "message": "Customer profile retrieved successfully.",
+    
+            "customer_profile": customer_profile
+        }
+
+    
+    # ---------------------------------------------------------
+    #  Error Response
+    # ---------------------------------------------------------
+    
+    
+    def _build_error_response(
+        self,
+        message: str
+    ) -> Dict[str, Any]:
+        """
+        Build a standardized error response.
+        """
+    
+        return {
+    
+            "success": False,
+    
+            "message": message,
+    
+            "customer_profile": None
+        }
+        
+        
     # ---------------------------------------------------------
     # Customer Lookup
     # ---------------------------------------------------------
@@ -70,68 +142,61 @@ class CustomerAgent:
         customer_id: str
     ) -> Dict[str, Any]:
         """
-        Retrieve complete customer profile.
-
-        Parameters
-        ----------
-        customer_id : str
-
-        Returns
-        -------
-        dict
-
-            Standardized customer response.
+        Retrieve a complete customer profile.
         """
-
-        if not customer_id:
-
-            return {
-
-                "success": False,
-
-                "message": "Customer ID cannot be empty.",
-
-                "customer_profile": None
-            }
-
-        profile = self.repository.get_customer_profile(
-            customer_id
+    
+        if not self._validate_customer_id(customer_id):
+    
+            return self._build_error_response(
+                "Customer ID cannot be empty."
+            )
+    
+        customer_profile = (
+            self.repository.get_customer_profile(customer_id)
         )
-
-        if profile["customer"] is None:
-
-            return {
-
-                "success": False,
-
-                "message": f"Customer '{customer_id}' was not found.",
-
-                "customer_profile": None
-            }
-
-        return {
-
-            "success": True,
-
-            "message": "Customer profile retrieved successfully.",
-
-            "customer_profile": profile
-        }
+    
+        if customer_profile["customer"] is None:
+    
+            return self._build_error_response(
+                f"Customer '{customer_id}' was not found."
+            )
+    
+        return self._build_success_response(
+            customer_profile
+        )
 
     # ---------------------------------------------------------
     # Self Test
     # ---------------------------------------------------------
 
+# ------------------------------------------------------------------
+# Test Harness
+# ------------------------------------------------------------------
+
 if __name__ == "__main__":
 
     agent = CustomerAgent()
 
+    customer_id = "CUST000001"
+
     response = agent.retrieve_customer_profile(
-        "CUST000001"
+        customer_id
     )
 
-    print(response["message"])
+    print("\nCustomer Agent Response")
+    print("-" * 60)
+
+    print(f"Status  : {response['success']}")
+    print(f"Message : {response['message']}")
 
     if response["success"]:
 
-        print(response["customer_profile"]["customer"])
+        customer = response["customer_profile"]["customer"]
+
+        print("\nCustomer Summary")
+        print("-" * 60)
+
+        print(f"Customer ID : {customer['customer_id']}")
+        print(f"Name        : {customer['first_name']} {customer['last_name']}")
+        print(f"Segment     : {customer['customer_segment']}")
+        print(f"Income      : {customer['annual_income']}")
