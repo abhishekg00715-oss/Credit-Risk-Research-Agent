@@ -106,18 +106,85 @@ class CustomerAssessmentService:
     ) -> Dict[str, Any]:
         """
         Assess customer credit score.
-
+    
         Business Rule
         -------------
         BR-001
-
+    
+        Credit Score Classification
+    
+        Excellent : >= 750
+        Good      : 700 - 749
+        Fair      : 650 - 699
+        Poor      : < 650
+    
         Returns
         -------
         dict
         """
-
-        raise NotImplementedError(
-            "Credit score assessment not yet implemented."
+    
+        bureau = customer_profile.get("credit_bureau")
+    
+        if not bureau:
+    
+            return self._build_assessment(
+    
+                metric="Credit Score",
+    
+                value=None,
+    
+                rating="Unavailable",
+    
+                rule_id="BR-001",
+    
+                reason="Credit bureau information is unavailable."
+            )
+    
+        credit_score = bureau.get("credit_score")
+    
+        if credit_score >= 750:
+    
+            rating = "Excellent"
+    
+            reason = (
+                "Credit score indicates excellent creditworthiness."
+            )
+    
+        elif credit_score >= 700:
+    
+            rating = "Good"
+    
+            reason = (
+                "Credit score indicates good creditworthiness."
+            )
+    
+        elif credit_score >= 650:
+    
+            rating = "Fair"
+    
+            reason = (
+                "Credit score indicates moderate creditworthiness."
+            )
+    
+        else:
+    
+            rating = "Poor"
+    
+            reason = (
+                "Credit score indicates elevated credit risk."
+            )
+    
+        return self._build_assessment(
+    
+            metric="Credit Score",
+    
+            value=credit_score,
+    
+            rating=rating,
+    
+            rule_id="BR-001",
+    
+            reason=reason
         )
 
     def _assess_credit_utilization(
@@ -126,14 +193,76 @@ class CustomerAssessmentService:
     ) -> Dict[str, Any]:
         """
         Assess customer credit utilization.
-
+    
         Business Rule
         -------------
         BR-002
+    
+        Utilization Classification
+    
+        Low       : < 30%
+        Moderate  : 30% - 50%
+        High      : > 50%
+    
+        Returns
+        -------
+        dict
         """
-
-        raise NotImplementedError(
-            "Credit utilization assessment not yet implemented."
+    
+        bureau = customer_profile.get("credit_bureau")
+    
+        if not bureau:
+    
+            return self._build_assessment(
+    
+                metric="Credit Utilization",
+    
+                value=None,
+    
+                rating="Unavailable",
+    
+                rule_id="BR-002",
+    
+                reason="Credit bureau information is unavailable."
+            )
+    
+        utilization = bureau.get("credit_utilization")
+    
+        if utilization < 30:
+    
+            rating = "Low"
+    
+            reason = (
+                "Credit utilization is well below the recommended threshold."
+            )
+    
+        elif utilization <= 50:
+    
+            rating = "Moderate"
+    
+            reason = (
+                "Credit utilization is within an acceptable range."
+            )
+    
+        else:
+    
+            rating = "High"
+    
+            reason = (
+                "High credit utilization may indicate increased credit risk."
+            )
+    
+        return self._build_assessment(
+    
+            metric="Credit Utilization",
+    
+            value=utilization,
+    
+            rating=rating,
+    
+            rule_id="BR-002",
+    
+            reason=reason
         )
 
     def _assess_dti_ratio(
