@@ -271,14 +271,76 @@ class CustomerAssessmentService:
     ) -> Dict[str, Any]:
         """
         Assess customer debt-to-income ratio.
-
+    
         Business Rule
         -------------
         BR-003
+    
+        DTI Classification
+    
+        Low       : < 20%
+        Moderate  : 20% - 35%
+        High      : > 35%
+    
+        Returns
+        -------
+        dict
         """
-
-        raise NotImplementedError(
-            "DTI assessment not yet implemented."
+    
+        bureau = self._get_credit_bureau(customer_profile)
+    
+        if not bureau:
+    
+            return self._build_assessment(
+    
+                metric="Debt-to-Income Ratio",
+    
+                value=None,
+    
+                rating="Unavailable",
+    
+                rule_id="BR-003",
+    
+                reason="Credit bureau information is unavailable."
+            )
+    
+        dti_ratio = bureau.get("dti_ratio")
+    
+        if dti_ratio < 20:
+    
+            rating = "Low"
+    
+            reason = (
+                "Debt obligations are comfortably supported by income."
+            )
+    
+        elif dti_ratio <= 35:
+    
+            rating = "Moderate"
+    
+            reason = (
+                "Debt-to-income ratio is within an acceptable range."
+            )
+    
+        else:
+    
+            rating = "High"
+    
+            reason = (
+                "High debt-to-income ratio may affect repayment capacity."
+            )
+    
+        return self._build_assessment(
+    
+            metric="Debt-to-Income Ratio",
+    
+            value=dti_ratio,
+    
+            rating=rating,
+    
+            rule_id="BR-003",
+    
+            reason=reason
         )
 
     def _assess_payment_history(
@@ -286,15 +348,71 @@ class CustomerAssessmentService:
         customer_profile: Dict[str, Any]
     ) -> Dict[str, Any]:
         """
-        Assess customer payment behaviour.
-
+        Assess customer payment history.
+    
         Business Rule
         -------------
         BR-004
+    
+        Returns
+        -------
+        dict
         """
-
-        raise NotImplementedError(
-            "Payment history assessment not yet implemented."
+    
+        bureau = self._get_credit_bureau(customer_profile)
+    
+        if not bureau:
+    
+            return self._build_assessment(
+    
+                metric="Payment History",
+    
+                value=None,
+    
+                rating="Unavailable",
+    
+                rule_id="BR-004",
+    
+                reason="Credit bureau information is unavailable."
+            )
+    
+        late_payments = bureau.get("late_payments", 0)
+    
+        if late_payments == 0:
+    
+            rating = "Excellent"
+    
+            reason = (
+                "No late payments recorded."
+            )
+    
+        elif late_payments <= 2:
+    
+            rating = "Moderate"
+    
+            reason = (
+                "Limited late payment history observed."
+            )
+    
+        else:
+    
+            rating = "Poor"
+    
+            reason = (
+                "Frequent late payments indicate repayment risk."
+            )
+    
+        return self._build_assessment(
+    
+            metric="Payment History",
+    
+            value=late_payments,
+    
+            rating=rating,
+    
+            rule_id="BR-004",
+    
+            reason=reason
         )
 
     def _assess_fraud_indicator(
@@ -302,15 +420,63 @@ class CustomerAssessmentService:
         customer_profile: Dict[str, Any]
     ) -> Dict[str, Any]:
         """
-        Assess fraud indicators.
-
+        Assess customer fraud indicator.
+    
         Business Rule
         -------------
         BR-005
+    
+        Returns
+        -------
+        dict
         """
-
-        raise NotImplementedError(
-            "Fraud assessment not yet implemented."
+    
+        bureau = self._get_credit_bureau(customer_profile)
+    
+        if not bureau:
+    
+            return self._build_assessment(
+    
+                metric="Fraud Indicator",
+    
+                value=None,
+    
+                rating="Unavailable",
+    
+                rule_id="BR-005",
+    
+                reason="Credit bureau information is unavailable."
+            )
+    
+        fraud_flag = bureau.get("fraud_flag")
+    
+        if fraud_flag == "No":
+    
+            rating = "Clear"
+    
+            reason = (
+                "No fraud indicators identified."
+            )
+    
+        else:
+    
+            rating = "High Risk"
+    
+            reason = (
+                "Fraud indicator requires immediate investigation."
+            )
+    
+        return self._build_assessment(
+    
+            metric="Fraud Indicator",
+    
+            value=fraud_flag,
+    
+            rating=rating,
+    
+            rule_id="BR-005",
+    
+            reason=reason
         )
 
     # ---------------------------------------------------------
