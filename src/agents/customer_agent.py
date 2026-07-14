@@ -29,6 +29,9 @@ Credit Risk Research Agent
 from typing import Any, Dict
 
 from repository.customer_repository import CustomerRepository
+from services.customer_assessment_service import (
+    CustomerAssessmentService
+)
 
 
 class CustomerAgent:
@@ -41,24 +44,20 @@ class CustomerAgent:
 
     def __init__(
         self,
-        repository: CustomerRepository | None = None
+        repository: CustomerRepository | None = None,
+        assessment_service: CustomerAssessmentService | None = None
     ) -> None:
-        """
-        Initialize Customer Agent.
-
-        Parameters
-        ----------
-        repository : CustomerRepository, optional
-
-            Repository instance.
-
-            If omitted, a default repository will be created.
-        """
-
+    
         self.repository = (
             repository
             if repository
             else CustomerRepository()
+        )
+    
+        self.assessment_service = (
+            assessment_service
+            if assessment_service
+            else CustomerAssessmentService()
         )
 
 
@@ -94,7 +93,8 @@ class CustomerAgent:
 
     def _build_success_response(
         self,
-        customer_profile: Dict[str, Any]
+        customer_profile: Dict[str, Any],
+        assessment: Dict[str, Any] | None = None
     ) -> Dict[str, Any]:
         """
         Build a standardized success response.
@@ -106,7 +106,8 @@ class CustomerAgent:
     
             "message": "Customer profile retrieved successfully.",
     
-            "customer_profile": customer_profile
+            "customer_profile": customer_profile,
+            "assessment": assessment
         }
 
     
@@ -144,7 +145,7 @@ class CustomerAgent:
         """
         Retrieve a complete customer profile.
         """
-    
+        
         if not self._validate_customer_id(customer_id):
     
             return self._build_error_response(
@@ -160,9 +161,12 @@ class CustomerAgent:
             return self._build_error_response(
                 f"Customer '{customer_id}' was not found."
             )
-    
-        return self._build_success_response(
+        assessment = self.assessment_service.assess_customer(
             customer_profile
+        )
+        return self._build_success_response(
+            customer_profile,
+            assessment=assessment
         )
 
     # ---------------------------------------------------------
