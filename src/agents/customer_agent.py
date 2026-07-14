@@ -65,7 +65,7 @@ class CustomerAgent:
     # Customer Lookup
     # ---------------------------------------------------------
 
-    def get_customer_profile(
+    def retrieve_customer_profile(
         self,
         customer_id: str
     ) -> Dict[str, Any]:
@@ -126,7 +126,7 @@ if __name__ == "__main__":
 
     agent = CustomerAgent()
 
-    response = agent.get_customer_profile(
+    response = agent.retrieve_customer_profile(
         "CUST000001"
     )
 
