@@ -479,6 +479,29 @@ class CustomerAssessmentService:
             reason=reason
         )
 
+
+    # ---------------------------------------------------------
+# Data Extraction Helpers
+# ---------------------------------------------------------
+
+    def _get_credit_bureau(
+        self,
+        customer_profile: Dict[str, Any]
+    ) -> Dict[str, Any] | None:
+        """
+        Retrieve credit bureau information from the customer profile.
+
+        Parameters
+        ----------
+        customer_profile : dict
+
+        Returns
+        -------
+        dict | None
+            Credit bureau information if available.
+        """
+
+        return customer_profile.get("credit_bureau")
     # ---------------------------------------------------------
     # Assessment Helpers
     # ---------------------------------------------------------
