@@ -113,24 +113,60 @@ class CustomerSummaryService:
         assessment: Dict[str, Any]
     ) -> str:
         """
-        Build executive summary.
-
-        Returns
-        -------
-        str
+        Build an executive summary describing the customer's
+        overall credit profile.
         """
-
-        raise NotImplementedError
+    
+        customer = customer_profile.get("customer", {})
+    
+        name = (
+            f"{customer.get('first_name', '')} "
+            f"{customer.get('last_name', '')}"
+        ).strip()
+    
+        overall_risk = assessment["overall_summary"]["rating"]
+    
+        return (
+            f"{name} is assessed as '{overall_risk}'. "
+            "The assessment is based on the customer's credit bureau "
+            "profile, repayment behaviour, debt obligations and "
+            "other supporting credit indicators."
+        )
 
     def _identify_strengths(
         self,
         assessment: Dict[str, Any]
     ) -> List[str]:
         """
-        Identify customer strengths.
+        Identify positive credit characteristics.
         """
-
-        raise NotImplementedError
+    
+        strengths = []
+    
+        if assessment["credit_score"]["rating"] in (
+            "Excellent",
+            "Good"
+        ):
+            strengths.append(
+                assessment["credit_score"]["reason"]
+            )
+    
+        if assessment["dti_ratio"]["rating"] == "Low":
+            strengths.append(
+                assessment["dti_ratio"]["reason"]
+            )
+    
+        if assessment["payment_history"]["rating"] == "Excellent":
+            strengths.append(
+                assessment["payment_history"]["reason"]
+            )
+    
+        if assessment["fraud_indicator"]["rating"] == "Clear":
+            strengths.append(
+                assessment["fraud_indicator"]["reason"]
+            )
+    
+        return strengths
 
     def _identify_risk_factors(
         self,
@@ -139,29 +175,96 @@ class CustomerSummaryService:
         """
         Identify customer risk factors.
         """
-
-        raise NotImplementedError
+    
+        risks = []
+    
+        if assessment["credit_score"]["rating"] == "Poor":
+            risks.append(
+                assessment["credit_score"]["reason"]
+            )
+    
+        if assessment["credit_utilization"]["rating"] == "High":
+            risks.append(
+                assessment["credit_utilization"]["reason"]
+            )
+    
+        if assessment["dti_ratio"]["rating"] == "High":
+            risks.append(
+                assessment["dti_ratio"]["reason"]
+            )
+    
+        if assessment["payment_history"]["rating"] == "Poor":
+            risks.append(
+                assessment["payment_history"]["reason"]
+            )
+    
+        if assessment["fraud_indicator"]["rating"] == "High Risk":
+            risks.append(
+                assessment["fraud_indicator"]["reason"]
+            )
+    
+        return risks
 
     def _identify_key_observations(
         self,
         customer_profile: Dict[str, Any]
     ) -> List[str]:
         """
-        Identify key customer observations.
+        Identify noteworthy customer observations.
         """
-
-        raise NotImplementedError
+    
+        customer = customer_profile.get("customer", {})
+    
+        observations = [
+    
+            (
+                f"Customer Segment: "
+                f"{customer.get('customer_segment')}"
+            ),
+    
+            (
+                f"Employment Type: "
+                f"{customer.get('employment_type')}"
+            ),
+    
+            (
+                f"Occupation: "
+                f"{customer.get('occupation')}"
+            ),
+    
+            (
+                f"Annual Income: "
+                f"{customer.get('annual_income'):,.2f}"
+            ),
+    
+            (
+                f"Relationship Duration: "
+                f"{customer.get('relationship_years')} years"
+            )
+        ]
+    
+        return observations
 
     def _collect_supporting_evidence(
         self,
         assessment: Dict[str, Any]
     ) -> List[str]:
         """
-        Collect assessment evidence.
-
-        Returns
-        -------
-        List[str]
+        Collect evidence supporting the assessment.
         """
-
-        raise NotImplementedError
+    
+        evidence = []
+    
+        for item in assessment.values():
+    
+            if not isinstance(item, dict):
+                continue
+            if key == "overall_summary":
+                continue
+    
+            evidence.append(
+    
+                f"{item['metric']}: {item['value']}"
+            )
+    
+        return evidence
