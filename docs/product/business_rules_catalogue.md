@@ -12,6 +12,7 @@ The rules are not institution-specific underwriting policies and should be regar
 |BR-03 |DTI Assessment|Categorizes Customer's Debt to Income ratio |<20% Low, 20–35% Moderate, >35% High| Demonstration Rule	|Phase 2|Customer Agent| Hard coded Python|
 |BR-04 |Payment History |Categorizes Customer's Payment history into different levels |0 late payments = Excellent, 1–2 = Moderate, >2 = Poor| Demonstration Rule	|Phase 2|Customer Agent| Hard coded Python|
 |BR-05 |Fraud Flag |Categorizes Customer potential to lead into Fraud |Fraud = High Risk, No Fraud = Clear| Demonstration Rule	|Phase 2|Customer Agent| Hard coded Python|
+|BR-06 |Overall Customer Risk Assessment |This provides an overall rating to the customer profile | a)If Fraud Indicator = High Risk, Overall Rating= High Risk b)If Credit Score = Poor,Overall Rating= High Risk  c) Two or more High/ Poor assessments ,Overall Rating= High Risk  d) One High/ Poor or two Moderate assessments Moderate Risk,Overall Rating= Moderate Risk  e) Otherwise ,Overall Rating = Low Risk | Demonstration Rule	|Phase 2|Customer Agent| Hard coded Python|
 
 
 # Assumptions
