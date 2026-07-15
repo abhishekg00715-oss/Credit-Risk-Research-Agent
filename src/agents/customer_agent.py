@@ -32,6 +32,9 @@ from repository.customer_repository import CustomerRepository
 from services.customer_assessment_service import (
     CustomerAssessmentService
 )
+from services.customer_summary_service import (
+    CustomerSummaryService
+)
 
 
 class CustomerAgent:
@@ -45,7 +48,8 @@ class CustomerAgent:
     def __init__(
         self,
         repository: CustomerRepository | None = None,
-        assessment_service: CustomerAssessmentService | None = None
+        assessment_service: CustomerAssessmentService | None = None,
+        summary_service: CustomerSummaryService | None = None
     ) -> None:
     
         self.repository = (
@@ -59,7 +63,12 @@ class CustomerAgent:
             if assessment_service
             else CustomerAssessmentService()
         )
-
+    
+        self.summary_service = (
+            summary_service
+            if summary_service
+            else CustomerSummaryService()
+        )
 
 # ------------------------------------------------------------------
 # Validation Helpers
@@ -94,7 +103,8 @@ class CustomerAgent:
     def _build_success_response(
         self,
         customer_profile: Dict[str, Any],
-        assessment: Dict[str, Any] | None = None
+        assessment: Dict[str, Any] | None = None,
+        risk_summary: Dict[str, Any]
     ) -> Dict[str, Any]:
         """
         Build a standardized success response.
@@ -108,6 +118,7 @@ class CustomerAgent:
     
             "customer_profile": customer_profile,
             "assessment": assessment
+            "risk summary": risk_summary
         }
 
     
@@ -162,11 +173,17 @@ class CustomerAgent:
                 f"Customer '{customer_id}' was not found."
             )
         assessment = self.assessment_service.assess_customer(
-            customer_profile
+            customer_profile,
+        )
+
+        risk_summary = self.summary_service.generate_customer_summary(
+            customer_profile,
+            assessment
         )
         return self._build_success_response(
             customer_profile,
-            assessment=assessment
+            assessment=assessment,
+            risk_summary=risk_summary
         )
 
     # ---------------------------------------------------------
@@ -179,28 +196,37 @@ class CustomerAgent:
 
 if __name__ == "__main__":
 
-    agent = CustomerAgent()
-
-    customer_id = "CUST000001"
-
-    response = agent.retrieve_customer_profile(
-        customer_id
+    from repository.customer_repository import CustomerRepository
+    from services.customer_assessment_service import (
+        CustomerAssessmentService
     )
 
-    print("\nCustomer Agent Response")
+    repository = CustomerRepository()
+
+    profile = repository.get_customer_profile(
+        "CUST000001"
+    )
+
+    assessment_service = CustomerAssessmentService()
+
+    assessment = assessment_service.assess_customer(
+        profile
+    )
+
+    summary_service = CustomerSummaryService()
+
+    summary = summary_service.generate_customer_summary(
+
+        profile,
+
+        assessment
+    )
+
+    print("\nCustomer Risk Summary")
     print("-" * 60)
 
-    print(f"Status  : {response['success']}")
-    print(f"Message : {response['message']}")
+    for key, value in summary.items():
 
-    if response["success"]:
+        print(f"\n{key}")
 
-        customer = response["customer_profile"]["customer"]
-
-        print("\nCustomer Summary")
-        print("-" * 60)
-
-        print(f"Customer ID : {customer['customer_id']}")
-        print(f"Name        : {customer['first_name']} {customer['last_name']}")
-        print(f"Segment     : {customer['customer_segment']}")
-        print(f"Income      : {customer['annual_income']}")
+        print(value)
