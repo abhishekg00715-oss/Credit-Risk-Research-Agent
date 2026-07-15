@@ -95,7 +95,9 @@ def test_response_contract(
 
         "customer_profile",
 
-        "assessment"
+        "assessment",
+
+        "risk summary"
     }
 
     assert expected == set(response.keys())
@@ -153,3 +155,124 @@ def test_assessment_exists(
     assert "fraud_indicator" in assessment
 
     assert "overall_summary" in assessment
+
+
+# ---------------------------------------------------------
+# Risk Summary Contract
+# ---------------------------------------------------------
+
+def test_risk_summary_exists(
+    customer_agent
+):
+
+    response = customer_agent.retrieve_customer_profile(
+        "CUST000001"
+    )
+
+    summary = response["risk_summary"]
+
+    assert summary is not None
+
+    assert "overall_risk" in summary
+
+    assert "executive_summary" in summary
+
+    assert "strengths" in summary
+
+    assert "risk_factors" in summary
+
+    assert "key_observations" in summary
+
+    assert "supporting_evidence" in summary
+
+
+def test_overall_risk(
+    customer_agent
+):
+
+    response = customer_agent.retrieve_customer_profile(
+        "CUST000001"
+    )
+
+    overall_risk = response["risk_summary"]["overall_risk"]
+
+    assert overall_risk in (
+
+        "Low Risk",
+
+        "Moderate Risk",
+
+        "High Risk"
+    )
+
+def test_executive_summary(
+    customer_agent
+):
+
+    response = customer_agent.retrieve_customer_profile(
+        "CUST000001"
+    )
+
+    summary = response["risk_summary"]
+
+    assert isinstance(
+        summary["executive_summary"],
+        str
+    )
+
+    assert len(
+        summary["executive_summary"]
+    ) > 0
+
+def test_supporting_evidence(
+    customer_agent
+):
+
+    response = customer_agent.retrieve_customer_profile(
+        "CUST000001"
+    )
+
+    evidence = response["risk_summary"]["supporting_evidence"]
+
+    assert isinstance(
+        evidence,
+        list
+    )
+
+    assert len(evidence) > 0
+
+def test_rule_ids_not_exposed(
+    customer_agent
+):
+
+    response = customer_agent.retrieve_customer_profile(
+        "CUST000001"
+    )
+
+    summary = response["risk_summary"]
+
+    text = str(summary)
+
+    assert "BR-" not in text
+
+def test_assessment_contains_rule_ids(
+    customer_agent
+):
+
+    response = customer_agent.retrieve_customer_profile(
+        "CUST000001"
+    )
+
+    assessment = response["assessment"]
+
+    assert assessment["credit_score"]["rule_id"] == "BR-001"
+
+    assert assessment["credit_utilization"]["rule_id"] == "BR-002"
+
+    assert assessment["dti_ratio"]["rule_id"] == "BR-003"
+
+    assert assessment["payment_history"]["rule_id"] == "BR-004"
+
+    assert assessment["fraud_indicator"]["rule_id"] == "BR-005"
+
+    assert assessment["overall_summary"]["rule_id"] == "BR-006"
