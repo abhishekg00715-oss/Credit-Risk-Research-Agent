@@ -279,5 +279,34 @@ class CustomerSummaryService:
     
                 f"{item['metric']}: {item['value']}"
             )
+
+
+    # ---------------------------------------------------------
+    #  Test Harness
+    # ---------------------------------------------------------
+
+if __name__ == "__main__":
+
+    from repository.customer_repository import CustomerRepository
+    from services.customer_assessment_service import CustomerAssessmentService
+
+    repository = CustomerRepository()
+
+    profile = repository.get_customer_profile("CUST000001")
+
+    assessment_service = CustomerAssessmentService()
+
+    assessment = assessment_service.assess_customer(profile)
+
+    summary_service = CustomerSummaryService()
+
+    summary = summary_service.generate_customer_summary(
+        profile,
+        assessment
+    )
+
+    from pprint import pprint
+
+    pprint(summary)
     
         return evidence
