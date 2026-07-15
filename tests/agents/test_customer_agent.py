@@ -97,7 +97,7 @@ def test_response_contract(
 
         "assessment",
 
-        "risk summary"
+        "risk_summary"
     }
 
     assert expected == set(response.keys())

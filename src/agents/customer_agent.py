@@ -26,7 +26,14 @@ Author
 Credit Risk Research Agent
 """
 
+import os
+import sys
 from typing import Any, Dict
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+SRC_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, ".."))
+if SRC_ROOT not in sys.path:
+    sys.path.insert(0, SRC_ROOT)
 
 from repository.customer_repository import CustomerRepository
 from services.customer_assessment_service import (
@@ -35,6 +42,7 @@ from services.customer_assessment_service import (
 from services.customer_summary_service import (
     CustomerSummaryService
 )
+
 
 
 class CustomerAgent:
@@ -104,22 +112,19 @@ class CustomerAgent:
         self,
         customer_profile: Dict[str, Any],
         assessment: Dict[str, Any] | None = None,
-        risk_summary: Dict[str, Any]
+        risk_summary: Dict[str, Any] | None = None
     ) -> Dict[str, Any]:
         """
         Build a standardized success response.
         """
     
-        return {
-    
+        return ({
             "success": True,
-    
             "message": "Customer profile retrieved successfully.",
-    
             "customer_profile": customer_profile,
-            "assessment": assessment
-            "risk summary": risk_summary
-        }
+            "assessment": assessment,
+            "risk_summary": risk_summary,
+        })
 
     
     # ---------------------------------------------------------
@@ -135,14 +140,13 @@ class CustomerAgent:
         Build a standardized error response.
         """
     
-        return {
-    
+        return ({
             "success": False,
-    
             "message": message,
-    
-            "customer_profile": None
-        }
+            "customer_profile": None,
+            "assessment": None,
+            "risk_summary": None,
+        })
         
         
     # ---------------------------------------------------------
@@ -181,7 +185,7 @@ class CustomerAgent:
             assessment
         )
         return self._build_success_response(
-            customer_profile,
+            customer_profile=customer_profile,
             assessment=assessment,
             risk_summary=risk_summary
         )
@@ -196,37 +200,12 @@ class CustomerAgent:
 
 if __name__ == "__main__":
 
-    from repository.customer_repository import CustomerRepository
-    from services.customer_assessment_service import (
-        CustomerAssessmentService
-    )
+    agent = CustomerAgent()
 
-    repository = CustomerRepository()
-
-    profile = repository.get_customer_profile(
+    response = agent.retrieve_customer_profile(
         "CUST000001"
     )
 
-    assessment_service = CustomerAssessmentService()
+    from pprint import pprint
 
-    assessment = assessment_service.assess_customer(
-        profile
-    )
-
-    summary_service = CustomerSummaryService()
-
-    summary = summary_service.generate_customer_summary(
-
-        profile,
-
-        assessment
-    )
-
-    print("\nCustomer Risk Summary")
-    print("-" * 60)
-
-    for key, value in summary.items():
-
-        print(f"\n{key}")
-
-        print(value)
+    pprint(response)
