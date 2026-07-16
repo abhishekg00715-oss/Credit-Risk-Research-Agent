@@ -190,6 +190,18 @@ class CustomerAgent:
             risk_summary=risk_summary
         )
 
+    def process_request(
+        self,
+        customer_id: str
+    ):
+        """
+        Standard Coordinator entry point.
+        """
+    
+        return self.retrieve_customer_profile(
+            customer_id
+        )
+
     # ---------------------------------------------------------
     # Self Test
     # ---------------------------------------------------------
