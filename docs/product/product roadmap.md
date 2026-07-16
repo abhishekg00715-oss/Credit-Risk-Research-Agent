@@ -20,16 +20,17 @@ Capabilities:
 Customer Risk Assessment 
 
 Goal:
-Customer Risk Agent-
-This agent will analyze customer credit profile.
+Build the Customer Risk Assessment capability and establish the Coordinator Agent as the single entry point for customer and policy requests.
 
 Capabilities:
 
 - Customer lookup
 - Credit score evaluation
 - Income analysis
-- Utilization analysis
+- Credit utilization analysis
 - Customer risk summarization
+- Coordinator-based request routing
+- Multi-agent request orchestration (Policy + Customer, without synthesis)
 
 **Phase 3**
 Portfolio Intelligence
