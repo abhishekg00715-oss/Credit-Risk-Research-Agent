@@ -139,8 +139,8 @@ The following backlog items constitute the Minimum Viable Product:
 |----|---------|--------|
 | NFR-2 | Customer profile retrieval time |**To Do**|
 |NFR-8 | Customer recommendations shall be derived from retrieved evidence.|**To Do**|
-|NFR-10| Customer assessments shall include supporting rationale.|**To Do**|
-|NFR-11| Evidence used to generate customer assessments shall be visible to users.|**To Do**|
+|NFR-10| Customer assessments shall include supporting rationale.|**Done**|
+|NFR-11| Evidence used to generate customer assessments shall be visible to users.|***Done**|
 |NFR-13| User questions should be logged.|**To Do**|
 |NFR-14| Agent responses should be logged.|**To Do**|
 
