@@ -1,9 +1,19 @@
 """
 policy_agent.py
 
-Purpose:
-Answer policy questions using
-retrieval augmented generation.
+Policy Agent responsible for
+retrieving relevant credit policy
+information and generating
+context-aware responses using
+Retrieval-Augmented Generation (RAG).
+
+Responsibilities
+
+- Receive policy questions
+- Retrieve relevant policy chunks
+- Build LLM context
+- Generate policy response
+
 
 Author:
 Credit Risk Research Agent
@@ -137,6 +147,17 @@ Instructions:
 
         return answer
 
+    def process_request(
+        self,
+        query: str
+    ) -> str:
+        """
+        Standard Coordinator entry point.
+        """
+    
+        return self.answer_question(query)
+
+
 if __name__ == "__main__":
 
     agent = PolicyAgent()
@@ -148,7 +169,7 @@ if __name__ == "__main__":
     )
 
     response = (
-        agent.answer_question(
+        agent.process_request(
             query
         )
     )
