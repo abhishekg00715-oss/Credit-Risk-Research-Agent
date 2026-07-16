@@ -1,147 +1,168 @@
 """
 intent_routing_service.py
 
-Purpose:
+Purpose
+-------
 Determine which specialist agents should
 process a user's request.
 
-The service performs lightweight,
-deterministic intent detection using
-keyword-based matching.
-
-Responsibilities:
-- Normalize incoming requests
-- Identify required business capabilities
-- Return one or more target agents
-
-Future Enhancements:
-- Configurable routing rules
-- NLP / LLM intent classification
-- Confidence scoring
-
-Author:
-Credit Risk Research Agent
+Responsibilities
+----------------
+- Normalize requests
+- Detect customer intent
+- Detect policy intent
+- Extract customer identifiers
+- Return target agents
 """
+
+import re
 
 from typing import List
 
 
 class IntentRoutingService:
-    """
-    Determines which specialist agents
-    should process a request.
-    """
 
     POLICY_AGENT = "policy"
     CUSTOMER_AGENT = "customer"
 
-    def __init__(self):
-        """
-        Initialize routing keywords.
-        """
+    CUSTOMER_ID_PATTERN = r"\bCUST\d{6}\b"
 
-        self._policy_keywords = {
+    def __init__(self):
+
+        self._policy_anchors = {
 
             "policy",
             "guideline",
-            "eligibility",
+            "guidelines",
             "criteria",
-            "minimum score",
-            "ltv",
-            "dti",
-            "credit policy",
+            "eligibility",
             "rule",
-            "document",
-            "manual"
+            "rules",
+            "underwriting",
+            "approval",
+            "decline",
+            "minimum",
+            "maximum",
+            "required",
+            "threshold",
+            "credit policy",
+            "premium credit card",
+            "manual",
+            "document"
+
         }
 
-        self._customer_keywords = {
+        self._customer_anchors = {
 
             "customer",
             "customer id",
-            "credit score",
-            "bureau",
-            "utilization",
-            "income",
-            "loan",
+            "customer profile",
             "profile",
             "assessment",
-            "risk summary"
+            "risk summary",
+            "bureau"
+
         }
 
     def identify_agents(
         self,
         request: str
     ) -> List[str]:
+
+        request = self._normalize_request(request)
+
+        customer = False
+        policy = False
+
+        if self._contains_customer_identifier(request):
+            customer = True
+
+        elif self._contains_customer_anchor(request):
+            customer = True
+
+        if self._contains_policy_anchor(request):
+            policy = True
+
+        if customer and policy:
+            return [
+                self.POLICY_AGENT,
+                self.CUSTOMER_AGENT
+            ]
+
+        if policy:
+            return [
+                self.POLICY_AGENT
+            ]
+
+        if customer:
+            return [
+                self.CUSTOMER_AGENT
+            ]
+
+        return []
+
+    def extract_customer_id(
+        self,
+        request: str
+    ) -> str | None:
         """
-        Determine which agents should
-        process the request.
+        Extract customer identifier
+        from a natural language request.
         """
 
-        normalized_request = self._normalize_request(
-            request
+        match = re.search(
+            self.CUSTOMER_ID_PATTERN,
+            request.upper()
         )
 
-        agents = []
+        if match:
+            return match.group()
 
-        if self._is_policy_request(
-            normalized_request
-        ):
-
-            agents.append(
-                self.POLICY_AGENT
-            )
-
-        if self._is_customer_request(
-            normalized_request
-        ):
-
-            agents.append(
-                self.CUSTOMER_AGENT
-            )
-
-        return agents
+        return None
 
     def _normalize_request(
         self,
         request: str
     ) -> str:
-        """
-        Normalize user request.
-        """
 
         return request.lower().strip()
 
-    def _is_policy_request(
+    def _contains_customer_identifier(
         self,
         request: str
     ) -> bool:
-        """
-        Determine whether the request
-        requires the Policy Agent.
-        """
+
+        return (
+            self.extract_customer_id(request)
+            is not None
+        )
+
+    def _contains_customer_anchor(
+        self,
+        request: str
+    ) -> bool:
 
         return any(
 
             keyword in request
 
-            for keyword in self._policy_keywords
+            for keyword
+
+            in self._customer_anchors
 
         )
 
-    def _is_customer_request(
+    def _contains_policy_anchor(
         self,
         request: str
     ) -> bool:
-        """
-        Determine whether the request
-        requires the Customer Agent.
-        """
 
         return any(
 
             keyword in request
 
-            for keyword in self._customer_keywords
+            for keyword
+
+            in self._policy_anchors
 
         )

@@ -8,9 +8,29 @@ Credit Risk Research Agent MVP.
 Author:
 Credit Risk Research Agent
 """
+import os
+import subprocess
 import sys
 import time
 from pathlib import Path
+
+if __name__ == "__main__" and os.environ.get("STREAMLIT_RUN_AS_SCRIPT") != "1":
+    env = os.environ.copy()
+    env["STREAMLIT_RUN_AS_SCRIPT"] = "1"
+    raise SystemExit(
+        subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "streamlit",
+                "run",
+                str(Path(__file__).resolve()),
+                "--server.headless",
+                "true",
+            ],
+            env=env,
+        ).returncode
+    )
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 

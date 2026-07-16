@@ -1,27 +1,39 @@
 """
 coordinator_agent.py
 
-Purpose:
+Purpose
+-------
 Central orchestration layer responsible
 for routing user requests to the
-appropriate agent.
+appropriate specialist agent.
 
-Current Capabilities:
-Policy Agent
-Customer Risk Agent
+Current Capabilities
+--------------------
+- Policy Agent
+- Customer Agent
 
-Future:
-Portfolio Agent
-Recommendation Agent
+Future Capabilities
+-------------------
+- Portfolio Agent
+- Recommendation Agent
+- Explainability Agent
 
-Author:
+Responsibilities
+----------------
+- Determine required specialist agents
+- Delegate requests to the appropriate agent(s)
+- Aggregate responses
+- Return a standardized orchestration response
+
+Author
+------
 Credit Risk Research Agent
 """
 
-from src.agents.policy_agent import PolicyAgent
+from typing import Any, Dict
 
 from src.agents.customer_agent import CustomerAgent
-
+from src.agents.policy_agent import PolicyAgent
 from src.services.intent_routing_service import (
     IntentRoutingService
 )
@@ -32,7 +44,10 @@ class CoordinatorAgent:
     Central orchestration agent.
     """
 
-    def __init__(self):
+    QUERY_INPUT = "query"
+    CUSTOMER_ID_INPUT = "customer_id"
+
+    def __init__(self) -> None:
         """
         Initialize routing service
         and specialist agents.
@@ -42,42 +57,69 @@ class CoordinatorAgent:
             IntentRoutingService()
         )
 
-        self._initialize_agents()
+        self._register_agents()
 
-    def _initialize_agents(self):
+    # ---------------------------------------------------------
+    # Agent Registration
+    # ---------------------------------------------------------
+
+    def _register_agents(self) -> None:
         """
-        Register available agents.
+        Register all available
+        specialist agents.
         """
 
         self._agents = {
+
             "policy": {
+
                 "instance": PolicyAgent(),
-                "method": "answer_question"
+
+                "method": "answer_question",
+
+                "input_type": self.QUERY_INPUT
+
             },
+
             "customer": {
+
                 "instance": CustomerAgent(),
-                "method": "retrieve_customer_profile"
+
+                "method": "retrieve_customer_profile",
+
+                "input_type": self.CUSTOMER_ID_INPUT
+
             }
+
         }
+
+    # ---------------------------------------------------------
+    # Routing
+    # ---------------------------------------------------------
 
     def route_query(
         self,
         query: str
-    ) -> str:
+    ) -> Dict[str, Any]:
         """
-        Determine which agent should
-        process the query.
+        Route the request to one or
+        more specialist agents.
+        """
 
-        """
-         agent_names = (
+        agent_names = (
+
             self.routing_service
             .identify_agents(query)
+
         )
 
         if not agent_names:
 
             return self._build_error_response(
-                "Unable to determine the appropriate agent."
+
+                "Unable to determine the "
+                "appropriate agent."
+
             )
 
         responses = {}
@@ -85,10 +127,15 @@ class CoordinatorAgent:
         for agent_name in agent_names:
 
             responses[agent_name] = (
+
                 self._invoke_agent(
+
                     agent_name,
+
                     query
+
                 )
+
             )
 
         return {
@@ -100,29 +147,101 @@ class CoordinatorAgent:
             "responses": responses
 
         }
-        
-        
 
-     def _invoke_agent(
+    # ---------------------------------------------------------
+    # Agent Invocation
+    # ---------------------------------------------------------
+
+    def _invoke_agent(
         self,
-        agent_name,
-        query
-    ):
+        agent_name: str,
+        query: str
+    ) -> Any:
         """
-        Execute the selected agent.
+        Invoke the configured
+        specialist agent.
         """
-            agent = self._agents[agent_name]
-            handler = getattr(agent["instance"], agent["method"])
+
+        agent = self._agents[agent_name]
+
+        handler = getattr(
+
+            agent["instance"],
+
+            agent["method"]
+
+        )
+
+        input_type = agent["input_type"]
+
+        #
+        # Customer Identifier
+        #
+
+        if input_type == self.CUSTOMER_ID_INPUT:
+
+            customer_id = (
+
+                self.routing_service
+                .extract_customer_id(query)
+
+            )
+
+            if customer_id is None:
+
+                return {
+
+                    "success": False,
+
+                    "message": (
+                        "No valid customer ID "
+                        "was found in the request."
+                    ),
+
+                    "customer_profile": None,
+
+                    "assessment": None,
+
+                    "risk_summary": None
+
+                }
+
+            return handler(customer_id)
+
+        #
+        # Natural Language Query
+        #
+
+        if input_type == self.QUERY_INPUT:
+
             return handler(query)
-    
+
+        #
+        # Unsupported Input Type
+        #
+
+        return {
+
+            "success": False,
+
+            "message": (
+                f"Unsupported input type: "
+                f"{input_type}"
+            )
+
+        }
+
+    # ---------------------------------------------------------
+    # Response Helpers
+    # ---------------------------------------------------------
 
     def _build_error_response(
         self,
-        message
-    ):
+        message: str
+    ) -> Dict[str, Any]:
         """
-        Build standardized error
-        response.
+        Build standardized
+        error response.
         """
 
         return {
@@ -137,43 +256,50 @@ class CoordinatorAgent:
 
         }
 
-    
+    # ---------------------------------------------------------
+    # Public Entry Point
+    # ---------------------------------------------------------
 
     def process_query(
         self,
         query: str
-    ) -> str:
+    ) -> Dict[str, Any]:
         """
-        Main entry point for all user queries.
+        Process a user request.
         """
 
         if not query.strip():
 
-            return (
+            return self._build_error_response(
+
                 "Please provide a valid query."
+
             )
 
-        response = self.route_query(
-            query
-        )
+        return self.route_query(query)
 
-        return response
 
+# ---------------------------------------------------------
+# Test Harness
+# ---------------------------------------------------------
 
 if __name__ == "__main__":
 
     coordinator = CoordinatorAgent()
 
     query = (
-        "What is the minimum credit "
-        "score required for a premium "
-        "credit card?"
+        "Assess customer "
+        "CUST000001 against the "
+        "premium credit card policy."
     )
 
     response = coordinator.process_query(
         query
     )
 
+    from pprint import pprint
+
     print("\nResponse")
     print("=" * 80)
-    print(response)
+
+    pprint(response)

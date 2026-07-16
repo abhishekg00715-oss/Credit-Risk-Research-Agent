@@ -9,12 +9,13 @@ Credit Risk Research Agent
 """
 
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 from openai import OpenAI
 
-# Load environment variables from .env file
-load_dotenv()
+# Load environment variables from the repository root .env file
+load_dotenv(dotenv_path=Path(__file__).resolve().parents[2] / ".env")
 
 
 class LLMService:
@@ -30,8 +31,11 @@ class LLMService:
     def generate_response(
         self,
         prompt: str,
-        model: str = "gpt-4o-mini"
+        model: str | None = None
     ) -> str:
+
+        if model is None:
+            model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
         response = (
             self.client.chat.completions.create(
