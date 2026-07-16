@@ -63,10 +63,10 @@
 | ID | Feature / User Story | Priority |
 |----|----------------------|----------|
 | CRA-24 | Implement Coordinator Agent | Must |
-| CRA-25 | Implement Policy Agent | Must |
-| CRA-26 | Implement Customer Agent | Must |
-| CRA-27 | Implement Portfolio Agent | Must |
-| CRA-28 | Implement Recommendation Agent | Must |
+| CRA-25 | Integrate Policy Agent with Coordinator Agent | Must |
+| CRA-26 | Integrate Customer Agent with Coordinator Agent| Must |
+| CRA-27 | Integrate Portfolio Agent with Coordinator Agent | Must |
+| CRA-28 | Integrate Recommendation Agent with Coordinator Agent | Must |
 | CRA-29 | Implement Explainability Agent | Should |
 | CRA-30 | Create end-to-end credit assessment workflow | Should |
 
@@ -99,11 +99,11 @@ The following backlog items constitute the Minimum Viable Product:
 | CRA-4 | Store embeddings |**Done**|
 | CRA-5 | Semantic search |**Done**|
 | CRA-6 | RAG-based answers with citations |**Done**|
-| CRA-20 | Source attribution |**Done**|
-| CRA-24 | Coordinator Agent |**Done**|
-| CRA-25 | Policy Agent |**Done**|
+| CRA-20 | Attach policy citations to responses |**Done**|
+| CRA-24 | Implement Coordinator Agent  |**Done**|
+| CRA-25 | Integrate Policy Agent with Coordinator Agent |**Done**|
 | CRA-31 | Build Streamlit UI for Policy Research |**Done**|
-| CRA-34 | Sample queries and demo scenarios |**Done**|
+| CRA-34 | Add Sample queries and demo scenarios |**Done**|
 
 | ID | NFR | status |
 |----|---------|--------|
@@ -131,7 +131,7 @@ The following backlog items constitute the Minimum Viable Product:
 | CRA-9 | Calculate credit score assessment | **Done** |
 | CRA-10 | Analyze income and credit utilization | **Done** |
 | CRA-11 | Generate customer risk summary | **Done** |
-| CRA-26 | Implement Customer Agent | **To Do** |
+| CRA-26 | Integrate Customer Agent with Coordinator Agent | **To Do** |
 
 
 
