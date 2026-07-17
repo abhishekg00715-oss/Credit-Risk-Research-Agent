@@ -29,7 +29,7 @@ Author
 ------
 Credit Risk Research Agent
 """
-
+import time
 from typing import Any, Dict
 
 from src.agents.customer_agent import CustomerAgent
@@ -41,6 +41,9 @@ from src.services.response_formatting_service import (
     ResponseFormattingService
 )
 from src.logging.query_logger import QueryLogger
+from src.logging.agent_execution_logger import (
+    AgentExecutionLogger
+)
 
 
 class CoordinatorAgent:
@@ -66,6 +69,9 @@ class CoordinatorAgent:
             ResponseFormattingService()
         )
         self.query_logger = QueryLogger()
+        self.execution_logger = (
+            AgentExecutionLogger()
+        )
 
     # ---------------------------------------------------------
     # Agent Registration
@@ -107,7 +113,8 @@ class CoordinatorAgent:
 
     def route_query(
         self,
-        query: str
+        query: str,
+        correlation_id: str
     ) -> Dict[str, Any]:
         """
         Route the request to one or
@@ -151,7 +158,8 @@ class CoordinatorAgent:
 
                     agent_name,
 
-                    query
+                    query,
+                    correlation_id
 
                 )
 
@@ -174,7 +182,8 @@ class CoordinatorAgent:
     def _invoke_agent(
         self,
         agent_name: str,
-        query: str
+        query: str,
+        correlation_id
     ) -> Any:
         """
         Invoke the configured
@@ -286,6 +295,10 @@ class CoordinatorAgent:
         """
         Process a user request.
         """
+        correlation_id = (
+            self.execution_logger
+            .create_correlation_id()
+        )
 
         if not query.strip():
 
@@ -295,7 +308,50 @@ class CoordinatorAgent:
 
             )
 
-        response = self.route_query(query)
+        start = time.perf_counter()
+
+        success = True
+        error = None
+
+        try: 
+            
+            response = self.route_query(query,correlation_id=correlation_id)
+
+        except Exception as ex:
+
+            success = False
+        
+            error = str(ex)
+        
+            raise
+        finally:
+
+            elapsed = (
+        
+                time.perf_counter()
+        
+                - start
+        
+            ) * 1000
+
+            self.execution_logger.log_execution(
+
+                correlation_id=correlation_id,
+        
+                agent_name=agent_name,
+        
+                input_summary=query,
+        
+                response=response if success else {},
+        
+                execution_time_ms=elapsed,
+        
+                success=success,
+        
+                error_message=error
+        
+            )
+            
         return self.response_formatter.format_response(
             response
         )
