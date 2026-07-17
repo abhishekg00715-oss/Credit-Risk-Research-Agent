@@ -41,14 +41,20 @@ class QueryLogger:
     analytics.
     """
 
-    DEFAULT_LOG_DIRECTORY = (
-        Path(__file__).resolve().parents[2]
-        / "logs"
+ # ---------------------------------------------------------
+# Log File Location
+# ---------------------------------------------------------
+
+    SRC_ROOT = (
+        Path(__file__).resolve().parent.parent
     )
 
-    DEFAULT_LOG_FILE = (
-        DEFAULT_LOG_DIRECTORY
-        / "query_logs.jsonl"
+    LOG_DIRECTORY = (
+        SRC_ROOT / "logs"
+    )
+
+    LOG_FILE = (
+        LOG_DIRECTORY / "query_logs.jsonl"
     )
 
     def __init__(
@@ -62,7 +68,7 @@ class QueryLogger:
         self.log_file = (
             log_file
             if log_file
-            else self.DEFAULT_LOG_FILE
+            else self.LOG_FILE
         )
 
         self.log_file.parent.mkdir(

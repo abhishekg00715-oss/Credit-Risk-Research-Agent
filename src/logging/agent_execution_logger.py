@@ -35,8 +35,16 @@ class AgentExecutionLogger:
     agent execution details.
     """
 
+# ---------------------------------------------------------
+# Log File Location
+# ---------------------------------------------------------
+
+    SRC_ROOT = (
+        Path(__file__).resolve().parent.parent
+    )
+
     LOG_DIRECTORY = (
-        Path(__file__).resolve().parent / "logs"
+        SRC_ROOT / "logs"
     )
 
     LOG_FILE = (

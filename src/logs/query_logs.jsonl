@@ -1,0 +1,6 @@
+{"timestamp": "2026-07-17T17:32:41", "query": "Can a customer with a credit score of 640 be approved?\n", "agents": ["policy"], "customer_id": null}
+{"timestamp": "2026-07-17T17:33:23", "query": "What is the minimum credit score required for a premium credit card?\n\n\n", "agents": ["policy"], "customer_id": null}
+{"timestamp": "2026-07-17T17:44:51", "query": "What is the minimum credit score required for a premium credit card?\n\n\n", "agents": ["policy"], "customer_id": null}
+{"timestamp": "2026-07-17T17:46:01", "query": "Can a customer with a credit score of 640 be approved?\n", "agents": ["policy"], "customer_id": null}
+{"timestamp": "2026-07-17T17:50:42", "query": "Can a customer with a credit score of 640 be approved?", "agents": ["policy"], "customer_id": null}
+{"timestamp": "2026-07-17T17:51:12", "query": "What utilization ratio is considered low risk?", "agents": ["policy"], "customer_id": null}

@@ -175,89 +175,143 @@ class CoordinatorAgent:
 
         }
 
-    # ---------------------------------------------------------
-    # Agent Invocation
-    # ---------------------------------------------------------
+
+
+# ---------------------------------------------------------
+# Agent Invocation
+# ---------------------------------------------------------
 
     def _invoke_agent(
         self,
         agent_name: str,
         query: str,
-        correlation_id
+        correlation_id: str
     ) -> Any:
         """
-        Invoke the configured
-        specialist agent.
+        Invoke the configured specialist agent
+        and record execution metrics.
         """
 
         agent = self._agents[agent_name]
 
         handler = getattr(
-
             agent["instance"],
-
             agent["method"]
-
         )
 
         input_type = agent["input_type"]
 
-        #
-        # Customer Identifier
-        #
+        start = time.perf_counter()
 
-        if input_type == self.CUSTOMER_ID_INPUT:
+        success = True
+        error = None
+        response = None
+        input_summary = query
 
-            customer_id = (
+        try:
 
-                self.routing_service
-                .extract_customer_id(query)
+            # -------------------------------------------------
+            # Customer Identifier
+            # -------------------------------------------------
 
-            )
+            if input_type == self.CUSTOMER_ID_INPUT:
 
-            if customer_id is None:
+                customer_id = (
+                    self.routing_service.extract_customer_id(
+                        query
+                    )
+                )
 
-                return {
+                if customer_id is None:
+
+                    response = {
+
+                        "success": False,
+
+                        "message": (
+                            "No valid customer ID "
+                            "was found in the request."
+                        ),
+
+                        "customer_profile": None,
+
+                        "assessment": None,
+
+                        "risk_summary": None
+
+                    }
+
+                else:
+
+                    input_summary = customer_id
+
+                    response = handler(
+                        customer_id
+                    )
+
+            # -------------------------------------------------
+            # Natural Language Query
+            # -------------------------------------------------
+
+            elif input_type == self.QUERY_INPUT:
+
+                response = handler(
+                    query
+                )
+
+            # -------------------------------------------------
+            # Unsupported Input Type
+            # -------------------------------------------------
+
+            else:
+
+                success = False
+
+                response = {
 
                     "success": False,
 
                     "message": (
-                        "No valid customer ID "
-                        "was found in the request."
-                    ),
-
-                    "customer_profile": None,
-
-                    "assessment": None,
-
-                    "risk_summary": None
+                        f"Unsupported input type: "
+                        f"{input_type}"
+                    )
 
                 }
 
-            return handler(customer_id)
+        except Exception as ex:
 
-        #
-        # Natural Language Query
-        #
+            success = False
 
-        if input_type == self.QUERY_INPUT:
+            error = str(ex)
 
-            return handler(query)
+            raise
 
-        #
-        # Unsupported Input Type
-        #
+        finally:
 
-        return {
+            elapsed = (
+                time.perf_counter()
+                - start
+            ) * 1000
 
-            "success": False,
+            self.execution_logger.log_execution(
 
-            "message": (
-                f"Unsupported input type: "
-                f"{input_type}"
+                correlation_id=correlation_id,
+
+                agent_name=agent_name,
+
+                input_summary=input_summary,
+
+                response=response,
+
+                execution_time_ms=elapsed,
+
+                success=success,
+
+                error_message=error
+
             )
 
-        }
+        return response
 
     # ---------------------------------------------------------
     # Response Helpers
@@ -312,50 +366,15 @@ class CoordinatorAgent:
 
         success = True
         error = None
-
-        try: 
-            
-            response = self.route_query(query,correlation_id=correlation_id)
-
-        except Exception as ex:
-
-            success = False
-        
-            error = str(ex)
-        
-            raise
-        finally:
-
-            elapsed = (
-        
-                time.perf_counter()
-        
-                - start
-        
-            ) * 1000
-
-            self.execution_logger.log_execution(
-
-                correlation_id=correlation_id,
-        
-                agent_name=agent_name,
-        
-                input_summary=query,
-        
-                response=response if success else {},
-        
-                execution_time_ms=elapsed,
-        
-                success=success,
-        
-                error_message=error
-        
+        response = self.route_query(
+        query=query,
+        correlation_id=correlation_id
             )
-            
-        return self.response_formatter.format_response(
-            response
-        )
 
+        return self.response_formatter.format_response(
+                response
+        )
+        
 
 # ---------------------------------------------------------
 # Test Harness
