@@ -10,3 +10,4 @@ explored,analyzed for feasibility and added into the future phases. A set of suc
 |FE-03| Multi-session Conversation Context | Candidate |  | | | Future Release |
 |FE-04|Human-in-the-loop Review| Candidate |  | | | Future Release |
 |FE-05|Decision Trace Visualization|Candidate |  | | | Future Release |
+|FE-06|Intelligent Intent Classification & Routing|Candidate| | | | Future Release |
