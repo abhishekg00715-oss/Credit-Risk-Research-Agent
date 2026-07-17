@@ -9,116 +9,143 @@ process a user's request.
 Responsibilities
 ----------------
 - Normalize requests
-- Detect customer intent
-- Detect policy intent
+- Detect business intent
 - Extract customer identifiers
-- Return target agents
+- Route requests to specialist agents
+
+Author
+------
+Credit Risk Research Agent
 """
 
 import re
 
 from typing import List
 
+from src.config.intent_rules import (
+    CUSTOMER_ID_PATTERN,
+    POLICY_LANGUAGE,
+    POLICY_SUBJECTS,
+    CUSTOMER_INTENT
+)
+
 
 class IntentRoutingService:
+    """
+    Determines which specialist agents
+    should process a request.
+    """
 
     POLICY_AGENT = "policy"
+
     CUSTOMER_AGENT = "customer"
-
-    CUSTOMER_ID_PATTERN = r"\bCUST\d{6}\b"
-
-    def __init__(self):
-
-        self._policy_anchors = {
-
-            "policy",
-            "guideline",
-            "guidelines",
-            "criteria",
-            "eligibility",
-            "rule",
-            "rules",
-            "underwriting",
-            "approval",
-            "decline",
-            "minimum",
-            "maximum",
-            "required",
-            "threshold",
-            "credit policy",
-            "premium credit card",
-            "manual",
-            "document"
-
-        }
-
-        self._customer_anchors = {
-
-            "customer",
-            "customer id",
-            "customer profile",
-            "profile",
-            "assessment",
-            "risk summary",
-            "bureau"
-
-        }
 
     def identify_agents(
         self,
         request: str
     ) -> List[str]:
+        """
+        Determine which specialist
+        agents should process a request.
+        """
 
-        request = self._normalize_request(request)
+        request = self._normalize_request(
+            request
+        )
 
         customer = False
+
         policy = False
 
-        if self._contains_customer_identifier(request):
+        customer_id = (
+            self.extract_customer_id(
+                request
+            )
+        )
+
+        # -----------------------------------------
+        # Customer Intent
+        # -----------------------------------------
+
+        if customer_id:
+
             customer = True
 
-        elif self._contains_customer_anchor(request):
+        elif self._contains_customer_intent(
+            request
+        ):
+
             customer = True
 
-        if self._contains_policy_anchor(request):
+        # -----------------------------------------
+        # Policy Intent
+        # -----------------------------------------
+
+        if self._contains_policy_intent(
+            request
+        ):
+
             policy = True
 
-        if customer and policy:
+        # -----------------------------------------
+        # Routing Decision
+        # -----------------------------------------
+
+        if policy and customer:
+
             return [
+
                 self.POLICY_AGENT,
+
                 self.CUSTOMER_AGENT
+
             ]
 
         if policy:
+
             return [
+
                 self.POLICY_AGENT
+
             ]
 
         if customer:
+
             return [
+
                 self.CUSTOMER_AGENT
+
             ]
 
         return []
+
+    # ---------------------------------------------------------
+    # Customer Identifier
+    # ---------------------------------------------------------
 
     def extract_customer_id(
         self,
         request: str
     ) -> str | None:
         """
-        Extract customer identifier
-        from a natural language request.
+        Extract customer identifier from
+        a natural language request.
         """
 
         match = re.search(
-            self.CUSTOMER_ID_PATTERN,
+            CUSTOMER_ID_PATTERN,
             request.upper()
         )
 
         if match:
+
             return match.group()
 
         return None
+
+    # ---------------------------------------------------------
+    # Helper Methods
+    # ---------------------------------------------------------
 
     def _normalize_request(
         self,
@@ -127,20 +154,14 @@ class IntentRoutingService:
 
         return request.lower().strip()
 
-    def _contains_customer_identifier(
+    def _contains_customer_intent(
         self,
         request: str
     ) -> bool:
-
-        return (
-            self.extract_customer_id(request)
-            is not None
-        )
-
-    def _contains_customer_anchor(
-        self,
-        request: str
-    ) -> bool:
+        """
+        Determine whether the request
+        represents customer analysis.
+        """
 
         return any(
 
@@ -148,21 +169,27 @@ class IntentRoutingService:
 
             for keyword
 
-            in self._customer_anchors
+            in CUSTOMER_INTENT
 
         )
 
-    def _contains_policy_anchor(
+    def _contains_policy_intent(
         self,
         request: str
     ) -> bool:
+        """
+        Determine whether the request
+        represents policy interpretation.
+        """
 
-        return any(
-
-            keyword in request
-
-            for keyword
-
-            in self._policy_anchors
-
+        has_language = any(
+        word in request
+        for word in POLICY_LANGUAGE
         )
+
+        has_subject = any(
+            subject in request
+            for subject in POLICY_SUBJECTS
+        )
+
+        return has_language or has_subject

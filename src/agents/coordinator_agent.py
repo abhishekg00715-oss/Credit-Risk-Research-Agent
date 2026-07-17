@@ -120,6 +120,11 @@ class CoordinatorAgent:
             .identify_agents(query)
 
         )
+        customer_id = (
+            self.routing_service.extract_customer_id(
+                query
+            )
+        )
 
         self.query_logger.log_query(
             query=query,
