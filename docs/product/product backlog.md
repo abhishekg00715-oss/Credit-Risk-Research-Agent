@@ -133,18 +133,17 @@ The following backlog items constitute the Minimum Viable Product:
 | CRA-10 | Analyze income and credit utilization | **Done** |
 | CRA-11 | Generate customer risk summary | **Done** |
 | CRA-26 | Integrate Customer Agent with Coordinator Agent | **Done** |
-|CRA-36 | Format and Enhance composite reponses from multiple agents |**To Do**|
+|CRA-36 | Format and Enhance composite reponses from multiple agents | **Done**|
 
 
 
 | ID | NFR | status |
 |----|---------|--------|
-| NFR-2 | Customer profile retrieval time |**To Do**|
-|NFR-8 | Customer recommendations shall be derived from retrieved evidence.|**To Do**|
+| NFR-2 | Customer profile retrieval time | **Done** (Under 3 seconds)|
 |NFR-10| Customer assessments shall include supporting rationale.|**Done**|
 |NFR-11| Evidence used to generate customer assessments shall be visible to users.|***Done**|
-|NFR-13| User questions should be logged.|**To Do**|
-|NFR-14| Agent responses should be logged.|**To Do**|
+|NFR-13| User questions should be logged.| **Done**|
+|NFR-14| Agent responses should be logged.| **Done**|
 
 
 
