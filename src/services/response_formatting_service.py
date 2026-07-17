@@ -3,16 +3,15 @@ response_formatting_service.py
 
 Purpose
 -------
-Format Coordinator Agent responses into
-a presentation-friendly response while
-preserving the underlying agent outputs.
+Transform Coordinator Agent responses into a
+presentation-friendly model.
 
 Responsibilities
 ----------------
-- Format Policy Agent responses
-- Format Customer Agent responses
-- Format composite responses
-- Preserve standardized response contracts
+- Standardize presentation structure
+- Organize responses into semantic sections
+- Preserve business responses
+- Remain UI independent
 
 Future Enhancements
 -------------------
@@ -30,8 +29,7 @@ from typing import Any, Dict
 
 class ResponseFormattingService:
     """
-    Formats Coordinator responses for
-    presentation.
+    Builds a presentation model for the UI.
     """
 
     def format_response(
@@ -48,27 +46,16 @@ class ResponseFormattingService:
         agents = response["agents_invoked"]
 
         if agents == ["policy"]:
-
-            return self._format_policy_response(
-                response
-            )
+            return self._format_policy_response(response)
 
         if agents == ["customer"]:
-
-            return self._format_customer_response(
-                response
-            )
+            return self._format_customer_response(response)
 
         if (
-
             "policy" in agents
-
             and
-
             "customer" in agents
-
         ):
-
             return self._format_policy_customer_response(
                 response
             )
@@ -81,8 +68,8 @@ class ResponseFormattingService:
 
     def _format_policy_response(
         self,
-        response
-    ):
+        response: Dict[str, Any]
+    ) -> Dict[str, Any]:
 
         return {
 
@@ -90,11 +77,17 @@ class ResponseFormattingService:
 
             "response_type": "policy",
 
-            "answer": (
+            "title": "Policy Response",
 
-                response["responses"]["policy"]
+            "sections": [
 
-            )
+                {
+                    "heading": "Answer",
+                    "type": "text",
+                    "content": response["responses"]["policy"]
+                }
+
+            ]
 
         }
 
@@ -104,8 +97,8 @@ class ResponseFormattingService:
 
     def _format_customer_response(
         self,
-        response
-    ):
+        response: Dict[str, Any]
+    ) -> Dict[str, Any]:
 
         return {
 
@@ -113,11 +106,17 @@ class ResponseFormattingService:
 
             "response_type": "customer",
 
-            "customer": (
+            "title": "Customer Assessment",
 
-                response["responses"]["customer"]
+            "sections": [
 
-            )
+                {
+                    "heading": "Assessment",
+                    "type": "customer",
+                    "content": response["responses"]["customer"]
+                }
+
+            ]
 
         }
 
@@ -127,8 +126,8 @@ class ResponseFormattingService:
 
     def _format_policy_customer_response(
         self,
-        response
-    ):
+        response: Dict[str, Any]
+    ) -> Dict[str, Any]:
 
         return {
 
@@ -136,16 +135,22 @@ class ResponseFormattingService:
 
             "response_type": "policy_customer",
 
-            "policy": (
+            "title": "Customer Policy Assessment",
 
-                response["responses"]["policy"]
+            "sections": [
 
-            ),
+                {
+                    "heading": "Applicable Policy",
+                    "type": "text",
+                    "content": response["responses"]["policy"]
+                },
 
-            "customer": (
+                {
+                    "heading": "Customer Assessment",
+                    "type": "customer",
+                    "content": response["responses"]["customer"]
+                }
 
-                response["responses"]["customer"]
-
-            )
+            ]
 
         }
