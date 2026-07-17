@@ -14,29 +14,14 @@ import sys
 import time
 from pathlib import Path
 
-if __name__ == "__main__" and os.environ.get("STREAMLIT_RUN_AS_SCRIPT") != "1":
-    env = os.environ.copy()
-    env["STREAMLIT_RUN_AS_SCRIPT"] = "1"
-    raise SystemExit(
-        subprocess.run(
-            [
-                sys.executable,
-                "-m",
-                "streamlit",
-                "run",
-                str(Path(__file__).resolve()),
-                "--server.headless",
-                "true",
-            ],
-            env=env,
-        ).returncode
-    )
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-sys.path.append(
-    str(PROJECT_ROOT)
-)
+print(PROJECT_ROOT)
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 import streamlit as st
 
@@ -72,7 +57,11 @@ with st.sidebar:
 
     st.markdown("### Status")
 
+    st.success("Coordinator Agent Ready")
+
     st.success("Policy Agent Ready")
+
+    st.success("Customer Agent Ready")
 
     st.success("Vector Database Connected")
 
@@ -112,9 +101,11 @@ st.title(
 
 st.markdown(
     """
-    Ask questions about credit policies,
-    underwriting rules, eligibility criteria,
-    and risk guidelines.
+    Ask questions about:
+    • Credit policies
+    • Customer assessments
+    • Eligibility rules
+    • Credit risk
     """
 )
 
@@ -124,7 +115,7 @@ st.markdown(
 # --------------------------------------------------
 
 query = st.text_area(
-    "Ask a Credit Policy Question",
+    "Ask a Credit Risk Question",
     height=120,
     placeholder=(
         "Example:\n"
@@ -151,7 +142,7 @@ if st.button(
     else:
 
         with st.spinner(
-            "Analyzing policy documents..."
+            "Processing Request..."
         ):
 
             try:
