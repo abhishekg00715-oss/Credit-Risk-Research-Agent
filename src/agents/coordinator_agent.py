@@ -40,6 +40,7 @@ from src.services.intent_routing_service import (
 from src.services.response_formatting_service import (
     ResponseFormattingService
 )
+from src.logging.query_logger import QueryLogger
 
 
 class CoordinatorAgent:
@@ -64,6 +65,7 @@ class CoordinatorAgent:
         self.response_formatter = (
             ResponseFormattingService()
         )
+        self.query_logger = QueryLogger()
 
     # ---------------------------------------------------------
     # Agent Registration
@@ -117,6 +119,12 @@ class CoordinatorAgent:
             self.routing_service
             .identify_agents(query)
 
+        )
+
+        self.query_logger.log_query(
+            query=query,
+            agents=agent_names,
+            customer_id=customer_id
         )
 
         if not agent_names:
