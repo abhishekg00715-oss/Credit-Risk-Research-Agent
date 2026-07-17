@@ -116,11 +116,19 @@ def render_response(
             section["heading"]
         )
 
+        # --------------------------------------------------
+        # Policy / Text Sections
+        # --------------------------------------------------
+
         if section["type"] == "text":
 
             st.markdown(
                 section["content"]
             )
+
+        # --------------------------------------------------
+        # Customer Assessment Section
+        # --------------------------------------------------
 
         elif section["type"] == "customer":
 
@@ -130,13 +138,133 @@ def render_response(
                 customer["message"]
             )
 
+            risk_summary = customer["risk_summary"]
+
+            # ----------------------------------------------
+            # Overall Risk
+            # ----------------------------------------------
+
+            st.markdown("### Overall Risk")
+
+            overall_risk = risk_summary["overall_risk"]
+
+            if overall_risk == "Low Risk":
+
+                st.success(overall_risk)
+
+            elif overall_risk == "Moderate Risk":
+
+                st.warning(overall_risk)
+
+            else:
+
+                st.error(overall_risk)
+
+            # ----------------------------------------------
+            # Executive Summary
+            # ----------------------------------------------
+
             st.markdown(
-                "### Risk Summary"
+                "### Executive Summary"
             )
 
             st.write(
-                customer["risk_summary"]
+                risk_summary["executive_summary"]
             )
+
+            # ----------------------------------------------
+            # Strengths
+            # ----------------------------------------------
+
+            strengths = risk_summary.get(
+                "strengths",
+                []
+            )
+
+            if strengths:
+
+                st.markdown(
+                    "### Strengths"
+                )
+
+                for item in strengths:
+
+                    st.markdown(
+                        f"✅ {item}"
+                    )
+
+            # ----------------------------------------------
+            # Risk Factors
+            # ----------------------------------------------
+
+            risk_factors = risk_summary.get(
+                "risk_factors",
+                []
+            )
+
+            st.markdown(
+                "### Risk Factors"
+            )
+
+            if risk_factors:
+
+                for item in risk_factors:
+
+                    st.markdown(
+                        f"⚠️ {item}"
+                    )
+
+            else:
+
+                st.info(
+                    "No significant risk factors identified."
+                )
+
+            # ----------------------------------------------
+            # Key Observations
+            # ----------------------------------------------
+
+            observations = risk_summary.get(
+                "key_observations",
+                []
+            )
+
+            if observations:
+
+                st.markdown(
+                    "### Key Observations"
+                )
+
+                for item in observations:
+
+                    st.markdown(
+                        f"• {item}"
+                    )
+
+            # ----------------------------------------------
+            # Supporting Evidence
+            # ----------------------------------------------
+
+            evidence = risk_summary.get(
+                "supporting_evidence",
+                []
+            )
+
+            if evidence:
+
+                st.markdown(
+                    "### Supporting Evidence"
+                )
+
+                for item in evidence:
+
+                    st.markdown(
+                        f"- {item}"
+                    )
+
+            # ----------------------------------------------
+            # Expandable Details
+            # ----------------------------------------------
 
             with st.expander(
                 "Customer Profile"
