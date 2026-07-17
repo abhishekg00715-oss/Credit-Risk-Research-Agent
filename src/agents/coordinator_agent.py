@@ -37,6 +37,9 @@ from src.agents.policy_agent import PolicyAgent
 from src.services.intent_routing_service import (
     IntentRoutingService
 )
+from src.services.response_formatting_service import (
+    ResponseFormattingService
+)
 
 
 class CoordinatorAgent:
@@ -58,6 +61,9 @@ class CoordinatorAgent:
         )
 
         self._register_agents()
+        self.response_formatter = (
+            ResponseFormattingService()
+        )
 
     # ---------------------------------------------------------
     # Agent Registration
@@ -276,7 +282,10 @@ class CoordinatorAgent:
 
             )
 
-        return self.route_query(query)
+        response = self.route_query(query)
+        return self.response_formatter.format_response(
+            response
+        )
 
 
 # ---------------------------------------------------------
