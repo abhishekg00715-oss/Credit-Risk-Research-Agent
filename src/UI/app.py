@@ -87,6 +87,73 @@ def load_coordinator():
 
     return CoordinatorAgent()
 
+# --------------------------------------------------
+# Response Renderer
+# --------------------------------------------------
+
+def render_response(
+    response
+):
+    """
+    Render formatted response.
+    """
+
+    if not response["success"]:
+
+        st.error(
+            response["message"]
+        )
+
+        return
+
+    st.markdown(
+        f"## {response['title']}"
+    )
+
+    for section in response["sections"]:
+
+        st.subheader(
+            section["heading"]
+        )
+
+        if section["type"] == "text":
+
+            st.markdown(
+                section["content"]
+            )
+
+        elif section["type"] == "customer":
+
+            customer = section["content"]
+
+            st.success(
+                customer["message"]
+            )
+
+            st.markdown(
+                "### Risk Summary"
+            )
+
+            st.write(
+                customer["risk_summary"]
+            )
+
+            with st.expander(
+                "Customer Profile"
+            ):
+
+                st.json(
+                    customer["customer_profile"]
+                )
+
+            with st.expander(
+                "Assessment Details"
+            ):
+
+                st.json(
+                    customer["assessment"]
+                )
+
 
 coordinator = load_coordinator()
 
@@ -161,9 +228,10 @@ if st.button(
                     "### Answer"
                 )
 
-                st.write(
+                render_response(
                     response
                 )
+                
                 st.caption(
                     f"Response generated in {end-start:.2f} seconds"
                 )
