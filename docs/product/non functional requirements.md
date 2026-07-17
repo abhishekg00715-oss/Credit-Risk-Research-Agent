@@ -19,7 +19,7 @@ Following Non-Functional requirements to be covered by the solution :
 | NFR-5 | Responses shall be generated using retrieved context whenever available. | Must Have | Phase 1 | ✅ Implemented |
 | NFR-6 | Policy-related responses shall reference source documents. | Must Have | Phase 1 | ✅ Implemented |
 | NFR-7 | Hallucinated policy rules shall be minimized through RAG. | Must Have | Phase 1 | ✅ Implemented |
-| NFR-8 | Customer recommendations shall be derived from retrieved evidence. | Should Have | Phase 2 | ✅ Implemented |
+| NFR-8 | Customer recommendations shall be derived from retrieved evidence. | Should Have | Phase 5 | ⚪ Planned|
 
 ## Explainability
 | ID | Requirement | Priority | Phase | Status |
