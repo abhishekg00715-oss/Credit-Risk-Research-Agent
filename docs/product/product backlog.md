@@ -81,6 +81,7 @@
 | CRA-33 | Build Streamlit UI for Portfolio Analysis | Should |
 | CRA-34 | Add sample queries and demo scenarios | Must |
 | CRA-35 | Capture screenshots and walkthroughs for README | Should |
+|CRA-36| Format and Enhance composite reponses from multiple agents |Must|
 
 ---
 
@@ -131,7 +132,8 @@ The following backlog items constitute the Minimum Viable Product:
 | CRA-9 | Calculate credit score assessment | **Done** |
 | CRA-10 | Analyze income and credit utilization | **Done** |
 | CRA-11 | Generate customer risk summary | **Done** |
-| CRA-26 | Integrate Customer Agent with Coordinator Agent | **To Do** |
+| CRA-26 | Integrate Customer Agent with Coordinator Agent | **Done** |
+|CRA-36 | Format and Enhance composite reponses from multiple agents |**To Do**|
 
 
 
