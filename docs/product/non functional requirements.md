@@ -8,8 +8,8 @@ Following Non-Functional requirements to be covered by the solution :
 
 | ID | Requirement | Target | Priority | Phase | Status |
 |---|---|---|---|---|---|
-| NFR-1 | Policy document query response time | < 10 seconds | Should Have | Phase 1 | 🟡 Not Measured |
-| NFR-2 | Customer profile retrieval time | < 3 seconds | Should Have | Phase 2 | 🟡 To be validated in CRA-09 |
+| NFR-1 | Policy document query response time | < 10 seconds | Should Have | Phase 1 | ✅ Implemented |
+| NFR-2 | Customer profile retrieval time | < 3 seconds | Should Have | Phase 2 | ✅ Implemented |
 | NFR-3 | Portfolio analytics response time | < 15 seconds | Should Have | Phase 3 | ⚪ Planned |
 | NFR-4 | End-to-end credit assessment workflow | < 20 seconds | Should Have | Phase 5 | ⚪ Planned |
 
@@ -19,22 +19,22 @@ Following Non-Functional requirements to be covered by the solution :
 | NFR-5 | Responses shall be generated using retrieved context whenever available. | Must Have | Phase 1 | ✅ Implemented |
 | NFR-6 | Policy-related responses shall reference source documents. | Must Have | Phase 1 | ✅ Implemented |
 | NFR-7 | Hallucinated policy rules shall be minimized through RAG. | Must Have | Phase 1 | ✅ Implemented |
-| NFR-8 | Customer recommendations shall be derived from retrieved evidence. | Should Have | Phase 2 | ⚪ Planned |
+| NFR-8 | Customer recommendations shall be derived from retrieved evidence. | Should Have | Phase 2 | ✅ Implemented |
 
 ## Explainability
 | ID | Requirement | Priority | Phase | Status |
 |---|---|---|---|---|
 | NFR-9 | All policy answers shall include source citations. | Must Have | Phase 1 | ✅ Implemented |
-| NFR-10 | Customer assessments shall include supporting rationale. | Must Have | Phase 2 | ⚪ Planned |
-| NFR-11 | Evidence used to generate customer assessments shall be visible to users. | Must Have | Phase 2 | ⚪ Planned |
+| NFR-10 | Customer assessments shall include supporting rationale. | Must Have | Phase 2 | ✅ Implemented |
+| NFR-11 | Evidence used to generate customer assessments shall be visible to users. | Must Have | Phase 2 | ✅ Implemented |
 | NFR-12 | Confidence scores should be provided where feasible. | Should Have | Future | ⚪ Deferred |
 
 ## Auditability
 | ID | Requirement | Priority | Phase | Status |
 |---|---|---|---|---|
-| NFR-13 | User questions should be logged. | Should Have | Phase 2 | ⚪ Planned |
-| NFR-14 | Agent responses should be logged. | Should Have | Phase 2 | ⚪ Planned |
-| NFR-15 | Retrieved source references should be captured for audit purposes. | Should Have | Phase 2 | 🟡 Partially Implemented |
+| NFR-13 | User questions should be logged. | Should Have | Phase 2 | ✅ Implemented|
+| NFR-14 | Agent responses should be logged. | Should Have | Phase 2 | ✅ Implemented |
+| NFR-15 | Retrieved source references should be captured for audit purposes. | Should Have | Phase 2 | ✅ Implemented |
 | NFR-16 | Multi-agent workflow execution history should be traceable. | Should Have | Phase 5 | ⚪ Planned |
 
 ## Maintainability
