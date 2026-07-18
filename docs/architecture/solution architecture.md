@@ -2,11 +2,23 @@
 
 ## Overview
 
-The Credit Risk Research Agent is a local-first, multi-agent AI platform designed to assist credit analysts in researching lending policies, assessing customer risk, analyzing portfolio trends, and generating explainable recommendations.
+The Credit Risk Research Agent is a modular, local-first Agentic AI platform designed to support credit analysts in researching lending policies, assessing customer creditworthiness, and producing explainable credit risk insights.
 
-The solution is intentionally designed as a personal project and therefore avoids cloud dependencies such as AWS S3, AWS Glue, Redshift, or managed vector databases.
+The solution follows a layered architecture that separates presentation, orchestration, business capabilities, data access, and infrastructure concerns.
 
-All components execute locally on a developer workstation.
+Rather than relying on an external agent framework, the platform implements a lightweight, framework-independent orchestration model that emphasizes modularity, explainability, and extensibility.
+
+The current implementation includes:
+
+- Policy Research (RAG)
+- Customer Credit Assessment
+- Request Orchestration
+- Intent-Based Routing
+- Response Formatting
+- Query Logging
+- Agent Execution Logging
+
+Future phases will introduce portfolio analytics, recommendation generation, and explainability workflows
 
 ---
 
@@ -14,23 +26,28 @@ All components execute locally on a developer workstation.
 
 The solution aims to:
 
-- Demonstrate Agentic AI concepts
-- Demonstrate RAG implementation
-- Showcase Credit Risk domain knowledge
-- Provide explainable recommendations
-- Support future agent expansion
-- Operate entirely on local infrastructure
+- Demonstrate Agentic AI design principles
+- Implement Retrieval-Augmented Generation (RAG)
+- Showcase Credit Risk domain modelling
+- Provide explainable assessments
+- Support incremental capability expansion
+- Remain framework independent
+- Execute entirely on local infrastructure
 
 ---
 
 # Architecture Principles
 
 1. Local-first execution
-2. Explainability over complexity
-3. Modular agent design
-4. Evidence-based recommendations
-5. Extensible architecture
-6. Separation of concerns
+2. Separation of concerns
+3. Single Responsibility Principle
+4. Service-oriented design
+5. Repository pattern
+6. Explainability by design
+7. Thin orchestration layer
+8. Extensible multi-agent architecture
+9. Framework independence
+10. Evidence-based decision support
 
 ---
 
@@ -39,259 +56,286 @@ The solution aims to:
 | Layer | Technology |
 |---------|-----------|
 | UI | Streamlit |
-| Agent Framework | AISuite |
 | LLM Access | OpenAI GPT |
 | Orchestration | Coordinator Agent |
 | RAG Framework | LlamaIndex |
 | Embeddings | Sentence Transformers (Local) |
 | Vector Store | ChromaDB |
-| Customer Data | SQLite |
+| Structured Data | SQLite |
 | Portfolio Data | CSV / SQLite |
 | Configuration | YAML / ENV |
-| Logging | Python Logging |
-| Language | Python |
+| Logging | JSON based |
+| Programming Language | Python |
 
 ---
 
 # High-Level Architecture
 
 ```
-
-+-------------------+
-| Streamlit UI |
-+---------+---------+
-|
-v
-+-------------------+
-| Coordinator Agent |
-+---------+---------+
-|
-+-------------------+-------------------+
-| | |
-v v v
-
-+-----------+ +------------+ +------------+
-| Policy | | Customer | | Portfolio |
-| Agent | | Agent | | Agent |
-+-----+-----+ +------+-----+ +------+-----+
-| | |
-v v v
-
-+-----------+ +-----------+ +-----------+
-| ChromaDB | | SQLite | | Portfolio |
-| Policies | | Customer | | Dataset |
-+-----------+ +-----------+ +-----------+
-
-|
-v
-
-+-------------------+
-| Recommendation |
-| Agent |
-+---------+---------+
-|
-v
-
-+-------------------+
-| Explainability |
-| Agent |
-+-------------------+
+                                User
+                                  │
+                                  ▼
+                           Streamlit UI
+                                  │
+                                  ▼
+                         Coordinator Agent
+                                  │
+                    ┌─────────────┴─────────────┐
+                    │                           │
+                    ▼                           ▼
+            Intent Routing Service      Query Logger
+                    │
+        ┌───────────┴───────────────┐
+        ▼                           ▼
+   Policy Agent                Customer Agent
+        │                           │
+        ▼                           ▼
+ Retrieval Service         Customer Repository
+        │                           │
+        ▼                           ▼
+   LLM Service        Customer Assessment Service
+                                    │
+                                    ▼
+                      Customer Summary Service
+                    ┌───────────────┴───────────────┐
+                    ▼                               ▼
+         Agent Execution Logger     Response Formatting Service
+                                                │
+                                                ▼
+                                          Final Response
 
 ```
 
 ---
+#  Layered Architecture  
 
-# Component Description
+## Presentation Layer
 
-## Streamlit UI
+**Component:**
 
-Responsibilities:
+- Streamlit UI
+
+**Responsibilities:**
 
 - Accept user requests
-- Display responses
-- Display citations
-- Display recommendations
+- Display formatted responses
+- Present expandable customer information
+- Display supporting evidence
+- Maintain session history
 
-Examples:
+------
 
-- Ask policy questions
-- Assess customer risk
-- Analyze portfolio trends
+## Orchestration Layer
 
----
+**Component:**
 
-## Coordinator Agent
+- Coordinator Agent
 
-Responsibilities:
+**Responsibilities:**
 
-- Receive user requests
-- Identify workflow
-- Route requests to appropriate agents
-- Aggregate outputs
+- Receive requests
+- Invoke Intent Routing Service
+- Coordinate specialist agents
+- Aggregate responses
+- Invoke Response Formatting Service
+- Record logging events
 
-The coordinator contains no business logic.
+The Coordinator intentionally contains no business logic.
 
----
+-------
+
+## Business Capability Layer
+
+Current specialist agents:
 
 ## Policy Agent
 
-Responsibilities:
+**Responsibilities:**
 
-- Policy document retrieval
-- Semantic search
-- Citation generation
-- RAG response generation
+- Policy retrieval
+- Context generation
+- Prompt construction
+- Policy answer generation
 
-Data Source:
+**Internal Services:**
 
-- Policy PDFs
-- ChromaDB
+- RetrievalService
+- LLMService
 
----
+---------
 
 ## Customer Agent
 
-Responsibilities:
+**Responsibilities:**
 
-- Customer lookup
-- Credit score analysis
-- Income evaluation
-- Utilization analysis
+- Customer validation
+- Customer retrieval
+- Credit assessment
+- Executive summary generation
 
-Data Source:
+**Internal Components:**
 
-- SQLite
+- CustomerRepository
+- CustomerAssessmentService
+- CustomerSummaryService
 
----
+--------
 
-## Portfolio Agent
+# Infrastructure Services
 
-Responsibilities:
+## Intent Routing Service
 
-- Segment analysis
-- Default rate analysis
-- Trend detection
+**Responsible for:**
 
-Data Source:
+- Request normalization
+- Customer ID extraction
+- Intent detection
+- Agent selection
 
-- Portfolio Dataset
+**Current implementation:**
 
----
+- Deterministic keyword routing
 
-## Recommendation Agent
+**Future evolution:**
 
-Responsibilities:
+- SLM-powered semantic intent classification (to be explored)
+- Confidence scoring
+- Dynamic routing
 
-- Consolidate findings
-- Apply credit rules
-- Generate recommendation
+--------
 
-Possible Outputs:
+## Response Formatting Service
 
-- Approve
-- Decline
-- Review
+**Responsible for:**
 
----
+- Formatting Policy responses
+- Formatting Customer responses
+- Formatting composite responses
+- Decoupling presentation from orchestration
 
-## Explainability Agent
+---------
 
-Responsibilities:
+## Query Logger
 
-- Gather evidence
-- Attach citations
-- Generate confidence score
-- Create decision rationale
+**Responsible for recording:**
 
----
+ Timestamp
+- Query
+- Customer ID
+- Invoked agents
 
-# Storage Architecture
+----------
+
+## Agent Execution Logger
+
+**Responsible for recording:**
+
+- Correlation ID
+- Agent name
+- Execution duration
+- Success/failure
+- Response summary
+- Error information
+
+-------------
+
+# Data Architecture
 
 ## Unstructured Data
 
-Policy Documents
+**Policy Documents**
 
-Format:
-
+Format
 - PDF
 
-Storage:
+Storage
+- docs/policies/
 
-```text
-data/policies/
-```
+Purpose
 
----
+- Knowledge source for Retrieval-Augmented Generation
+------------
 
-## Vector Storage
+## Vector Store
 
-Embeddings
+**Technology**
 
-Storage:
+- ChromaDB
 
-```text
-ChromaDB
-```
+**Purpose**
 
-Purpose:
-
-```text
-Semantic Search
-Similarity Search
-RAG Context Retrieval
-```
-
----
+- Embedding storage
+- Semantic similarity search
+- Context retrieval
+--------------
 
 ## Structured Data
 
-Customer Profiles
+**Technology**
 
-Storage:
+- SQLite
 
-```text
-SQLite
-```
+**Database**
 
-Example:
+- src/database/customer_risk.db
 
-```text
-customer.db
-```
+**Contains**
 
----
+- Customer Master
+- Credit Bureau
+- Credit Cards
+- Loan Accounts
+- Transactions
+- Digital Behaviour
 
-## Analytical Data
+---------
 
-Portfolio Metrics
+## Analytical Data 
 
-Storage:
+**Technology**
 
-```text
-portfolio.csv
-```
+- CSV
+- SQLite
 
----
+**Purpose**
 
+- Portfolio analytics
+- Segment benchmarking
+- Trend analysis
+
+---------
+
+## Current Capability Map
+
+|Capability|	Status|
+|--------|------|
+|Policy Research	|✅ Complete|
+|Customer Assessment	|✅ Complete|
+|Request Orchestration	|✅ Complete|
+|Intent Routing	|✅ Initial Implementation|
+|Response Formatting	|✅ Complete|
+|Query Logging	|✅ Complete|
+|Agent Execution Logging|	✅ Complete|
+|Portfolio Analytics|	Planned|
+|Recommendation Engine|	Planned|
+|Explainability Workflow|	Planned|
+
+----------
 # Deployment Model
 
-The initial design of the  solution is intended for local execution. There can be further design improvements which can enable the solution to use cloud services.
+**Current deployment target**
 
-Deployment Target:
+- Developer Workstation
 
-```text
-Developer Laptop
-```
+**Minimum Requirements**
 
-Minimum Requirements:
+- Python 3.12+
+- 8 GB RAM
+- Internet Access (OpenAI API)
 
-```text
-8 GB RAM
-Python 3.11+
-Internet Access (LLM API Calls)
-```
+The architecture remains cloud-independent and is designed for local execution throughout development.
 
----
+
 
 # Future Evolution
 
