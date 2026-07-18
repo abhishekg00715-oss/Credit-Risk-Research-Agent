@@ -335,15 +335,77 @@ Purpose
 
 The architecture remains cloud-independent and is designed for local execution throughout development.
 
+--------------
 
+# Architectural Evolution
+## Phase 1
+**Policy Agent**
+- Retrieval-Augmented Generation
+- Streamlit UI
+---------
+## Phase 2
+**Customer Agent**
+- SQLite Repository
+- Customer Assessment Service
+- Customer Summary Service
+- Coordinator Orchestration
+- Intent Routing Service
+- Response Formatting Service
+- Query Logging
+- Agent Execution Logging
+- Planned Future Evolution
+----------
 
-# Future Evolution
+## Phase 3
+**Portfolio Agent**
+- Portfolio Repository
+- Portfolio Analytics Services
+--------
+## Phase 4
+**Recommendation Agent**
+- Credit Decision Engine
 
-Future agents may include:
+---------
+
+## Phase 5
+**Explainability Agent**
+
+- Multi-Agent Workflow
+- Evidence Aggregation
+----------
+
+## Future agents may include:
 
 - Regulatory Agent : Monitors and interprets regulatory guidelines to identify impacts on credit risk policies and decision-making.
 - Fraud Risk Agent : Detects suspicious customer behaviors and potential fraud indicators during credit assessment.
 - Market Intelligence Agent : Analyzes macroeconomic, industry, and market trends that may influence portfolio risk and lending strategies.
 - Collections Agent : Evaluates delinquent accounts and recommends collection, recovery, or customer engagement actions.
 
-The architecture is designed to support additional agents without significant redesign.
+
+--------------
+## Future Enhancements
+  
+- Intelligent SLM-based Intent Classification
+- Agent Registry Configuration
+- Dynamic Agent Discovery
+- Agent Memory
+- Workflow Engine
+- Execution Dashboard
+- Performance Monitoring
+- Policy Evaluation Service
+
+-------------------
+# Architectural Characteristics
+
+The solution is intentionally designed to demonstrate production-quality software engineering practices alongside Agentic AI concepts.
+
+Key characteristics include:
+
+- Thin orchestration layer
+- Independent specialist agents
+- Service-based business logic
+- Repository-based data access
+- Framework-independent architecture
+- Explainability-first design
+- Observable execution through structured logging
+- Extensible capability-driven architecture
