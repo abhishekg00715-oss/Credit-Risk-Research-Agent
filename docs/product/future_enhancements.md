@@ -10,5 +10,10 @@ explored,analyzed for feasibility and added into the future phases. A set of suc
 |FE-03| Multi-session Conversation Context | Candidate |Medium  |Medium | | Future Release |
 |FE-04|Human-in-the-loop Review| Candidate | High | Medium| | Future Release |
 |FE-05|Decision Trace Visualization|Candidate | Very High |Medium | | Future Release |
-|FE-06|Intelligent Intent Classification & Routing|Candidate|Very High |Medium | | Future Release |
+|FE-06|Intelligent Intent Classification & Routing|Candidate|Very High |Medium | | In Planning |
 |FE-07|Policy Decision Engine|Candidate|Very High |High | | Future Release |
+|FE-08|Regulatory Intelligence Agent|Strategic|Very High |High | | Future Release |
+|FE-09|Fraud Risk Agent|Strategic|Very High |High | | Future Release |
+|FE-10|Market Intelligence Agent|Strategic| High |High | | Future Release |
+|FE-11|Collections Intelligence Agent|Strategic| High |Medium | | Future Release |
+
