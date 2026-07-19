@@ -33,17 +33,19 @@ Capabilities:
 - Multi-agent request orchestration (Policy + Customer, without synthesis)
 
 **Phase 3**
-Portfolio Intelligence
+Intelligent Portfolio Assessment
 
 Goal:
-Portfolio Agent-
-Analyze historical portfolio performance.
+Portfolio Agent-Analyze historical portfolio performance.
+& Smarter orchestration
+
 
 Capabilities:
 
 - Segment analysis
 - Default rate analysis
 - Risk trend detection
+- Intelligent Agent Routing
 
 **Phase 4**
 
