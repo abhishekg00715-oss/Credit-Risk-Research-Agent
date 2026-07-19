@@ -13,7 +13,7 @@ Capabilities:
 - Semantic search
 - RAG based responses
 - Source retrieval and citation
-
+------------------
   
 **Phase 2**
 
@@ -32,7 +32,9 @@ Capabilities:
 - Coordinator-based request routing
 - Multi-agent request orchestration (Policy + Customer, without synthesis)
 
+---------------
 **Phase 3**
+
 Intelligent Portfolio Assessment
 
 Goal:
@@ -47,6 +49,8 @@ Capabilities:
 - Risk trend detection
 - Intelligent Agent Routing
 
+--------------------
+
 **Phase 4**
 
 Recommendation Engine
@@ -60,7 +64,7 @@ Capabilities
 - Recommendation generation
 - Decision rationale generation
 
-
+---------------------
 **Phase 5**
  
  Explainability & Governance
@@ -73,7 +77,8 @@ Capabilities
 - Confidence score generation
 - Decision traceability
 - Audit trail generation
- 
+
+----------------------
 
 **Phase 6**
 
