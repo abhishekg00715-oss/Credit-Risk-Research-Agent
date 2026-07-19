@@ -1,103 +1,470 @@
-# Credit-Risk-Research-Agent
-An AI-powered multi-agent decision support platform that enables credit analysts and underwriters to quickly interpret underwriting policies, retrieve relevant policy clauses through semantic search, and generate grounded answers using Retrieval-Augmented Generation (RAG).
+# Credit Risk Research Agent
 
-The project demonstrates how Generative AI, Vector Databases, and Agentic AI can be applied to enterprise credit risk decision support.
+An AI-powered, local-first, multi-agent decision support platform that demonstrates how Agentic AI, Retrieval-Augmented Generation (RAG), semantic search, and explainable AI can be applied to enterprise Credit Risk decision support.
+
+The solution enables credit analysts and underwriters to interpret lending policies, assess customer creditworthiness, and generate evidence-based decisions through collaboration between specialized AI agents.
+
+The project has been intentionally designed as a portfolio solution to demonstrate modern AI solution architecture, software engineering principles, and credit risk domain expertise.
+
+---
 
 # Business Problem
 
-Financial institutions maintain hundreds of underwriting and policy documents covering credit cards, personal loans, mortgages, fraud, compliance, and regulatory requirements.
+Credit Risk teams rely on multiple sources of information before making lending decisions, including:
 
-Searching these documents manually is:
+- Credit policies
+- Underwriting guidelines
+- Customer credit bureau information
+- Income and repayment behaviour
+- Portfolio performance
+- Regulatory requirements
 
-- Time consuming
-- Inconsistent across analysts
-- Difficult for new employees
-- Prone to interpretation errors
+Analysts often spend considerable time navigating these sources, resulting in:
 
-This project provides an AI-powered assistant capable of understanding policy documents and answering underwriting questions using policy-grounded responses with source attribution.
+- Slow decision making
+- Inconsistent policy interpretation
+- Manual evidence gathering
+- Limited explainability
+- High onboarding effort for new analysts
 
-# Key Features 
+The Credit Risk Research Agent addresses these challenges by combining Retrieval-Augmented Generation (RAG) with specialized AI agents that retrieve, analyze and explain credit risk information.
 
-Current MVP has following features implemented:
+---
 
- - PDF Policy Ingestion
- - Intelligent Document Chunking
- - Local Embedding Generation
- - ChromaDB Vector Store
- - Semantic Search
- - Retrieval-Augmented Generation (RAG)
- - Policy Agent
- - Coordinator Agent
- - Streamlit User Interface
- - Source Attribution
- - Explainable Responses
+# Current Solution Capabilities
 
-# High Level Architecture 
+## Phase 1 – Policy Intelligence (Completed)
+
+- PDF Policy Ingestion Pipeline
+- Intelligent Document Chunking
+- Local Embedding Generation
+- ChromaDB Vector Database
+- Semantic Search
+- Retrieval-Augmented Generation (RAG)
+- Policy Agent
+- Coordinator Agent
+- Streamlit User Interface
+- Policy Source Attribution
+- Explainable Policy Responses
+
+---
+
+## Phase 2 – Customer Risk Assessment (Completed)
+
+Phase 2 extends the platform beyond document intelligence by introducing structured customer assessment capabilities.
+
+Implemented features include:
+
+- SQLite Customer Repository
+- Synthetic Customer Data Generation
+- Customer Repository Pattern
+- Customer Agent
+- Customer Assessment Service
+- Customer Risk Summary Service
+- Business Rule Engine
+- Customer Lookup
+- Credit Score Assessment
+- Credit Utilization Analysis
+- Debt-to-Income Analysis
+- Executive Risk Summary Generation
+- Policy + Customer Multi-Agent Orchestration
+- Response Formatting Service
+- Query Logging
+- Agent Execution Logging
+- Explainable Customer Assessments
+
+---
+
+# High-Level Architecture
 
 <img width="2048" height="1152" alt="Architecture_diagram" src="https://github.com/user-attachments/assets/0f58bdfe-4a68-4861-8d65-22650a2f6fb4" />
 
-***Note: Further agents will be added into the 'AI ORCHESTRATION LAYER'***
+**Current AI Orchestration Layer**
+
+- Coordinator Agent
+- Policy Agent
+- Customer Agent
+
+The architecture has been intentionally designed to support additional specialist agents without modifying existing business logic.
+
+---
 
 # Technology Stack
 
-| Layer	| Technology |
-|--------|-----------------|
-|Language|	Python|
-|LLM	|OpenAI GPT|
-|Embeddings |	Sentence Transformers (Local)|
-|Vector Database |	ChromaDB |
-|RAG Framework	| LlamaIndex
-|UI	|Streamlit|
-|Development |	GitHub Codespaces |
+| Layer | Technology |
+|--------|------------|
+| Language | Python |
+| User Interface | Streamlit |
+| Agent Orchestration | Custom Coordinator Agent |
+| LLM | OpenAI GPT |
+| Embeddings | Sentence Transformers (Local) |
+| Vector Database | ChromaDB |
+| RAG Framework | LlamaIndex |
+| Structured Data | SQLite |
+| Configuration | Python Configuration Modules |
+| Logging | JSON-based Custom Logging |
+| Development Environment | GitHub Codespaces |
 
+---
 
-# End-to-End Workflow 
+# Current Architecture
 
-Current MVP has the following workflow to be followed:
+```text
+                    User
+                      │
+                      ▼
+               Streamlit UI
+                      │
+                      ▼
+             Coordinator Agent
+                      │
+        ┌─────────────┴─────────────┐
+        ▼                           ▼
 
-- Upload policy PDF documents.
-- Extract document text.
-- Split documents into semantic chunks.
-- Generate embeddings locally.
-- Store vectors in ChromaDB.
-- Perform semantic retrieval.
-- Pass retrieved context to the Policy Agent.
-- Generate grounded responses using OpenAI GPT.
-- Display answers and citations in the Streamlit UI.
+   Policy Agent              Customer Agent
+        │                           │
+        ▼                           ▼
 
-# Design Decisions
-- Local embedding generation to minimize API cost.
-- OpenAI GPT used only for final answer generation.
-- ChromaDB selected as an embedded vector database suitable for MVP development.
-- Multi-agent architecture separates orchestration from policy reasoning.
-- Source attribution included to improve explainability and trust.
+ Retrieval Service        Customer Repository
+        │                           │
+        ▼                           ▼
 
-# Future Roadmap
+     ChromaDB                  SQLite Database
+        │
+        ▼
 
-Policy agent and Co-ordinator agent are completed and in working state, as part of Phase 1 milestone and MVP.
-Future components to be integrated are as follows:
+     OpenAI GPT
+
+                      │
+                      ▼
+
+      Response Formatting Service
+                      │
+                      ▼
+
+              Explainable Response
+```
+
+---
+
+# Key Architectural Principles
+
+The solution follows a number of core architectural principles:
+
+- Local-first execution
+- Modular multi-agent architecture
+- Single Responsibility Principle
+- Separation of concerns
+- Repository Pattern
+- Explainability by design
+- Evidence-based decision support
+- Extensible agent ecosystem
+- Framework independence (no LangChain/CrewAI dependency)
+- Configuration-driven behaviour
+
+---
+
+# Current End-to-End Workflow
+
+The current solution supports multiple user journeys.
+
+## Policy Research Workflow
+
+1. User submits a policy question.
+2. Coordinator Agent identifies policy intent.
+3. Policy Agent performs semantic retrieval.
+4. Relevant policy sections are retrieved from ChromaDB.
+5. OpenAI GPT generates a grounded response.
+6. Source citations are included.
+7. Response is presented through the Streamlit UI.
+
+---
+
+## Customer Assessment Workflow
+
+1. User requests assessment of a customer.
+2. Coordinator Agent extracts the customer identifier.
+3. Customer Agent retrieves customer information.
+4. Customer Assessment Service evaluates customer risk.
+5. Customer Summary Service generates an executive summary.
+6. Response Formatting Service prepares a presentation-friendly output.
+7. Final explainable assessment is presented to the user.
+
+---
+
+## Multi-Agent Workflow
+
+For requests requiring both policy interpretation and customer assessment:
+
+1. Coordinator Agent identifies multiple required capabilities.
+2. Policy Agent retrieves relevant lending policy.
+3. Customer Agent evaluates customer profile.
+4. Responses are consolidated.
+5. Evidence-based assessment is presented through a unified response.
+
+---
+
+# Explainability
+
+A key objective of the solution is transparency.
+
+Every customer assessment includes:
+
+- Executive summary
+- Risk classification
+- Key strengths
+- Risk factors
+- Supporting evidence
+- Business observations
+- Policy citations (where applicable)
+
+This ensures AI-generated responses remain interpretable and suitable for analyst review.
+
+---
+
+# Non-Functional Capabilities
+
+The platform currently includes:
+
+- Modular service architecture
+- Explainable AI responses
+- Query execution logging
+- Agent execution logging
+- Structured response formatting
+- Local embedding generation
+- Framework-independent design
+- Extensible configuration model
+
+---
+
+# Repository Structure
+
+```text
+src/
+│
+├── agents/
+├── services/
+├── repository/
+├── database/
+├── ingestion/
+├── logging/
+├── config/
+├── UI/
+└── tests/
+```
+
+---
+
+# Project Roadmap
+
+The project is being developed incrementally through capability-driven phases.
+
+## ✅ Phase 1 — Policy Intelligence
+
+Completed
+
+- Policy Agent
+- RAG Pipeline
+- Semantic Search
+- Coordinator Agent
+- Streamlit UI
+
+---
+
+## ✅ Phase 2 — Customer Risk Assessment
+
+Completed
 
 - Customer Agent
-- Portfolio Agent
-- Fraud Detection Agent
-- Recommendation Agent
-- Decision Agent
-- Loan Agent
-- Regulatory Compliance Agent
-- Multi-document comparison
-- Conversational memory
-- AWS deployment (Design and Roadmap)
-- CI/CD pipeline
+- Customer Assessment
+- Business Rule Engine
+- Response Formatting
+- Logging
+- Multi-Agent Coordination
 
-*More details can be referred in the Product Roadmap -docs/product/product roadmap.md*
+---
+
+## 🚧 Phase 3 — Intelligent Portfolio Assessment (Planned)
+
+Phase 3 focuses on two major architectural enhancements.
+
+### Intelligent Agent Routing
+
+Replace keyword-based routing with semantic intent classification using local embedding models.
+
+Planned capabilities include:
+
+- Embedding-based Intent Classification
+- Hybrid Routing Strategy
+- Routing Confidence Scoring
+- Intelligent Coordinator Routing
+
+---
+
+### Portfolio Intelligence
+
+Introduce portfolio-level risk analytics.
+
+Planned capabilities include:
+
+- Portfolio Repository
+- Portfolio Agent
+- Portfolio Assessment Service
+- Portfolio Summary Service
+- Portfolio Risk Insights
+- Portfolio Benchmarking
+
+---
+
+## Future Enhancements
+
+Additional enhancements currently under evaluation include:
+
+- Agent Memory
+- Multi-session Conversation Context
+- Human-in-the-loop Review
+- Decision Trace Visualization
+- Regulatory Agent
+- Fraud Risk Agent
+- Market Intelligence Agent
+- Collections Agent
+- Recommendation Agent
+- Explainability Agent
+- Cloud Deployment Architecture
+- CI/CD Pipeline
+
+---
+
+# Design Decisions
+
+Some key architectural decisions made during development include:
+
+- Local embedding generation to minimize operational cost.
+- OpenAI GPT is used only for reasoning and answer generation.
+- ChromaDB provides lightweight embedded vector storage.
+- SQLite provides structured customer data storage.
+- Specialized agents own individual business capabilities.
+- Coordinator Agent contains orchestration only.
+- Business logic remains isolated within domain services.
+- Explainability is treated as a first-class architectural concern.
+- Response formatting is separated from business processing.
+- Logging is designed for traceability and future observability.
+
+---
 
 # How to Run
-- Clone the repository.
-- Install dependencies.
-- Configure the .env file with your OpenAI API key.
-- Run the ingestion pipeline.(one time)
-- Generate chunks.(one time)
-- Generate embeddings.(one time)
-- Build the vector store.(one time)
-- Launch the Streamlit application.
-- streamlit run src/ui/app.py
+
+## Prerequisites
+
+- Python 3.11+
+- OpenAI API Key
+- Git
+
+---
+
+## One-Time Setup
+
+1. Clone the repository.
+
+```bash
+git clone <repository-url>
+```
+
+2. Install dependencies.
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Configure environment variables.
+
+Create a `.env` file in the project root and configure your OpenAI API key.
+
+```text
+OPENAI_API_KEY=<your-api-key>
+```
+
+---
+
+
+4. Build the Policy Knowledge Base
+
+Run the ingestion pipeline to prepare the policy document repository.
+
+1. Extract text from policy PDFs
+2. Generate semantic chunks
+3. Create local embeddings
+4. Build the ChromaDB vector database
+
+> This step only needs to be repeated when policy documents are added or modified.
+
+---
+
+5. Create the Customer Repository
+
+Generate the synthetic customer repository and initialize the SQLite database.
+
+The pipeline performs the following activities:
+
+- Generate synthetic customer master data
+- Generate bureau records
+- Generate credit card accounts
+- Generate loan accounts
+- Generate transaction history
+- Generate digital behaviour history
+- Export intermediate CSV datasets
+- Validate generated datasets
+- Create the SQLite database
+- Load all generated data into SQLite
+
+> This step only needs to be repeated when regenerating the synthetic customer dataset.
+
+----
+
+
+
+## Launch the Application
+
+Once the one-time setup is complete-
+
+```bash
+streamlit run src/UI/app.py
+```
+
+The Streamlit interface allows you to:
+
+- Ask policy-related questions
+- Assess customer credit risk
+- Evaluate customers against lending policies
+- View explainable policy evidence
+- Review customer risk summaries
+
+---
+
+# Project Status
+
+| Phase | Status |
+|---------|--------|
+| Phase 1 – Policy Intelligence | ✅ Completed |
+| Phase 2 – Customer Risk Assessment | ✅ Completed |
+| Phase 3 – Intelligent Portfolio Assessment | 🚧 Planned |
+
+---
+
+# Documentation
+
+Additional project documentation is available under the `docs/` directory, including:
+
+- Vision
+- Product Roadmap
+- Capability Map
+- Solution Architecture
+- Agent Design
+- Data Model
+- Sequence Flows
+- Future Enhancements
+- Product Backlogs
+
+---
+
+**Credit Risk Research Agent** demonstrates how modern Agentic AI architectures can combine Retrieval-Augmented Generation, semantic search, structured analytics, and explainable AI into a modular decision support platform for enterprise credit risk management.
