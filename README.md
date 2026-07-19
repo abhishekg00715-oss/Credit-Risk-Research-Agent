@@ -77,7 +77,10 @@ Implemented features include:
 
 # High-Level Architecture
 
-<img width="2048" height="1152" alt="Architecture_diagram" src="https://github.com/user-attachments/assets/0f58bdfe-4a68-4861-8d65-22650a2f6fb4" />
+
+
+<img width="1536" height="1024" alt="Architecture Jul 19, 2026, 03_35_46 PM" src="https://github.com/user-attachments/assets/5e9d9711-2318-4b66-864f-c82d3937e0db" />
+
 
 **Current AI Orchestration Layer**
 
@@ -468,3 +471,5 @@ Additional project documentation is available under the `docs/` directory, inclu
 ---
 
 **Credit Risk Research Agent** demonstrates how modern Agentic AI architectures can combine Retrieval-Augmented Generation, semantic search, structured analytics, and explainable AI into a modular decision support platform for enterprise credit risk management.
+
+
