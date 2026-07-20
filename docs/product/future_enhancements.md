@@ -16,4 +16,12 @@ explored,analyzed for feasibility and added into the future phases. A set of suc
 |FE-09|Fraud Risk Agent|Strategic|Very High |High | | Future Release |
 |FE-10|Market Intelligence Agent|Strategic| High |High | | Future Release |
 |FE-11|Collections Intelligence Agent|Strategic| High |Medium | | Future Release |
+|FE-12|Redesign the Streamlit interface into a richer analyst dashboard with improved navigation, visualizations, interactive portfolio views and enterprise-grade usability.|Strategic| Medium |High | | Deferred |
+|FE-13|Extend the customer data ingestion layer to support configurable data sources such as SQLite, S3, Snowflake, Redshift and other enterprise repositories through a common connector interface.| Strategic | High |High |  |
+|FE-14|Extend the platform beyond credit risk assessment by incorporating predictive models to identify profitable customers for cross-selling and next-best-product recommendations.| Strategic | High |High |  |
+|FE-15|Externalize credit assessment rules, thresholds and policies into configurable rule definitions or decision tables, enabling rule changes without modifying application code.| Candidate | Medium |High | |
+
+
+
+
 
