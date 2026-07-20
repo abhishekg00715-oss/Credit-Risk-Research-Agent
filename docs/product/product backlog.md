@@ -1,4 +1,4 @@
-# Product Backlog
+# Product Backlog 
 
 ## Epic: Policy Research Assistant
 
@@ -29,10 +29,10 @@
 
 | ID | Feature / User Story | Priority |
 |----|----------------------|----------|
-| CRA-12 | Load portfolio dataset (CSV / SQLite) | Must |
-| CRA-13 | Compute default rates by customer segment | Should |
-| CRA-14 | Perform trend analysis over time | Should |
-| CRA-15 | Identify high-risk segments and risk hotspots | Could |
+| CRA-12 | Implement Portfolio Repository and portfolio data foundation | Must |
+| CRA-13 | Implement Portfolio Analytics Service | Should |
+| CRA-14 | Implement Portfolio Summary Service | Should |
+| CRA-15 | Implement Portfolio Agent | Could |
 
 ---
 
@@ -82,12 +82,17 @@
 | CRA-34 | Add sample queries and demo scenarios | Must |
 | CRA-35 | Capture screenshots and walkthroughs for README | Should |
 |CRA-36| Format and Enhance composite reponses from multiple agents |Must|
+|CRA-37| Implement semantic intent routing using the selected approach |Must|
+|CRA-38| Implement reusable Intent Repository for semantic routing |Should|
+|CRA-39| Build routing evaluation framework (confidence scoring, fallback logic and routing accuracy tests) |Should|
 
 ---
 
 
+# Phasewise allocation plan of Backlog items
 
 
+---------------------
 # MVP Scope (Release 1.0)
 
 The following backlog items constitute the Minimum Viable Product:
@@ -144,6 +149,25 @@ The following backlog items constitute the Minimum Viable Product:
 |NFR-11| Evidence used to generate customer assessments shall be visible to users.|***Done**|
 |NFR-13| User questions should be logged.| **Done**|
 |NFR-14| Agent responses should be logged.| **Done**|
+
+
+------------------------------------
+
+# Phase 3 Backlog
+
+| ID | Feature | Associated Features| status |
+|----|---------|--------|------|
+| SPK-01 | Assess intelligent intent routing approaches (keyword, embedding, ML, SLM/LLM, hybrid) and recommend the preferred architecture |CRA-37, CRA-38, CRA-39| **In Progress** |
+| CRA-37 | Implement semantic intent routing using the selected approach | | **To Do** |
+| CRA-38 | Implement reusable Intent Repository for semantic routing | |  **To Do** |
+| CRA-39 | Build routing evaluation framework (confidence scoring, fallback logic and routing accuracy tests) | | **To Do**  |
+| SPK-02 | Define the Portfolio Intelligence capability, analytics catalogue, business scenarios, data model and implementation roadmap | CRA-12, CRA-13, CRA-14, CRA-15, CRA-27, CRA-33| **To Do** |
+| CRA-12 | Implement Portfolio Repository and portfolio data foundation | | **To Do**  |
+| CRA-13 | Implement Portfolio Analytics Service (portfolio KPIs, segment analysis, risk distribution, exposure analysis) |  | **To Do**  |
+| CRA-14 | Implement Portfolio Summary Service for analyst-friendly portfolio insights |  | **To Do**  |
+| CRA-15 | Implement Portfolio Summary Service for analyst-friendly portfolio insights |  | **To Do**  |
+| CRA-27 | Integrate Portfolio Agent with Coordinator Agent|  | **To Do**  |
+| CRA-33 | Build Streamlit UI for Portfolio Intelligence |  | **To Do**  |
 
 
 
