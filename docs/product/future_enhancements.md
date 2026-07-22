@@ -22,3 +22,7 @@ explored,analyzed for feasibility and added into the future phases. A set of suc
 | **FE-13** | Pluggable Enterprise Data Connectors | Extend the customer data ingestion layer to support configurable enterprise data sources such as SQLite, Amazon S3, Snowflake, Amazon Redshift, and other repositories through a common connector interface. | Strategic | High | High | Data Integration | Future Release |
 | **FE-14** | Predictive Customer Opportunity Intelligence | Extend the platform beyond credit risk assessment by incorporating predictive models to identify profitable customers for cross-selling, upselling, and next-best-product recommendations. | Strategic | Very High | High | Customer Intelligence | Future Release |
 | **FE-15** | Configurable Business Rules Engine | Externalize credit assessment rules, thresholds, and decision policies into configurable rule definitions or decision tables, enabling business users to modify rules without code changes. | Candidate | High | High | Decision Management | Future Release |
+
+---------------------------------------
+
+Requirements Analysis & Detailed assessment
