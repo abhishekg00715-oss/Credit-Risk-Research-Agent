@@ -1,4 +1,3 @@
-# Future Enahancements
 
 As we explore more about the Agentic AI capabilities and current Business landscape , there are many possibilities that can be 
 explored,analyzed for feasibility and added into the future phases. A set of such capabilities are captured in the backlog below:
@@ -23,6 +22,170 @@ explored,analyzed for feasibility and added into the future phases. A set of suc
 | **FE-14** | Predictive Customer Opportunity Intelligence | Extend the platform beyond credit risk assessment by incorporating predictive models to identify profitable customers for cross-selling, upselling, and next-best-product recommendations. | Strategic | Very High | High | Customer Intelligence | Future Release |
 | **FE-15** | Configurable Business Rules Engine | Externalize credit assessment rules, thresholds, and decision policies into configurable rule definitions or decision tables, enabling business users to modify rules without code changes. | Candidate | High | High | Decision Management | Future Release |
 
----------------------------------------
+-----------------------------------------
 
-Requirements Analysis & Detailed assessment
+
+# Requirements Analysis & Detailed assessment
+
+## FE-01 — Agent Memory
+
+**Business Value: High**
+
+**Enablement of Memory capability for the agentic solution will provide:
+
+- follow-up questions
+- reduced repeated inputs
+- richer customer conversations
+- persistent analyst sessions
+
+Example:
+
+*Assess customer CUST000001*
+
+...
+
+*Now compare with last customer.*
+
+...
+
+*What was their utilization?*
+
+
+**Complexity: High**
+
+Following factors justify the complexity level:
+
+- memory architecture
+- session management
+- context pruning
+- retrieval strategy
+- It also impacts almost every agent.
+
+## Recommendation & Direction:
+
+**Move until after multi-agent workflows exist.**
+
+---------
+
+## FE-02 — LangGraph / CrewAI Integration
+
+**Business Value: Low**
+
+Today the architecture already supports:
+
+- orchestration
+- routing
+- modular agents
+
+Adding LangGraph would mainly replace infrastructure that is already built.
+Little new business capability.
+
+
+**Complexity: Medium**
+
+Migration & Introduction of the new framework would require the following:
+
+- redesigning Coordinator
+- changing execution model
+- introducing framework dependency
+
+## Recommendation & Direction:
+
+Trea & Keep as an architecture experiment only.Not to be considered in future roadmap plan.
+
+-----------------------
+
+
+## FE-03 — Multi-session Conversation Context
+
+**Business Value: Medium**
+
+Enabling this capability would allow the agentic framework:
+
+- Recall the converstation past conversationa and build context from it.
+- Useful,Not essential.
+
+**Complexity: Medium**
+
+Enabling the capability would require the following:
+
+- conversation persistence
+- retrieval
+- session management
+
+## Recommendation & Direction:
+
+Possible implemantion to be planned after Agent Memory.
+
+---------------
+
+## FE-04 — Human-in-the-loop Review
+
+**Business Value: High**
+
+Folloiwing would be achieved with the capability:
+
+- Very valuable & effective  for credit decisions.
+- Example:Recommendation -> Analyst Review -> Approve -> Store Decision
+- Much closer to enterprise lending systems.
+- Reduces risk concerns & brings transparency around whole process
+
+
+**Complexity: Medium**
+
+- Mostly UI and workflow related impact.
+- minimal impact on existing agents.
+
+## Recommendation & Direction
+To be planned in future Phases as capacity is available.
+
+-----------------
+
+## FE-05 — Decision Trace Visualization
+
+**Business Value: High**
+
+Following are to be considered :
+
+- Financial institutions care enormously about explainability.
+- Builds credebility of the outcomes reached.
+- Helps in monitoring and reviewing the decisions.
+
+**Complexity:Medium**
+
+- Almost everything already exists.
+- Visualization work needs to be finished.
+
+## Recommendation & Direction
+To be plannned for the future phases as the capacity becomes available.
+
+------------------------
+
+## FE-06 — Intelligent Intent Classification & Routing
+
+**Business Value: Very High**
+
+Following considerations are associated with the capability:
+
+- substatially reduces the dependency on dictionaries (No dictionary in a sense)
+- Keyword maintencence overhead is removed completely.
+- Better improved composite routing.
+- Highly scalable as the solution grows with more agents.
+
+**Complexity: Medium**
+
+- Routing service already functioning as a separate component.
+- Only a single component change required. Minimal impact to current solution.
+
+## Recommendation & Direction
+To be planned & prioritized as in the current Roadmap to reap benefits as early as possible.
+
+
+
+
+
+
+
+
+
+
